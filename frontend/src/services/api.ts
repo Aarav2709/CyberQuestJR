@@ -55,14 +55,6 @@ export const exerciseAPI = {
   },
 };
 
-// Leaderboard API
-export const leaderboardAPI = {
-  getLeaderboard: async () => {
-    const response = await api.get('/api/leaderboard');
-    return response.data;
-  },
-};
-
 // Legacy Quiz API (for backwards compatibility)
 export const quizAPI = {
   generateQuiz: async (_quizType: string) => {

@@ -20,7 +20,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900 dark:text-white">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-pink-400/20 to-purple-400/20 animate-pulse"></div>
 
@@ -38,11 +38,11 @@ const Home = () => {
               🛡️ CyberQuest Jr! 🚀
             </h1>
 
-            <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 font-bold">
+            <p className="text-2xl md:text-3xl text-gray-700 mb-8 font-bold">
               🌟 The Super Fun Way to Learn Cybersecurity! 🌟
             </p>
 
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
               Join thousands of young cyber heroes (ages 8-18) on an exciting adventure to protect the digital world!
               {!hasCompletedAssessment
                 ? "First, let's see what you already know with a quick assessment!"
@@ -85,11 +85,11 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+      <section className="py-20 bg-white/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-gray-800 dark:text-white mb-4">🎯 Why Choose CyberQuest Jr?</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Perfect for young minds aged 8-18!</p>
+            <h2 className="text-4xl font-black text-gray-800 mb-4">🎯 Why Choose CyberQuest Jr?</h2>
+            <p className="text-xl text-gray-600">Perfect for young minds aged 8-18!</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -163,10 +163,10 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+      <section className="py-20 bg-white/80 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-black text-gray-800 dark:text-white mb-8">🚀 Ready to Become a Cyber Hero?</h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+          <h2 className="text-4xl font-black text-gray-800 mb-8">🚀 Ready to Become a Cyber Hero?</h2>
+          <p className="text-xl text-gray-600 mb-8">
             Join thousands of young adventurers learning to protect the digital world! It's free, fun, and educational! 🎉
           </p>
 
