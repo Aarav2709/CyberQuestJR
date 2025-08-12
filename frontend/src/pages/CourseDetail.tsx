@@ -4,9 +4,8 @@ import { courseAPI, exerciseAPI } from '../services/api';
 import { CourseContent, QuizResult, ExerciseValidation } from '../types';
 
 const CourseDetail = () => {
+  const { courseId } = useParams<{ courseId: string }>();
   const navigate = useNavigate();
-  const params = useParams<{ courseId: string }>();
-  const courseId = params.courseId;
   const [courseContent, setCourseContent] = useState<CourseContent | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentSection, setCurrentSection] = useState<'content' | 'exercises' | 'quiz'>('content');
@@ -18,55 +17,15 @@ const CourseDetail = () => {
   const userId = localStorage.getItem('cyberquest_user_id');
 
   useEffect(() => {
-    if (!courseId) {
+    if (!userId || !courseId) {
       navigate('/dashboard');
       return;
     }
 
-    const initializeUser = async () => {
-      let currentUserId = userId;
-
-      // If no user exists, create a default user
-      if (!currentUserId) {
-        try {
-          const defaultUser = {
-            name: localStorage.getItem('cyberquest_user_name') || 'Cyber Hero',
-            age: 12,
-            experience_level: 'Beginner',
-            interests: 'cybersecurity,technology'
-          };
-
-          const response = await fetch('http://127.0.0.1:8000/api/users', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(defaultUser)
-          });
-
-          if (response.ok) {
-            const userData = await response.json();
-            currentUserId = userData.id.toString();
-            localStorage.setItem('cyberquest_user_id', currentUserId ?? '');
-            localStorage.setItem('cyberquest_user_name', userData.name);
-            console.log('Created new user:', currentUserId);
-          }
-        } catch (error) {
-          console.error('Failed to create user:', error);
-          // Use a fallback user ID for demo purposes
-          currentUserId = '1';
-          localStorage.setItem('cyberquest_user_id', currentUserId);
-        }
-      }
-
-      // Now load the course content
-      if (currentUserId) {
-        loadCourse(currentUserId);
-      }
-    };
-
-    const loadCourse = async (userIdToUse: string) => {
+    const loadCourse = async () => {
       try {
         setLoading(true);
-        const content = await courseAPI.generateCourseContent(parseInt(userIdToUse), courseId);
+        const content = await courseAPI.generateCourseContent(parseInt(userId), courseId);
         setCourseContent(content);
       } catch (error) {
         console.error('Failed to load course:', error);
@@ -75,7 +34,7 @@ const CourseDetail = () => {
       }
     };
 
-    initializeUser();
+    loadCourse();
   }, [userId, courseId, navigate]);
 
   const handleQuizAnswer = (questionIndex: number, answerIndex: number) => {

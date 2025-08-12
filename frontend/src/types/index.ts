@@ -113,3 +113,12 @@ export interface ExerciseValidation {
   safety_score?: number;
   is_suspicious?: boolean;
 }
+
+// Leaderboard Types
+export interface LeaderboardEntry {
+  name: string;
+  completed_courses: number;
+  average_score: number;
+  total_score: number;
+  has_certificate: boolean;
+}
