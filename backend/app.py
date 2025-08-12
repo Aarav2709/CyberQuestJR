@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Boolean, Text
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from datetime import datetime
 import os
@@ -63,23 +63,15 @@ CORS(app)
 
 # Initialize Gemini AI
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if not GEMINI_API_KEY:
-    # Try to get API key from user input or set a default for demo
-    GEMINI_API_KEY = "demo_key_will_use_fallback"
-
-if GEMINI_API_KEY and GEMINI_API_KEY != "demo_key_will_use_fallback":
-    try:
-        genai.configure(api_key=GEMINI_API_KEY)
-        gemini_model = genai.GenerativeModel('gemini-2.0-flash-exp')
-        print("🤖 Google Gemini AI initialized successfully!")
-    except Exception as e:
-        gemini_model = None
-        print(f"⚠️ Warning: Failed to initialize Gemini AI: {e}. Using enhanced fallback content.")
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+    gemini_model = genai.GenerativeModel('gemini-2.0-flash-exp')
+    print("🤖 Google Gemini AI initialized successfully!")
 else:
     gemini_model = None
-    print("🎯 Using enhanced AI-like fallback content generation system.")
+    print("⚠️ Warning: GEMINI_API_KEY not found. AI features will use fallback content.")
 
-# Clean COURSES dictionary with only basic info and pre-made quizzes
+# Course definitions
 COURSES = {
     "password-basics": {
         "title": "Password Heroes",
@@ -87,239 +79,47 @@ COURSES = {
         "icon": "🔐",
         "level": "Beginner",
         "difficulty": 1,
-        "estimatedTime": "15 min",
-        "quiz_questions": [
-            {
-                "question": "What makes a password super strong?",
-                "options": ["Your birthday", "A mix of letters, numbers, and symbols", "Your pet's name", "password123"],
-                "correct_answer": 1,
-                "explanation": "Strong passwords use different types of characters and are hard to guess!"
-            },
-            {
-                "question": "How long should a strong password be?",
-                "options": ["4 characters", "6 characters", "At least 8 characters", "Exactly 10 characters"],
-                "correct_answer": 2,
-                "explanation": "Longer passwords are much harder to crack - aim for at least 8 characters!"
-            },
-            {
-                "question": "Should you use the same password for all your accounts?",
-                "options": ["Yes, it's easier to remember", "No, each account should have a unique password", "Only for unimportant accounts", "It doesn't matter"],
-                "correct_answer": 1,
-                "explanation": "Each account should have its own unique password so if one gets compromised, the others stay safe!"
-            },
-            {
-                "question": "What should you do if you think your password has been compromised?",
-                "options": ["Ignore it", "Change it immediately", "Wait a week", "Tell everyone"],
-                "correct_answer": 1,
-                "explanation": "If you suspect your password is compromised, change it right away to protect your account!"
-            },
-            {
-                "question": "Which of these is the strongest password?",
-                "options": ["password", "12345678", "Rainbow$Ninja#2024!", "myname123"],
-                "correct_answer": 2,
-                "explanation": "Rainbow$Ninja#2024! uses uppercase, lowercase, numbers, symbols, and is long - making it very strong!"
-            }
-        ]
+        "estimatedTime": "15 min"
     },
     "phishing-awareness": {
         "title": "Phishing Detective",
-        "description": "Become a super detective and learn to spot fake emails and websites that try to trick you!",
+        "description": "Become an expert detective at spotting fake emails and suspicious messages that try to trick you!",
         "icon": "🕵️",
         "level": "Beginner",
         "difficulty": 1,
-        "estimatedTime": "20 min",
-        "quiz_questions": [
-            {
-                "question": "What is phishing?",
-                "options": ["A type of fishing", "Tricking people online to steal their information", "A computer game", "A social media platform"],
-                "correct_answer": 1,
-                "explanation": "Phishing is when criminals trick people into giving away personal information online!"
-            },
-            {
-                "question": "What should you do if you receive a suspicious email?",
-                "options": ["Click all the links", "Delete it and tell an adult", "Reply with your password", "Forward it to friends"],
-                "correct_answer": 1,
-                "explanation": "Always delete suspicious emails and tell a trusted adult - never click suspicious links!"
-            },
-            {
-                "question": "Which is a red flag in an email?",
-                "options": ["Perfect grammar", "Your real name", "Urgent threats and pressure", "A legitimate company logo"],
-                "correct_answer": 2,
-                "explanation": "Urgent threats and pressure tactics are classic signs of phishing emails!"
-            },
-            {
-                "question": "Will legitimate companies ask for your password via email?",
-                "options": ["Yes, always", "No, never", "Sometimes", "Only banks do this"],
-                "correct_answer": 1,
-                "explanation": "Legitimate companies will NEVER ask for your password or sensitive information via email!"
-            },
-            {
-                "question": "What should you check before clicking a link?",
-                "options": ["Nothing, just click it", "Hover over it to see where it really goes", "The color of the text", "The font size"],
-                "correct_answer": 1,
-                "explanation": "Always hover over links to see the real destination before clicking!"
-            }
-        ]
+        "estimatedTime": "20 min"
     },
     "digital-footprints": {
-        "title": "Digital Footprint Explorer",
-        "description": "Discover how to manage your online presence and keep your digital footprint safe and positive!",
+        "title": "Digital Footprint Tracker",
+        "description": "Understand what traces you leave online and how to manage them like a pro!",
         "icon": "👣",
-        "level": "Beginner",
+        "level": "Intermediate",
         "difficulty": 2,
-        "estimatedTime": "25 min",
-        "quiz_questions": [
-            {
-                "question": "What is a digital footprint?",
-                "options": ["Footprints made by robots", "All the traces you leave online", "A type of computer virus", "A digital art project"],
-                "correct_answer": 1,
-                "explanation": "Your digital footprint is all the information and traces you leave behind when using the internet!"
-            },
-            {
-                "question": "Why should you be careful about what you post online?",
-                "options": ["It doesn't matter", "It can affect your future opportunities", "Only for adults", "It's just for fun"],
-                "correct_answer": 1,
-                "explanation": "What you post online can be seen by future schools, employers, and others - so keep it positive!"
-            },
-            {
-                "question": "Who can see your digital footprint?",
-                "options": ["Only you", "Your friends", "Future employers and schools", "Nobody"],
-                "correct_answer": 2,
-                "explanation": "Your digital footprint can be seen by many people, including future employers and schools!"
-            },
-            {
-                "question": "What should you do before posting something online?",
-                "options": ["Post it immediately", "Think about how it might affect your future", "Ask everyone's permission", "Only post at night"],
-                "correct_answer": 1,
-                "explanation": "Always think before you post - ask yourself if you'd be comfortable with anyone seeing it!"
-            },
-            {
-                "question": "Can you completely erase your digital footprint?",
-                "options": ["Yes, easily", "No, things online can be permanent", "Only with special software", "Only if you're under 18"],
-                "correct_answer": 1,
-                "explanation": "Once something is online, it can be very difficult or impossible to completely remove!"
-            }
-        ]
+        "estimatedTime": "25 min"
     },
     "social-media-safety": {
-        "title": "Social Media Guardian",
-        "description": "Learn how to have fun on social media while staying safe and protecting your privacy!",
+        "title": "Safe Social Media",
+        "description": "Navigate social platforms safely and responsibly while having fun with friends!",
         "icon": "📱",
         "level": "Intermediate",
         "difficulty": 2,
-        "estimatedTime": "30 min",
-        "quiz_questions": [
-            {
-                "question": "What information should you NEVER share on social media?",
-                "options": ["Your favorite color", "Your full address and phone number", "Your favorite movie", "Your pet's name"],
-                "correct_answer": 1,
-                "explanation": "Never share personal information like your address, phone number, or school details on social media!"
-            },
-            {
-                "question": "Who should you accept friend requests from?",
-                "options": ["Everyone who sends one", "Only people you know in real life", "Anyone with a nice profile picture", "Random people"],
-                "correct_answer": 1,
-                "explanation": "Only accept friend requests from people you actually know and trust in real life!"
-            },
-            {
-                "question": "What should you do if someone online makes you feel uncomfortable?",
-                "options": ["Keep talking to them", "Block them and tell a trusted adult", "Give them your address", "Meet them in person"],
-                "correct_answer": 1,
-                "explanation": "If someone makes you uncomfortable online, block them immediately and tell a trusted adult!"
-            },
-            {
-                "question": "Is it safe to share your location on social media?",
-                "options": ["Yes, always", "No, it can be dangerous", "Only with strangers", "Only at school"],
-                "correct_answer": 1,
-                "explanation": "Sharing your location can let strangers know where you are, which can be very dangerous!"
-            },
-            {
-                "question": "What should you check before posting a photo?",
-                "options": ["Nothing", "If it shows personal information in the background", "Only the lighting", "The number of likes it might get"],
-                "correct_answer": 1,
-                "explanation": "Always check if photos accidentally show personal information like addresses, school names, or private details!"
-            }
-        ]
+        "estimatedTime": "30 min"
     },
     "cyber-bullying": {
-        "title": "Kindness Champion",
-        "description": "Learn how to stand up against cyberbullying and create a positive online environment for everyone!",
+        "title": "Cyber Bullying Defense",
+        "description": "Learn to identify, prevent, and respond to online bullying like a true cyber warrior!",
         "icon": "🛡️",
         "level": "Intermediate",
         "difficulty": 2,
-        "estimatedTime": "25 min",
-        "quiz_questions": [
-            {
-                "question": "What is cyberbullying?",
-                "options": ["Playing games online", "Using technology to hurt or harass others", "Making new friends online", "Learning about computers"],
-                "correct_answer": 1,
-                "explanation": "Cyberbullying is using digital platforms to deliberately hurt, threaten, or embarrass someone!"
-            },
-            {
-                "question": "If you're being cyberbullied, what should you do first?",
-                "options": ["Fight back with mean comments", "Don't save any evidence", "Save evidence and tell a trusted adult", "Keep it secret"],
-                "correct_answer": 2,
-                "explanation": "Save screenshots as evidence and immediately tell a trusted adult who can help you!"
-            },
-            {
-                "question": "What should you do if you see someone else being cyberbullied?",
-                "options": ["Ignore it", "Join in", "Report it and offer support to the victim", "Share it with others"],
-                "correct_answer": 2,
-                "explanation": "Be an upstander! Report cyberbullying and offer support to the person being targeted!"
-            },
-            {
-                "question": "Which of these is considered cyberbullying?",
-                "options": ["Sending encouraging messages", "Sharing embarrassing photos of someone without permission", "Complimating someone's post", "Asking for homework help"],
-                "correct_answer": 1,
-                "explanation": "Sharing embarrassing content about someone without permission is a form of cyberbullying!"
-            },
-            {
-                "question": "How can you prevent accidentally cyberbullying someone?",
-                "options": ["Think before you post or comment", "Post whatever you want", "Only use private accounts", "Never use the internet"],
-                "correct_answer": 0,
-                "explanation": "Always think about how your words might affect others before posting or commenting online!"
-            }
-        ]
+        "estimatedTime": "25 min"
     },
     "privacy-guardian": {
         "title": "Privacy Guardian",
-        "description": "Master the art of protecting your personal information and maintaining privacy in the digital world!",
+        "description": "Master the art of protecting your personal information and privacy online!",
         "icon": "🔒",
         "level": "Advanced",
         "difficulty": 3,
-        "estimatedTime": "35 min",
-        "quiz_questions": [
-            {
-                "question": "Why is online privacy important?",
-                "options": ["It's not important", "To protect your personal information from misuse", "Only for celebrities", "Just for fun"],
-                "correct_answer": 1,
-                "explanation": "Online privacy protects your personal information from being misused by criminals or companies!"
-            },
-            {
-                "question": "What are privacy settings used for?",
-                "options": ["Making your profile look better", "Controlling who can see your information", "Increasing followers", "Making posts viral"],
-                "correct_answer": 1,
-                "explanation": "Privacy settings help you control who can see your posts, photos, and personal information!"
-            },
-            {
-                "question": "Which type of information should you keep private?",
-                "options": ["Your favorite hobby", "Your home address and school name", "Your favorite color", "Your favorite book"],
-                "correct_answer": 1,
-                "explanation": "Keep personal details like your address, school, and family information private for your safety!"
-            },
-            {
-                "question": "What should you do before downloading an app?",
-                "options": ["Download it immediately", "Check what permissions it asks for", "Give it access to everything", "Never read the terms"],
-                "correct_answer": 1,
-                "explanation": "Always check what information and permissions an app requests before downloading it!"
-            },
-            {
-                "question": "Is it safe to use public Wi-Fi for online banking?",
-                "options": ["Yes, always", "No, it's not secure", "Only in libraries", "Only with friends"],
-                "correct_answer": 1,
-                "explanation": "Public Wi-Fi is not secure - never do banking or enter passwords on public networks!"
-            }
-        ]
+        "estimatedTime": "35 min"
     }
 }
 
@@ -333,41 +133,76 @@ def get_db():
         db.close()
         raise
 
-def generate_smart_fallback_content(course_info: dict, user_age: int, experience_level: str, user_interests: list) -> dict:
-    """Generate minimal fallback content only when AI completely fails"""
+def validate_password_strength(password: str) -> Dict[str, Any]:
+    """Validate password strength with detailed feedback"""
+    score = 0
+    feedback = []
+
+    if len(password) >= 8:
+        score += 2
+    else:
+        feedback.append("Password should be at least 8 characters long")
+
+    if re.search(r'[A-Z]', password):
+        score += 1
+    else:
+        feedback.append("Include at least one uppercase letter")
+
+    if re.search(r'[a-z]', password):
+        score += 1
+    else:
+        feedback.append("Include at least one lowercase letter")
+
+    if re.search(r'\d', password):
+        score += 1
+    else:
+        feedback.append("Include at least one number")
+
+    if re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        score += 1
+    else:
+        feedback.append("Include at least one special character")
+
+    strength = "Weak"
+    if score >= 5:
+        strength = "Strong"
+    elif score >= 3:
+        strength = "Medium"
 
     return {
-        "content": f"""
-� **{course_info['title']}**
+        "score": score,
+        "max_score": 6,
+        "strength": strength,
+        "feedback": feedback,
+        "is_strong": score >= 5
+    }
 
-Welcome to this cybersecurity lesson!
+def validate_email_safety(email: str) -> Dict[str, Any]:
+    """Check if an email looks suspicious"""
+    suspicious_domains = ["fakeemail.com", "phishing.net", "suspicious.org", "scam.biz"]
+    suspicious_keywords = ["urgent", "winner", "prize", "click now", "verify account", "suspended"]
 
-**What you'll learn:**
-{course_info['description']}
+    is_suspicious = False
+    warnings = []
 
-**Important:** This is a simplified version. For the full AI-generated lesson with detailed explanations, examples, and interactive content, please try refreshing the page or contact support.
+    # Check domain
+    if "@" in email:
+        domain = email.split("@")[1].lower()
+        if domain in suspicious_domains:
+            is_suspicious = True
+            warnings.append(f"Domain '{domain}' is known to be suspicious")
 
-**Key Topics:**
-- Understanding the basics of {course_info['title'].lower()}
-- Best practices and safety tips
-- Real-world applications
+    # Check for suspicious keywords
+    email_lower = email.lower()
+    for keyword in suspicious_keywords:
+        if keyword in email_lower:
+            is_suspicious = True
+            warnings.append(f"Contains suspicious keyword: '{keyword}'")
 
-Let's get started with the exercises and quiz!
-        """,
-        "exercises": [
-            {
-                "title": f"Basic {course_info['title']} Practice",
-                "description": "Practice the fundamentals you just learned",
-                "type": "scenario",
-                "instructions": "Apply what you've learned about cybersecurity in a practical scenario."
-            },
-            {
-                "title": "Security Awareness Check",
-                "description": "Test your understanding of security concepts",
-                "type": "scenario",
-                "instructions": "Evaluate different security situations and choose the safest approach."
-            }
-        ]
+    return {
+        "is_suspicious": is_suspicious,
+        "warnings": warnings,
+        "safety_score": 0 if is_suspicious else 100
     }
 
 def generate_certificate_id() -> str:
@@ -473,99 +308,114 @@ def generate_course_content():
         try:
             user_interests = user.interests.split(",") if user.interests else []
 
-            # Create comprehensive AI prompt for course content
             prompt = f"""
-            Create detailed educational content for a cybersecurity course for children aged {user.age}.
+            Create educational content for a cybersecurity course for children aged {user.age}.
 
             Course: {course_info['title']} - {course_info['description']}
             User Experience Level: {user.experience_level}
             User Interests: {', '.join(user_interests)}
 
-            Focus on creating engaging, age-appropriate content that includes:
+            Generate a comprehensive course with:
+            1. Educational content (explanation, examples, tips) - make it engaging and age-appropriate
+            2. 3 practical exercises with clear instructions
+            3. A quiz with 5 multiple-choice questions
 
-            1. **Introduction**: A fun, engaging introduction to the topic (2-3 paragraphs)
-            2. **Main Content**: Detailed explanation with:
-               - Key concepts explained simply
-               - Real-world examples and scenarios
-               - Step-by-step instructions
-               - Tips and best practices
-               - Common mistakes to avoid
-            3. **Practical Exercises**: 3 hands-on exercises with clear instructions
-
-            Make the content:
-            - Fun and engaging for a {user.age}-year-old
-            - Educational but not overwhelming
-            - Include real examples and scenarios
-            - Use emojis and friendly language
-            - Practical and actionable
-
-            Format as JSON:
+            Format the response as JSON with this structure:
             {{
-                "content": "comprehensive educational content with introduction, main sections, and practical tips",
+                "content": "detailed educational content here",
                 "exercises": [
                     {{
                         "title": "exercise title",
-                        "description": "what the student will learn",
+                        "description": "what to do",
                         "type": "password|email|scenario",
-                        "instructions": "detailed step-by-step instructions"
-                    }},
-                    {{
-                        "title": "second exercise title",
-                        "description": "what the student will learn",
-                        "type": "password|email|scenario",
-                        "instructions": "detailed step-by-step instructions"
-                    }},
-                    {{
-                        "title": "third exercise title",
-                        "description": "what the student will learn",
-                        "type": "password|email|scenario",
-                        "instructions": "detailed step-by-step instructions"
+                        "instructions": "step by step instructions"
                     }}
-                ]
+                ],
+                "quiz": {{
+                    "questions": [
+                        {{
+                            "question": "question text",
+                            "options": ["A", "B", "C", "D"],
+                            "correct_answer": 0,
+                            "explanation": "why this is correct"
+                        }}
+                    ]
+                }}
             }}
 
-            Focus on quality educational content - the quiz will be handled separately.
+            Make it fun, educational, and appropriate for a {user.age}-year-old with {user.experience_level} experience.
             """
 
-            ai_content = None
-
             if gemini_model:
-                try:
-                    response = gemini_model.generate_content(prompt)
-                    response_text = response.text if hasattr(response, 'text') else str(response)
-                    # Clean the response to extract JSON
-                    if '```json' in response_text:
-                        response_text = response_text.split('```json')[1].split('```')[0]
-                    elif '```' in response_text:
-                        response_text = response_text.split('```')[1].split('```')[0]
+                response = gemini_model.generate_content(prompt)
+            else:
+                # Fallback if AI is not available
+                response = type('obj', (object,), {'text': '{"content": "Course content not available", "exercises": [], "quiz": {"questions": []}}'})
 
-                    ai_content = json.loads(response_text.strip())
-                    print(f"✅ AI generated content for course: {course_id}")
-                except Exception as ai_error:
-                    print(f"🤖 AI generation failed: {ai_error}, using enhanced fallback")
-                    ai_content = None
+            response_text = response.text if hasattr(response, 'text') else str(response)
 
-            # Generate final course content with AI content + pre-made quiz
-            if ai_content:
-                # Use AI-generated content with our pre-made quiz
+            # Parse AI response
+            try:
+                course_content = json.loads(response_text)
+            except json.JSONDecodeError:
+                # Improved fallback content if AI response isn't valid JSON
                 course_content = {
-                    "content": ai_content.get("content", ""),
-                    "exercises": ai_content.get("exercises", []),
+                    "content": f"Welcome to {course_info['title']}! 🚀\n\n{course_info['description']}\n\nIn this course, you'll learn important skills and have fun with interactive activities!",
+                    "exercises": [
+                        {
+                            "title": "Super Scenario!",
+                            "description": "Imagine you're a cyber hero. What would you do if you saw a suspicious message?",
+                            "type": "scenario",
+                            "instructions": "Read the scenario and pick the safest action."
+                        },
+                        {
+                            "title": "Create a Strong Password!",
+                            "description": "Make up a password that would be hard for others to guess.",
+                            "type": "password",
+                            "instructions": "Think of a password with letters, numbers, and symbols."
+                        },
+                        {
+                            "title": "Spot the Phish!",
+                            "description": "Look at this email: 'You won a million dollars! Click here!' Is it safe?",
+                            "type": "email",
+                            "instructions": "Decide if the email is real or a trick."
+                        }
+                    ],
                     "quiz": {
-                        "questions": course_info.get("quiz", [])
+                        "questions": [
+                            {
+                                "question": f"What is the main goal of {course_info['title']}?",
+                                "options": ["To have fun", "To learn cybersecurity", "To use computers", "To play games"],
+                                "correct_answer": 1,
+                                "explanation": "The main goal is to learn cybersecurity concepts."
+                            },
+                            {
+                                "question": "Which of these is a strong password?",
+                                "options": ["123456", "password", "Qw!7xZ#9", "abcdef"],
+                                "correct_answer": 2,
+                                "explanation": "A strong password uses letters, numbers, and symbols."
+                            },
+                            {
+                                "question": "What should you do if you get a suspicious email?",
+                                "options": ["Click the link", "Ignore it", "Tell an adult or teacher", "Reply to the sender"],
+                                "correct_answer": 2,
+                                "explanation": "Always tell a trusted adult or teacher."
+                            },
+                            {
+                                "question": "Why is it important to keep your password secret?",
+                                "options": ["So friends can use your account", "To protect your information", "Because it's fun", "No reason"],
+                                "correct_answer": 1,
+                                "explanation": "Keeping your password secret protects your information."
+                            },
+                            {
+                                "question": "What is phishing?",
+                                "options": ["A type of fish", "A trick to steal info", "A computer game", "A password"],
+                                "correct_answer": 1,
+                                "explanation": "Phishing is a trick to steal your information."
+                            }
+                        ]
                     }
                 }
-            else:
-                # Use enhanced fallback if AI failed
-                course_content = generate_smart_fallback_content(
-                    course_info, user.age, user.experience_level, user_interests
-                )
-                # Always use our pre-made quiz
-                course_content["quiz"] = {
-                    "questions": course_info.get("quiz", [])
-                }
-
-            print(f"🎯 Generated course content for: {course_id} (AI: {'Yes' if ai_content else 'Fallback'})")
 
             # Save content to database
             if existing_progress:
