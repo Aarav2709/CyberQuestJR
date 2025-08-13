@@ -160,14 +160,6 @@ const Dashboard = () => {
             );
           })}
         </div>
-
-        {/* Fun bottom section */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-orange-400 via-pink-400 via-purple-400 to-blue-400 rounded-3xl p-8 shadow-2xl border-4 border-white">
-            <h3 className="text-3xl font-bold text-white mb-4">Ready to become a Cyber Hero? 🦸‍♂️</h3>
-            <p className="text-white text-lg opacity-90">Click on any course above to start your learning journey!</p>
-          </div>
-        </div>
       </div>
     </div>
   );
