@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { courseAPI, exerciseAPI } from '../services/api';
+import { courseAPI, exerciseAPI, api } from '../services/api';
 import { CourseContent, QuizResult, ExerciseValidation } from '../types';
 
 const CourseDetail = () => {
@@ -25,51 +25,81 @@ const CourseDetail = () => {
     const loadCourse = async () => {
       try {
         setLoading(true);
-        // If no user exists, create a default user first
-        if (!localStorage.getItem('cyberquest_user_id')) {
-          try {
-            // Try to create a default user
-            const defaultUser = {
-              name: 'Student',
-              age: 12,
-              experience_level: 'beginner',
-              interests: ['cybersecurity', 'learning']
-            };
 
-            const response = await fetch('http://localhost:8000/api/users', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(defaultUser),
-            });
+        // Always ensure we have a user
+        let currentUserId: string | null = localStorage.getItem('cyberquest_user_id');
 
-            if (response.ok) {
-              const userData = await response.json();
-              localStorage.setItem('cyberquest_user_id', userData.id.toString());
-              localStorage.setItem('cyberquest_user_name', userData.name);
-              console.log('Created default user:', userData);
-            } else {
-              // If user creation fails, just use ID 1
-              localStorage.setItem('cyberquest_user_id', '1');
-              localStorage.setItem('cyberquest_user_name', 'Student');
+        if (!currentUserId) {
+          // Create a default user automatically - keep trying until it works
+          let userCreated = false;
+          let attempts = 0;
+
+          while (!userCreated && attempts < 3) {
+            try {
+              const defaultUser = {
+                name: `Student${attempts > 0 ? attempts + 1 : ''}`,
+                age: 12,
+                experience_level: 'beginner',
+                interests: ['cybersecurity', 'learning']
+              };
+
+              console.log(`🔄 Attempting to create user (attempt ${attempts + 1})...`);
+              const userResponse = await api.post('/api/users', defaultUser);
+              currentUserId = userResponse.data.id.toString();
+              localStorage.setItem('cyberquest_user_id', currentUserId as string);
+              localStorage.setItem('cyberquest_user_name', userResponse.data.name);
+              console.log('✅ Created new user:', userResponse.data);
+              userCreated = true;
+            } catch (userError) {
+              console.error(`❌ Failed to create user (attempt ${attempts + 1}):`, userError);
+              attempts++;
+
+              if (attempts >= 3) {
+                // Last resort: throw error so user knows something is wrong
+                throw new Error('Unable to create user account. Please check if the backend server is running.');
+              }
+
+              // Wait a bit before retrying
+              await new Promise(resolve => setTimeout(resolve, 1000));
             }
-          } catch (err) {
-            console.error('Error creating user:', err);
-            localStorage.setItem('cyberquest_user_id', '1');
-            localStorage.setItem('cyberquest_user_name', 'Student');
           }
         }
 
-        console.log('Loading course with ID:', courseId);
-        console.log('User ID:', userId);
+        console.log('🔄 Loading course with ID:', courseId, 'for user:', currentUserId);
 
-        const content = await courseAPI.generateCourseContent(parseInt(localStorage.getItem('cyberquest_user_id') || '1'), courseId);
-        console.log('Course content received:', content);
+        // Validate that the user exists before generating content
+        try {
+          await api.get(`/api/users/${currentUserId!}`);
+          console.log('✅ User validated:', currentUserId);
+        } catch (userValidationError) {
+          console.error('❌ User validation failed, creating new user:', userValidationError);
+          // User doesn't exist, clear localStorage and create new user
+          localStorage.removeItem('cyberquest_user_id');
+          localStorage.removeItem('cyberquest_user_name');
+
+          // Create new user
+          const defaultUser = {
+            name: 'Student',
+            age: 12,
+            experience_level: 'beginner',
+            interests: ['cybersecurity', 'learning']
+          };
+
+          const userResponse = await api.post('/api/users', defaultUser);
+          currentUserId = userResponse.data.id.toString();
+          localStorage.setItem('cyberquest_user_id', currentUserId as string);
+          localStorage.setItem('cyberquest_user_name', userResponse.data.name);
+          console.log('✅ Created replacement user:', userResponse.data);
+        }
+
+        // Generate course content
+        const content = await courseAPI.generateCourseContent(parseInt(currentUserId!), courseId as string);
+        console.log('✅ Course content received:', content);
         setCourseContent(content);
+
       } catch (error) {
-        console.error('Failed to load course:', error);
-        // If AI generation fails, just show error - no fallback content
+        console.error('❌ Failed to load course:', error);
+        // Don't show fallback content, just let it show "course not found"
       } finally {
         setLoading(false);
       }
@@ -173,26 +203,22 @@ const CourseDetail = () => {
         </div>
 
         {/* Content Section */}
-        {currentSection === 'content' && (
+        {currentSection === 'content' && courseContent && (
           <div className="bg-white rounded-2xl p-8 shadow-lg border-4 border-blue-200">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">📚 Course Content</h2>
             <div className="text-gray-800 leading-relaxed text-lg space-y-4">
-              {courseContent.content.split('\n').map((paragraph, index) => (
-                paragraph.trim() && (
-                  <p key={index} className="mb-4">
-                    {paragraph}
-                  </p>
-                )
-              ))}
+              <div className="whitespace-pre-line">
+                {courseContent.content}
+              </div>
             </div>
           </div>
         )}
 
         {/* Exercises Section */}
-        {currentSection === 'exercises' && (
+        {currentSection === 'exercises' && courseContent && (
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">🏋️ Practice Exercises</h2>
-            {courseContent.exercises.map((exercise, index) => (
+            {courseContent.exercises && courseContent.exercises.map((exercise, index) => (
               <div key={index} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6 shadow-lg border-4 border-green-200">
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   🎯 {exercise.title}
