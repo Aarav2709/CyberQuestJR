@@ -82,14 +82,14 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 via-blue-100 to-cyan-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-green-100 via-blue-100 via-pink-100 to-purple-100 py-8">
       <div className="max-w-6xl mx-auto px-4">
         {/* Welcome Section */}
         <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-6xl font-bold bg-gradient-to-r from-orange-500 via-pink-500 via-purple-500 via-blue-500 to-green-500 bg-clip-text text-transparent mb-4">
             Welcome, {userName}!
           </h1>
-          <p className="text-2xl font-semibold text-purple-700 mb-8">
+          <p className="text-2xl font-semibold text-green-700 mb-8">
             Ready for an awesome cybersecurity adventure? 🚀
           </p>
         </div>
@@ -163,15 +163,9 @@ const Dashboard = () => {
 
         {/* Fun bottom section */}
         <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 rounded-3xl p-8 shadow-2xl border-4 border-white">
+          <div className="bg-gradient-to-r from-orange-400 via-pink-400 via-purple-400 to-blue-400 rounded-3xl p-8 shadow-2xl border-4 border-white">
             <h3 className="text-3xl font-bold text-white mb-4">Ready to become a Cyber Hero? 🦸‍♂️</h3>
             <p className="text-white text-lg opacity-90">Click on any course above to start your learning journey!</p>
-            <div className="flex justify-center space-x-4 mt-6 text-4xl">
-              <span>🌟</span>
-              <span>🎯</span>
-              <span>🏆</span>
-              <span>🚀</span>
-            </div>
           </div>
         </div>
       </div>

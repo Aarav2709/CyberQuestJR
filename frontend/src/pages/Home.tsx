@@ -20,9 +20,9 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900 dark:text-white">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-green-100 via-blue-100 via-pink-100 to-purple-100 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900 dark:text-white">
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-pink-400/20 to-purple-400/20 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-green-400/20 via-pink-400/20 to-purple-400/20 animate-pulse"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
           <div className="text-center">
@@ -34,8 +34,8 @@ const Home = () => {
               </div>
             </div>
 
-            <h1 className="text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
-              🛡️ CyberQuest Jr! 🚀
+            <h1 className="text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-orange-500 via-pink-500 via-purple-500 via-blue-500 to-green-500 bg-clip-text text-transparent drop-shadow-lg px-4">
+              CyberQuest Jr!
             </h1>
 
             <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 font-bold">
@@ -47,7 +47,7 @@ const Home = () => {
               {!hasCompletedAssessment
                 ? "First, let's see what you already know with a quick assessment!"
                 : "Continue your personalized cybersecurity journey!"
-              } 🦸‍♂️🦸‍♀️
+              } 🦸‍♂️
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
