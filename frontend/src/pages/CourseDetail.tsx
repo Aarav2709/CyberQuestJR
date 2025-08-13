@@ -27,20 +27,53 @@ const CourseDetail = () => {
         setLoading(true);
         // If no user exists, create a default user first
         if (!localStorage.getItem('cyberquest_user_id')) {
-          localStorage.setItem('cyberquest_user_id', '1');
-          localStorage.setItem('cyberquest_user_name', 'Student');
+          try {
+            // Try to create a default user
+            const defaultUser = {
+              name: 'Student',
+              age: 12,
+              experience_level: 'beginner',
+              interests: ['cybersecurity', 'learning']
+            };
+
+            const response = await fetch('http://localhost:8000/api/users', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(defaultUser),
+            });
+
+            if (response.ok) {
+              const userData = await response.json();
+              localStorage.setItem('cyberquest_user_id', userData.id.toString());
+              localStorage.setItem('cyberquest_user_name', userData.name);
+              console.log('Created default user:', userData);
+            } else {
+              // If user creation fails, just use ID 1
+              localStorage.setItem('cyberquest_user_id', '1');
+              localStorage.setItem('cyberquest_user_name', 'Student');
+            }
+          } catch (err) {
+            console.error('Error creating user:', err);
+            localStorage.setItem('cyberquest_user_id', '1');
+            localStorage.setItem('cyberquest_user_name', 'Student');
+          }
         }
 
-        const content = await courseAPI.generateCourseContent(parseInt(userId), courseId);
+        console.log('Loading course with ID:', courseId);
+        console.log('User ID:', userId);
+
+        const content = await courseAPI.generateCourseContent(parseInt(localStorage.getItem('cyberquest_user_id') || '1'), courseId);
+        console.log('Course content received:', content);
         setCourseContent(content);
       } catch (error) {
         console.error('Failed to load course:', error);
+        // If AI generation fails, just show error - no fallback content
       } finally {
         setLoading(false);
       }
-    };
-
-    loadCourse();
+    };    loadCourse();
   }, [userId, courseId, navigate]);
 
   const handleQuizAnswer = (questionIndex: number, answerIndex: number) => {
@@ -107,17 +140,19 @@ const CourseDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-green-100 via-blue-100 via-pink-100 to-purple-100 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
           <button
             onClick={() => navigate('/dashboard')}
-            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 mb-4"
+            className="text-blue-600 hover:text-blue-800 mb-4 font-semibold"
           >
             ← Back to Dashboard
           </button>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Course: {courseId}</h1>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-500 via-pink-500 via-purple-500 via-blue-500 to-green-500 bg-clip-text text-transparent">
+            {courseId?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} Course
+          </h1>
         </div>
 
         {/* Navigation Tabs */}
@@ -128,8 +163,8 @@ const CourseDetail = () => {
               onClick={() => setCurrentSection(section as any)}
               className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
                 currentSection === section
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
               }`}
             >
               {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -139,10 +174,16 @@ const CourseDetail = () => {
 
         {/* Content Section */}
         {currentSection === 'content' && (
-          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Course Content</h2>
-            <div className="prose dark:prose-invert max-w-none">
-              <div dangerouslySetInnerHTML={{ __html: courseContent.content.replace(/\n/g, '<br>') }} />
+          <div className="bg-white rounded-2xl p-8 shadow-lg border-4 border-blue-200">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">📚 Course Content</h2>
+            <div className="text-gray-800 leading-relaxed text-lg space-y-4">
+              {courseContent.content.split('\n').map((paragraph, index) => (
+                paragraph.trim() && (
+                  <p key={index} className="mb-4">
+                    {paragraph}
+                  </p>
+                )
+              ))}
             </div>
           </div>
         )}
@@ -150,26 +191,28 @@ const CourseDetail = () => {
         {/* Exercises Section */}
         {currentSection === 'exercises' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Practice Exercises</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">🏋️ Practice Exercises</h2>
             {courseContent.exercises.map((exercise, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                  {exercise.title}
+              <div key={index} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6 shadow-lg border-4 border-green-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  🎯 {exercise.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{exercise.description}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{exercise.instructions}</p>
+                <p className="text-gray-700 mb-4 text-lg">{exercise.description}</p>
+                <p className="text-gray-600 mb-4 bg-yellow-100 p-3 rounded-lg border-l-4 border-yellow-400">
+                  💡 <strong>Instructions:</strong> {exercise.instructions}
+                </p>
 
                 <div className="space-y-4">
                   {exercise.type === 'password' && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Create a strong password:
+                      <label className="block text-lg font-medium text-gray-700 mb-2">
+                        🔐 Create a strong password:
                       </label>
                       <input
                         type="password"
                         value={exerciseAnswers[index] || ''}
                         onChange={(e) => handleExerciseAnswer(index, e.target.value)}
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white text-gray-900 text-lg"
                         placeholder="Enter your password..."
                       />
                     </div>
@@ -177,14 +220,14 @@ const CourseDetail = () => {
 
                   {exercise.type === 'email' && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Evaluate this email address:
+                      <label className="block text-lg font-medium text-gray-700 mb-2">
+                        📧 Evaluate this email address:
                       </label>
                       <input
                         type="email"
                         value={exerciseAnswers[index] || ''}
                         onChange={(e) => handleExerciseAnswer(index, e.target.value)}
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                        className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white text-gray-900 text-lg"
                         placeholder="Enter email to check..."
                       />
                     </div>
