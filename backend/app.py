@@ -123,6 +123,214 @@ COURSES = {
     }
 }
 
+# Pre-made quiz questions for each course
+COURSE_QUIZZES = {
+    "password-basics": {
+        "questions": [
+            {
+                "question": "What makes a password strong?",
+                "options": ["Using your name and birthday", "Having at least 8 characters with letters, numbers, and symbols", "Using 'password123'", "Making it easy to remember"],
+                "correct_answer": 1,
+                "explanation": "A strong password has at least 8 characters and includes uppercase letters, lowercase letters, numbers, and symbols!"
+            },
+            {
+                "question": "How often should you change your passwords?",
+                "options": ["Never", "Every day", "When you think they might be compromised", "Only on your birthday"],
+                "correct_answer": 2,
+                "explanation": "You should change passwords when you suspect they might be compromised or shared accidentally."
+            },
+            {
+                "question": "Should you share your password with your best friend?",
+                "options": ["Yes, best friends share everything", "No, passwords should always be private", "Only if they promise not to tell", "Yes, but only on weekends"],
+                "correct_answer": 1,
+                "explanation": "Passwords should NEVER be shared with anyone, not even your best friend. Keep them private and safe!"
+            },
+            {
+                "question": "What's a good way to remember strong passwords?",
+                "options": ["Write them on sticky notes", "Use the same password everywhere", "Use a password manager", "Tell your parents to remember them"],
+                "correct_answer": 2,
+                "explanation": "A password manager is a safe tool that helps you create and remember strong, unique passwords for all your accounts."
+            },
+            {
+                "question": "If you see someone typing their password, what should you do?",
+                "options": ["Try to memorize it", "Look away to respect their privacy", "Help them type it faster", "Take a picture"],
+                "correct_answer": 1,
+                "explanation": "Always look away when someone is entering their password to respect their privacy and security."
+            }
+        ]
+    },
+    "phishing-awareness": {
+        "questions": [
+            {
+                "question": "What is phishing?",
+                "options": ["A type of fishing with nets", "Fake messages trying to steal your information", "A computer game", "A way to catch viruses"],
+                "correct_answer": 1,
+                "explanation": "Phishing is when bad people send fake messages (emails, texts) to try to trick you into giving them your personal information."
+            },
+            {
+                "question": "You get an email saying 'You won $1000! Click here!' What should you do?",
+                "options": ["Click the link immediately", "Tell an adult and don't click anything", "Forward it to all your friends", "Reply with your address"],
+                "correct_answer": 1,
+                "explanation": "This is likely a phishing email! Always tell a trusted adult about suspicious messages and never click unknown links."
+            },
+            {
+                "question": "How can you spot a phishing email?",
+                "options": ["It has your name in it", "It asks for personal information or passwords", "It's from someone you know", "It has nice pictures"],
+                "correct_answer": 1,
+                "explanation": "Phishing emails often ask for personal information, passwords, or money. Real companies will never ask for this information via email."
+            },
+            {
+                "question": "What should you do if you accidentally click a suspicious link?",
+                "options": ["Keep clicking to see what happens", "Tell an adult immediately", "Try to undo it yourself", "Ignore it and hope nothing happens"],
+                "correct_answer": 1,
+                "explanation": "If you accidentally click a suspicious link, tell a trusted adult right away so they can help protect your information."
+            },
+            {
+                "question": "Which email address looks more trustworthy?",
+                "options": ["support@amaz0n.com", "support@amazon.com", "supp0rt@amazon.co", "support@amazom.com"],
+                "correct_answer": 1,
+                "explanation": "The real Amazon email would be support@amazon.com. Be careful of emails that replace letters with numbers or have misspellings!"
+            }
+        ]
+    },
+    "digital-footprints": {
+        "questions": [
+            {
+                "question": "What is a digital footprint?",
+                "options": ["A picture of your foot", "The trail of information you leave online", "A type of computer virus", "A way to track animals"],
+                "correct_answer": 1,
+                "explanation": "Your digital footprint is all the information about you that exists online - like posts, photos, and websites you visit."
+            },
+            {
+                "question": "Once you post something online, what happens to it?",
+                "options": ["It disappears after a day", "It stays there forever, even if you delete it", "Only your friends can see it", "It automatically becomes private"],
+                "correct_answer": 1,
+                "explanation": "Once something is posted online, it can stay there forever! Other people might have copied or saved it before you delete it."
+            },
+            {
+                "question": "Before posting a photo, you should ask yourself:",
+                "options": ["Is this the funniest photo ever?", "Would I be okay if everyone in the world saw this?", "Will this get lots of likes?", "Is my hair looking good?"],
+                "correct_answer": 1,
+                "explanation": "Always think: 'Would I be comfortable if anyone could see this?' This helps you make smart choices about what to share."
+            },
+            {
+                "question": "What information should you NEVER share online?",
+                "options": ["Your favorite color", "Your home address and phone number", "Your favorite movie", "Your pet's name"],
+                "correct_answer": 1,
+                "explanation": "Never share personal information like your address, phone number, school name, or where you'll be at certain times."
+            },
+            {
+                "question": "Who can see your 'private' social media posts?",
+                "options": ["Only you", "Your friends and possibly the company that runs the platform", "Nobody", "Only your family"],
+                "correct_answer": 1,
+                "explanation": "Even 'private' posts can be seen by the social media company, and settings can change. Always post carefully!"
+            }
+        ]
+    },
+    "social-media-safety": {
+        "questions": [
+            {
+                "question": "What should you do if a stranger wants to be your friend online?",
+                "options": ["Accept immediately - more friends is better!", "Ask a trusted adult before accepting", "Accept but don't talk to them", "Send them your phone number"],
+                "correct_answer": 1,
+                "explanation": "Always ask a trusted adult before accepting friend requests from people you don't know in real life."
+            },
+            {
+                "question": "Someone online wants to meet you in person. What should you do?",
+                "options": ["Meet them at a public place", "Tell your parents and let them decide", "Go alone to show you're grown up", "Meet them near your school"],
+                "correct_answer": 1,
+                "explanation": "NEVER meet online friends in person without your parents knowing and being involved. Tell a trusted adult immediately."
+            },
+            {
+                "question": "What's the best privacy setting for your social media?",
+                "options": ["Public - everyone should see my posts!", "Friends only", "Friends of friends", "It doesn't matter"],
+                "correct_answer": 1,
+                "explanation": "Keep your posts set to 'Friends only' so only people you know and trust can see what you share."
+            },
+            {
+                "question": "If someone is being mean to you online, you should:",
+                "options": ["Be mean back to them", "Block them and tell a trusted adult", "Post about it publicly", "Just ignore it completely"],
+                "correct_answer": 1,
+                "explanation": "Block bullies and always tell a trusted adult. You don't have to deal with online meanness alone!"
+            },
+            {
+                "question": "How much time should you spend on social media each day?",
+                "options": ["As much as possible", "Only during school hours", "A reasonable amount with breaks for other activities", "All night long"],
+                "correct_answer": 2,
+                "explanation": "It's important to balance screen time with other activities like playing outside, reading, and spending time with family!"
+            }
+        ]
+    },
+    "cyber-bullying": {
+        "questions": [
+            {
+                "question": "What is cyberbullying?",
+                "options": ["Playing games online", "Using technology to hurt or embarrass someone", "Learning about computers", "Making online friends"],
+                "correct_answer": 1,
+                "explanation": "Cyberbullying is when someone uses technology (like phones, computers, or social media) to be mean, threaten, or embarrass someone else."
+            },
+            {
+                "question": "If someone is cyberbullying you, what should you do FIRST?",
+                "options": ["Bully them back", "Don't save any evidence", "Tell a trusted adult immediately", "Post about it on social media"],
+                "correct_answer": 2,
+                "explanation": "The first thing to do is tell a trusted adult like a parent, teacher, or counselor. They can help you handle the situation safely."
+            },
+            {
+                "question": "Should you screenshot or save evidence of cyberbullying?",
+                "options": ["No, just delete everything", "Yes, it can help adults understand what's happening", "Only if it's really bad", "Only on weekends"],
+                "correct_answer": 1,
+                "explanation": "Yes! Save screenshots or evidence to show trusted adults. This helps them understand what's happening and how to help you."
+            },
+            {
+                "question": "If you see someone else being cyberbullied, what should you do?",
+                "options": ["Join in so you don't become a target", "Ignore it - it's not your problem", "Support the victim and tell an adult", "Share it with everyone"],
+                "correct_answer": 2,
+                "explanation": "Be an upstander! Support the person being bullied and tell a trusted adult. Your kindness can make a big difference."
+            },
+            {
+                "question": "True or False: It's okay to say things online that you wouldn't say in person.",
+                "options": ["True - the internet is different", "False - treat others with respect everywhere", "True - but only on weekends", "It depends on the website"],
+                "correct_answer": 1,
+                "explanation": "False! Always treat others with kindness and respect, whether online or in person. Real people with real feelings are behind every screen."
+            }
+        ]
+    },
+    "privacy-guardian": {
+        "questions": [
+            {
+                "question": "What does 'privacy' mean online?",
+                "options": ["Keeping your personal information safe and controlled", "Making sure no one can find you", "Only using private computers", "Never going online"],
+                "correct_answer": 0,
+                "explanation": "Privacy means controlling who can see your personal information and keeping your private details safe from people who shouldn't have them."
+            },
+            {
+                "question": "Which of these is okay to share on a public profile?",
+                "options": ["Your full name and address", "Your school name and schedule", "Your favorite hobby", "Your phone number"],
+                "correct_answer": 2,
+                "explanation": "Sharing your hobbies is generally safe! But never share personal details like your address, phone number, or school information."
+            },
+            {
+                "question": "What should you check before downloading an app?",
+                "options": ["If your friends have it", "The app's privacy policy and permissions", "If it's free", "If it has good graphics"],
+                "correct_answer": 1,
+                "explanation": "Always check what information the app wants to access and read reviews. Some apps ask for more information than they actually need!"
+            },
+            {
+                "question": "When is it okay to give out your personal information online?",
+                "options": ["When a website asks for it", "When you're talking to online friends", "Only with parent permission on trusted sites", "Never, under any circumstances"],
+                "correct_answer": 2,
+                "explanation": "Only share personal information on trusted websites and with your parents' permission. They can help you decide what's safe to share."
+            },
+            {
+                "question": "What's the safest way to use public Wi-Fi?",
+                "options": ["Avoid logging into important accounts", "Share your passwords with others", "Download lots of apps", "Give your personal information to anyone who asks"],
+                "correct_answer": 0,
+                "explanation": "On public Wi-Fi, avoid logging into important accounts like email or banking. Public networks are less secure than your home Wi-Fi."
+            }
+        ]
+    }
+}
+
 # Utility functions
 def get_db():
     """Get database session"""
@@ -308,6 +516,7 @@ def generate_course_content():
         try:
             user_interests = user.interests.split(",") if user.interests else []
 
+            # AI prompt for ONLY course content and exercises (NOT quiz)
             prompt = f"""
             Create educational content for a cybersecurity course for children aged {user.age}.
 
@@ -315,14 +524,13 @@ def generate_course_content():
             User Experience Level: {user.experience_level}
             User Interests: {', '.join(user_interests)}
 
-            Generate a comprehensive course with:
+            Generate ONLY:
             1. Educational content (explanation, examples, tips) - make it engaging and age-appropriate
             2. 3 practical exercises with clear instructions
-            3. A quiz with 5 multiple-choice questions
 
             Format the response as JSON with this structure:
             {{
-                "content": "detailed educational content here",
+                "content": "detailed educational content here - make it comprehensive, fun and educational for kids",
                 "exercises": [
                     {{
                         "title": "exercise title",
@@ -330,107 +538,95 @@ def generate_course_content():
                         "type": "password|email|scenario",
                         "instructions": "step by step instructions"
                     }}
-                ],
-                "quiz": {{
-                    "questions": [
-                        {{
-                            "question": "question text",
-                            "options": ["A", "B", "C", "D"],
-                            "correct_answer": 0,
-                            "explanation": "why this is correct"
-                        }}
-                    ]
-                }}
+                ]
             }}
 
-            Make it fun, educational, and appropriate for a {user.age}-year-old with {user.experience_level} experience.
+            Make the content detailed, fun, and appropriate for a {user.age}-year-old with {user.experience_level} experience.
+            Include real-world examples, tips, and make it engaging with emojis and kid-friendly language.
             """
 
             if gemini_model:
                 response = gemini_model.generate_content(prompt)
+                response_text = response.text if hasattr(response, 'text') else str(response)
+
+                print(f"🤖 AI Raw Response: {response_text}")  # Debug log
+
+                # Clean the response - remove markdown code blocks if present
+                cleaned_response = response_text.strip()
+                if cleaned_response.startswith('```json'):
+                    cleaned_response = cleaned_response[7:]  # Remove ```json
+                if cleaned_response.startswith('```'):
+                    cleaned_response = cleaned_response[3:]   # Remove ```
+                if cleaned_response.endswith('```'):
+                    cleaned_response = cleaned_response[:-3]  # Remove closing ```
+                cleaned_response = cleaned_response.strip()
+
+                print(f"🧹 Cleaned Response: {cleaned_response[:200]}...")  # Debug log
+
+                # Parse AI response for content and exercises
+                try:
+                    ai_content = json.loads(cleaned_response)
+                    course_content = ai_content.get('content', f"Welcome to {course_info['title']}!")
+                    exercises = ai_content.get('exercises', [])
+                    print(f"✅ AI JSON Parsed Successfully")  # Debug log
+                except json.JSONDecodeError as e:
+                    print(f"❌ JSON Parse Error: {e}")  # Debug log
+                    print(f"🔧 Trying to extract content manually from: {response_text[:200]}...")  # Debug log
+                    # Fallback if AI response isn't valid JSON
+                    course_content = f"Welcome to {course_info['title']}! 🚀\n\n{course_info['description']}\n\nIn this course, you'll learn important skills and have fun with interactive activities!"
+                    exercises = [
+                        {
+                            "title": "Practice Exercise",
+                            "description": "Let's practice what we've learned!",
+                            "type": "scenario",
+                            "instructions": "Think about how you would apply these cybersecurity concepts in real life."
+                        }
+                    ]
             else:
                 # Fallback if AI is not available
-                response = type('obj', (object,), {'text': '{"content": "Course content not available", "exercises": [], "quiz": {"questions": []}}'})
-
-            response_text = response.text if hasattr(response, 'text') else str(response)
-
-            # Parse AI response
-            try:
-                course_content = json.loads(response_text)
-            except json.JSONDecodeError:
-                # Improved fallback content if AI response isn't valid JSON
-                course_content = {
-                    "content": f"Welcome to {course_info['title']}! 🚀\n\n{course_info['description']}\n\nIn this course, you'll learn important skills and have fun with interactive activities!",
-                    "exercises": [
-                        {
-                            "title": "Super Scenario!",
-                            "description": "Imagine you're a cyber hero. What would you do if you saw a suspicious message?",
-                            "type": "scenario",
-                            "instructions": "Read the scenario and pick the safest action."
-                        },
-                        {
-                            "title": "Create a Strong Password!",
-                            "description": "Make up a password that would be hard for others to guess.",
-                            "type": "password",
-                            "instructions": "Think of a password with letters, numbers, and symbols."
-                        },
-                        {
-                            "title": "Spot the Phish!",
-                            "description": "Look at this email: 'You won a million dollars! Click here!' Is it safe?",
-                            "type": "email",
-                            "instructions": "Decide if the email is real or a trick."
-                        }
-                    ],
-                    "quiz": {
-                        "questions": [
-                            {
-                                "question": f"What is the main goal of {course_info['title']}?",
-                                "options": ["To have fun", "To learn cybersecurity", "To use computers", "To play games"],
-                                "correct_answer": 1,
-                                "explanation": "The main goal is to learn cybersecurity concepts."
-                            },
-                            {
-                                "question": "Which of these is a strong password?",
-                                "options": ["123456", "password", "Qw!7xZ#9", "abcdef"],
-                                "correct_answer": 2,
-                                "explanation": "A strong password uses letters, numbers, and symbols."
-                            },
-                            {
-                                "question": "What should you do if you get a suspicious email?",
-                                "options": ["Click the link", "Ignore it", "Tell an adult or teacher", "Reply to the sender"],
-                                "correct_answer": 2,
-                                "explanation": "Always tell a trusted adult or teacher."
-                            },
-                            {
-                                "question": "Why is it important to keep your password secret?",
-                                "options": ["So friends can use your account", "To protect your information", "Because it's fun", "No reason"],
-                                "correct_answer": 1,
-                                "explanation": "Keeping your password secret protects your information."
-                            },
-                            {
-                                "question": "What is phishing?",
-                                "options": ["A type of fish", "A trick to steal info", "A computer game", "A password"],
-                                "correct_answer": 1,
-                                "explanation": "Phishing is a trick to steal your information."
-                            }
-                        ]
+                course_content = f"Welcome to {course_info['title']}! 🚀\n\n{course_info['description']}\n\nIn this course, you'll learn important skills and have fun with interactive activities!"
+                exercises = [
+                    {
+                        "title": "Practice Exercise",
+                        "description": "Let's practice what we've learned!",
+                        "type": "scenario",
+                        "instructions": "Think about how you would apply these cybersecurity concepts in real life."
                     }
-                }
+                ]
+
+            # Get PRE-MADE quiz questions for this course
+            quiz_data = COURSE_QUIZZES.get(course_id, {
+                "questions": [
+                    {
+                        "question": "What did you learn in this course?",
+                        "options": ["Important cybersecurity concepts", "Nothing useful", "How to play games", "How to break computers"],
+                        "correct_answer": 0,
+                        "explanation": "This course teaches important cybersecurity concepts to keep you safe online!"
+                    }
+                ]
+            })
+
+            # Combine AI-generated content with pre-made quiz
+            final_course_content = {
+                "content": course_content,
+                "exercises": exercises,
+                "quiz": quiz_data
+            }
 
             # Save content to database
             if existing_progress:
-                existing_progress.course_content = json.dumps(course_content)
+                existing_progress.course_content = json.dumps(final_course_content)
             else:
                 progress = CourseProgress(
                     user_id=user_id,
                     course_id=course_id,
-                    course_content=json.dumps(course_content)
+                    course_content=json.dumps(final_course_content)
                 )
                 db.add(progress)
 
             db.commit()
 
-            return jsonify(course_content)
+            return jsonify(final_course_content)
 
         except Exception as e:
             return jsonify({"error": f"Failed to generate course content: {str(e)}"}), 500
