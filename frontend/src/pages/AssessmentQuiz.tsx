@@ -160,7 +160,7 @@ const AssessmentQuiz = () => {
     localStorage.setItem('personalized_recommendation', JSON.stringify(recommendation));
 
     // Navigate to learn page or dashboard
-    navigate('/learn');
+    navigate('/dashboard');
   };
 
   if (showUserForm) {
