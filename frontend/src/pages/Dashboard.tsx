@@ -7,9 +7,30 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Record<string, Course>>({});
   const [loading, setLoading] = useState(true);
-  const userName = localStorage.getItem('cyberquest_user_name') || 'Student';
+  const [userName, setUserName] = useState('Student');
 
   useEffect(() => {
+    // Get the most recent user name from various possible sources
+    const getUserName = () => {
+      // First check if there's user_info from assessment
+      const userInfoStr = localStorage.getItem('user_info');
+      if (userInfoStr) {
+        try {
+          const userInfo = JSON.parse(userInfoStr);
+          if (userInfo.name) {
+            return userInfo.name;
+          }
+        } catch (e) {
+          console.error('Error parsing user_info:', e);
+        }
+      }
+
+      // Fallback to cyberquest_user_name or default
+      return localStorage.getItem('cyberquest_user_name') || 'Student';
+    };
+
+    setUserName(getUserName());
+
     const fetchCourses = async () => {
       try {
         const coursesData = await courseAPI.getCourses();
@@ -22,6 +43,31 @@ const Dashboard = () => {
     };
 
     fetchCourses();
+
+    // Listen for localStorage changes to update username
+    const handleStorageChange = () => {
+      const getUserName = () => {
+        const userInfoStr = localStorage.getItem('user_info');
+        if (userInfoStr) {
+          try {
+            const userInfo = JSON.parse(userInfoStr);
+            if (userInfo.name) {
+              return userInfo.name;
+            }
+          } catch (e) {
+            console.error('Error parsing user_info:', e);
+          }
+        }
+        return localStorage.getItem('cyberquest_user_name') || 'Student';
+      };
+      setUserName(getUserName());
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, [navigate]);
 
   if (loading) {
