@@ -14,10 +14,10 @@ const CourseDetail = () => {
   const [exerciseResults, setExerciseResults] = useState<Record<string, ExerciseValidation>>({});
   const [exerciseAnswers, setExerciseAnswers] = useState<Record<string, string>>({});
 
-  const userId = localStorage.getItem('cyberquest_user_id');
+  const userId = localStorage.getItem('cyberquest_user_id') || '1'; // Default user ID
 
   useEffect(() => {
-    if (!userId || !courseId) {
+    if (!courseId) {
       navigate('/dashboard');
       return;
     }
@@ -25,6 +25,12 @@ const CourseDetail = () => {
     const loadCourse = async () => {
       try {
         setLoading(true);
+        // If no user exists, create a default user first
+        if (!localStorage.getItem('cyberquest_user_id')) {
+          localStorage.setItem('cyberquest_user_id', '1');
+          localStorage.setItem('cyberquest_user_name', 'Student');
+        }
+
         const content = await courseAPI.generateCourseContent(parseInt(userId), courseId);
         setCourseContent(content);
       } catch (error) {
@@ -45,7 +51,7 @@ const CourseDetail = () => {
   };
 
   const submitQuiz = async () => {
-    if (!userId || !courseId) return;
+    if (!courseId) return;
 
     try {
       const result = await courseAPI.submitQuiz(parseInt(userId), courseId, quizAnswers);

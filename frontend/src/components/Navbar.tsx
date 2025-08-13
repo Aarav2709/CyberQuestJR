@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Shield, BookOpen } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 const Navbar = () => {
   return (
@@ -16,14 +16,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Link
-              to="/learn"
-              className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-            >
-              <BookOpen className="h-4 w-4" />
-              <span>Learn</span>
-            </Link>
-
             <Link
               to="/dashboard"
               className="bg-gradient-to-r from-primary-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-primary-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"

@@ -20,6 +20,8 @@ export interface Course {
   description: string;
   icon: string;
   level: string;
+  difficulty?: number;
+  estimatedTime?: string;
 }
 
 export interface CourseContent {
