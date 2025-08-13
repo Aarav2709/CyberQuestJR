@@ -14,24 +14,95 @@
   .btn-primary {
     @apply bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg;
   }
-  
+
   .btn-secondary {
     @apply bg-white hover:bg-gray-50 text-primary-600 font-bold py-3 px-6 rounded-full border-2 border-primary-500 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg;
   }
-  
+
   .card {
     @apply bg-white rounded-2xl shadow-xl p-6 border border-gray-100;
   }
-  
+
   .card-hover {
     @apply card transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
   }
-  
+
   .text-gradient {
     @apply bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent;
   }
-  
+
   .bg-gradient-hero {
     @apply bg-gradient-to-br from-primary-400 via-purple-500 to-pink-500;
+  }
+
+  /* Fun animations for kids */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+  }
+
+  .animate-rainbow {
+    animation: rainbow 3s linear infinite;
+  }
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0%, 7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(6deg);
+  }
+  35% {
+    transform: rotateZ(-4deg);
+  }
+  40%, 100% {
+    transform: rotateZ(0);
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
   }
 }
