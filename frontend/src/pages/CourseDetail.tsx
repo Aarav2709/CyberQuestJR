@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import MarkdownRenderer from '../components/MarkdownRenderer';
 import { useParams, useNavigate } from 'react-router-dom';
 import { courseAPI, exerciseAPI, api } from '../services/api';
 import { CourseContent, QuizResult, ExerciseValidation } from '../types';
@@ -182,7 +183,7 @@ const CourseDetail = () => {
             ← Back to Dashboard
           </button>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-500 via-pink-500 via-purple-500 via-blue-500 to-green-500 bg-clip-text text-transparent">
-            {courseId?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} Course
+            {courseId?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())} Course
           </h1>
         </div>
 
@@ -208,9 +209,7 @@ const CourseDetail = () => {
           <div className="bg-white rounded-2xl p-8 shadow-lg border-4 border-blue-200">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">📚 Course Content</h2>
             <div className="text-gray-800 leading-relaxed text-lg space-y-4">
-              <div className="whitespace-pre-line">
-                {courseContent.content}
-              </div>
+              <MarkdownRenderer content={courseContent.content} className="prose max-w-none" />
             </div>
           </div>
         )}
