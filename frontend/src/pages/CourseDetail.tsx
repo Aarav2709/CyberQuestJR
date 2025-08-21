@@ -189,7 +189,7 @@ const CourseDetail = () => {
 
         {/* Navigation Tabs */}
         <div className="flex space-x-4 mb-8">
-          {['content', 'exercises', 'quiz'].map((section) => (
+          {['content', 'quiz'].map((section) => (
             <button
               key={section}
               onClick={() => setCurrentSection(section as any)}
@@ -211,113 +211,6 @@ const CourseDetail = () => {
             <div className="text-gray-800 leading-relaxed text-lg space-y-4">
               <MarkdownRenderer content={courseContent.content} className="prose max-w-none" />
             </div>
-          </div>
-        )}
-
-        {/* Exercises Section */}
-        {currentSection === 'exercises' && courseContent && (
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">🏋️ Practice Exercises</h2>
-            {courseContent.exercises && courseContent.exercises.map((exercise, index) => (
-              <div key={index} className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6 shadow-lg border-4 border-green-200">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  🎯 {exercise.title}
-                </h3>
-                <p className="text-gray-700 mb-4 text-lg">{exercise.description}</p>
-                <p className="text-gray-600 mb-4 bg-yellow-100 p-3 rounded-lg border-l-4 border-yellow-400">
-                  💡 <strong>Instructions:</strong> {exercise.instructions}
-                </p>
-
-                <div className="space-y-4">
-                  {exercise.type === 'password' && (
-                    <div>
-                      <label className="block text-lg font-medium text-gray-700 mb-2">
-                        🔐 Create a strong password:
-                      </label>
-                      <input
-                        type="password"
-                        value={exerciseAnswers[index] || ''}
-                        onChange={(e) => handleExerciseAnswer(index, e.target.value)}
-                        className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white text-gray-900 text-lg"
-                        placeholder="Enter your password..."
-                      />
-                    </div>
-                  )}
-
-                  {exercise.type === 'email' && (
-                    <div>
-                      <label className="block text-lg font-medium text-gray-700 mb-2">
-                        📧 Evaluate this email address:
-                      </label>
-                      <input
-                        type="email"
-                        value={exerciseAnswers[index] || ''}
-                        onChange={(e) => handleExerciseAnswer(index, e.target.value)}
-                        className="w-full p-3 border-2 border-blue-300 rounded-lg bg-white text-gray-900 text-lg"
-                        placeholder="Enter email to check..."
-                      />
-                    </div>
-                  )}
-
-                  {exercise.type === 'scenario' && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Your response:
-                      </label>
-                      <textarea
-                        value={exerciseAnswers[index] || ''}
-                        onChange={(e) => handleExerciseAnswer(index, e.target.value)}
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        rows={3}
-                        placeholder="Describe what you would do..."
-                      />
-                    </div>
-                  )}
-
-                  <button
-                    onClick={() => validateExercise(index, exercise.type)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
-                  >
-                    Check Answer
-                  </button>
-
-                  {exerciseResults[index] && (
-                    <div className={`p-4 rounded-lg ${
-                      exerciseResults[index].is_strong || exerciseResults[index].safety_score === 100 || exerciseResults[index].score
-                        ? 'bg-green-100 dark:bg-green-900'
-                        : 'bg-yellow-100 dark:bg-yellow-900'
-                    }`}>
-                      {exerciseResults[index].feedback && (
-                        <p className="font-semibold mb-2">{exerciseResults[index].feedback}</p>
-                      )}
-                      {exerciseResults[index].strength && (
-                        <p>Password Strength: {exerciseResults[index].strength}</p>
-                      )}
-                      {exerciseResults[index].warnings && exerciseResults[index].warnings!.length > 0 && (
-                        <div>
-                          <p className="font-semibold text-red-600">Warnings:</p>
-                          <ul className="list-disc list-inside">
-                            {exerciseResults[index].warnings!.map((warning, i) => (
-                              <li key={i}>{warning}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                      {exerciseResults[index].tips && (
-                        <div>
-                          <p className="font-semibold">Tips:</p>
-                          <ul className="list-disc list-inside">
-                            {exerciseResults[index].tips!.map((tip, i) => (
-                              <li key={i}>{tip}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
           </div>
         )}
 
