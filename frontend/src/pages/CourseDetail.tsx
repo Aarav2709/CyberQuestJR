@@ -14,8 +14,30 @@ const CourseDetail = () => {
   const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
   const [exerciseResults, setExerciseResults] = useState<Record<string, ExerciseValidation>>({});
   const [exerciseAnswers, setExerciseAnswers] = useState<Record<string, string>>({});
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+
+  const loadingMessages = [
+    'Your course is being prepared.',
+    "Wait while AI generates your course.",
+    'Almost there — adding fun exercises!'
+  ];
 
   const userId = localStorage.getItem('cyberquest_user_id') || '1'; // Default user ID
+
+  useEffect(() => {
+    // Cycle loading messages while loading is true
+    let interval: number | undefined;
+    if (loading) {
+      interval = window.setInterval(() => {
+        setLoadingMessageIndex(i => (i + 1) % 3);
+      }, 2500);
+    }
+
+    return () => {
+      if (interval) window.clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   useEffect(() => {
     if (!courseId) {
@@ -44,15 +66,15 @@ const CourseDetail = () => {
                 interests: ['cybersecurity', 'learning']
               };
 
-              console.log(`🔄 Attempting to create user (attempt ${attempts + 1})...`);
+              console.log(`Attempting to create user (attempt ${attempts + 1})...`);
               const userResponse = await api.post('/api/users', defaultUser);
               currentUserId = userResponse.data.id.toString();
               localStorage.setItem('cyberquest_user_id', currentUserId as string);
               localStorage.setItem('cyberquest_user_name', userResponse.data.name);
-              console.log('✅ Created new user:', userResponse.data);
+              console.log('Created new user:', userResponse.data);
               userCreated = true;
             } catch (userError) {
-              console.error(`❌ Failed to create user (attempt ${attempts + 1}):`, userError);
+              console.error(`Failed to create user (attempt ${attempts + 1}):`, userError);
               attempts++;
 
               if (attempts >= 3) {
@@ -66,14 +88,14 @@ const CourseDetail = () => {
           }
         }
 
-        console.log('🔄 Loading course with ID:', courseId, 'for user:', currentUserId);
+  console.log('Loading course with ID:', courseId, 'for user:', currentUserId);
 
         // Validate that the user exists before generating content
         try {
           await api.get(`/api/users/${currentUserId!}`);
-          console.log('✅ User validated:', currentUserId);
+          console.log('User validated:', currentUserId);
         } catch (userValidationError) {
-          console.error('❌ User validation failed, creating new user:', userValidationError);
+          console.error('User validation failed, creating new user:', userValidationError);
           // User doesn't exist, clear localStorage and create new user
           localStorage.removeItem('cyberquest_user_id');
           localStorage.removeItem('cyberquest_user_name');
@@ -90,16 +112,16 @@ const CourseDetail = () => {
           currentUserId = userResponse.data.id.toString();
           localStorage.setItem('cyberquest_user_id', currentUserId as string);
           localStorage.setItem('cyberquest_user_name', userResponse.data.name);
-          console.log('✅ Created replacement user:', userResponse.data);
+          console.log('Created replacement user:', userResponse.data);
         }
 
         // Generate course content
         const content = await courseAPI.generateCourseContent(parseInt(currentUserId!), courseId as string);
-        console.log('✅ Course content received:', content);
+  console.log('Course content received:', content);
         setCourseContent(content);
 
       } catch (error) {
-        console.error('❌ Failed to load course:', error);
+  console.error('Failed to load course:', error);
         // Don't show fallback content, just let it show "course not found"
       } finally {
         setLoading(false);
@@ -148,9 +170,18 @@ const CourseDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mb-8"></div>
-        <div className="text-xl font-semibold text-blue-700 dark:text-blue-200">Generating your course...</div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 flex flex-col items-center justify-center py-20">
+        <div className="flex flex-col items-center gap-6">
+          <div className="loading-ring">
+            <div className="loading-ring-inner"></div>
+          </div>
+
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-gray-800 mb-2 text-rainbow">Generating your course!</h2>
+            <p className="text-lg text-gray-700 mb-1" id="loading-status">{loadingMessages[loadingMessageIndex]}</p>
+            <p className="text-sm text-gray-500">This may take a few seconds — crafting fun, age-appropriate activities.</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -159,7 +190,7 @@ const CourseDetail = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Course not found</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Course not found!</h2>
           <button
             onClick={() => navigate('/dashboard')}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
@@ -178,7 +209,7 @@ const CourseDetail = () => {
         <div className="mb-8">
           <button
             onClick={() => navigate('/dashboard')}
-            className="text-blue-600 hover:text-blue-800 mb-4 font-semibold"
+            className="btn-secondary mb-4 font-semibold inline-flex items-center"
           >
             ← Back to Dashboard
           </button>
@@ -207,7 +238,7 @@ const CourseDetail = () => {
         {/* Content Section */}
         {currentSection === 'content' && courseContent && (
           <div className="bg-white rounded-2xl p-8 shadow-lg border-4 border-blue-200">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">📚 Course Content</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Course Content</h2>
             <div className="text-gray-800 leading-relaxed text-lg space-y-4">
               <MarkdownRenderer content={courseContent.content} className="prose max-w-none" />
             </div>
@@ -264,7 +295,7 @@ const CourseDetail = () => {
                 {Math.round(quizResult.score)}%
               </div>
               <p className={`text-xl font-semibold ${quizResult.passed ? 'text-green-600' : 'text-red-600'}`}>
-                {quizResult.passed ? '🎉 Congratulations! You passed!' : '📚 Keep studying and try again!'}
+                {quizResult.passed ? 'Congratulations! You passed!' : 'Keep studying and try again!'}
               </p>
               <p className="text-gray-600 dark:text-gray-300 mt-2">
                 You got {quizResult.correct_answers} out of {quizResult.total_questions} questions correct

@@ -130,20 +130,20 @@ const AssessmentQuiz = () => {
 
     if (score >= 80) {
       return {
-        level: "Advanced Explorer! 🌟",
-        message: "Wow! You already know a lot about cybersecurity. You're ready for intermediate and advanced courses!",
+        level: "Advanced Explorer",
+        message: "You already know a lot about cybersecurity. Try intermediate and advanced courses.",
         recommendedCourses: ["digital-footprints", "social-media-safety", "privacy-guardian"]
       };
     } else if (score >= 60) {
       return {
-        level: "Cyber Cadet! 🚀",
-        message: "Great job! You have some good knowledge. Let's build on that with some beginner and intermediate courses!",
+        level: "Cyber Cadet",
+        message: "Nice work! You have good knowledge. Let's build on that with beginner and intermediate courses.",
         recommendedCourses: ["password-basics", "phishing-awareness", "digital-footprints"]
       };
     } else {
       return {
-        level: "Future Cyber Hero! 💪",
-        message: "Perfect! You're just starting your cybersecurity journey. Let's begin with the basics and work our way up!",
+        level: "Future Cyber Hero",
+        message: "Great start! Begin with the basics and grow your skills.",
         recommendedCourses: ["password-basics", "phishing-awareness", "cyber-bullying"]
       };
     }
@@ -168,12 +168,12 @@ const AssessmentQuiz = () => {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 py-8">
         <div className="max-w-2xl mx-auto px-4">
           <div className="text-center mb-8">
-            <Brain className="h-16 w-16 text-primary-600 mx-auto mb-4 animate-pulse" />
+            <Brain className="h-16 w-16 text-primary-600 mx-auto mb-4" />
             <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
-              🧠 Cybersecurity Assessment
+              Cybersecurity Assessment
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              Let's get to know you first! This helps us personalize your learning experience.
+              Let's get to know you first. This helps us personalize your learning experience.
             </p>
           </div>
 
@@ -181,7 +181,7 @@ const AssessmentQuiz = () => {
             <form onSubmit={handleUserSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  What's your name? 😊
+                  What's your name?
                 </label>
                 <input
                   type="text"
@@ -195,7 +195,7 @@ const AssessmentQuiz = () => {
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  How old are you? 🎂
+                  How old are you?
                 </label>
                 <select
                   value={userInfo.age}
@@ -212,7 +212,7 @@ const AssessmentQuiz = () => {
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  How much do you know about online safety? 🤔
+                  How much do you know about online safety?
                 </label>
                 <select
                   value={userInfo.experience}
@@ -221,18 +221,18 @@ const AssessmentQuiz = () => {
                   required
                 >
                   <option value="">Choose your level</option>
-                  <option value="beginner">I'm just starting to learn 🌱</option>
-                  <option value="some">I know a little bit 🌿</option>
-                  <option value="good">I know quite a bit 🌳</option>
-                  <option value="expert">I'm already pretty good! 🌟</option>
+                  <option value="beginner">I'm just starting to learn</option>
+                  <option value="some">I know a little bit</option>
+                  <option value="good">I know quite a bit</option>
+                  <option value="expert">I'm already pretty good!</option>
                 </select>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-primary-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-primary-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
+                className="w-full btn-secondary py-3 px-6 rounded-lg font-semibold transition duration-200 transform hover:scale-105"
               >
-                Start Assessment Quiz! 🚀
+                Start Assessment Quiz
               </button>
             </form>
           </div>
@@ -249,9 +249,9 @@ const AssessmentQuiz = () => {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 py-8">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-8">
-            <Trophy className="h-20 w-20 text-yellow-500 mx-auto mb-4 animate-bounce" />
+            <Trophy className="h-20 w-20 text-yellow-500 mx-auto mb-4" />
             <h1 className="text-5xl font-bold text-gray-800 dark:text-white mb-4">
-              🎉 Assessment Complete!
+              Assessment Complete.
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300">
               Great job, {userInfo.name}! Here are your results:
@@ -274,7 +274,7 @@ const AssessmentQuiz = () => {
 
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-                📚 Your Personalized Learning Path:
+                Your Personalized Learning Path:
               </h3>
               {recommendation.recommendedCourses.map((courseId, index) => (
                 <div key={courseId} className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
@@ -290,9 +290,9 @@ const AssessmentQuiz = () => {
 
             <button
               onClick={completeAssessment}
-              className="w-full mt-8 bg-gradient-to-r from-primary-600 to-purple-600 text-white py-4 px-6 rounded-lg font-semibold hover:from-primary-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 text-lg"
+              className="w-full mt-8 bg-gradient-to-r from-primary-600 to-purple-600 text-white py-4 px-6 rounded-lg font-semibold hover:from-primary-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 text-lg"
             >
-              Start Learning Journey! 🚀
+              Start Learning Journey!
             </button>
           </div>
         </div>
@@ -317,8 +317,11 @@ const AssessmentQuiz = () => {
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
-              className="bg-gradient-to-r from-primary-600 to-purple-600 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${progress}%` }}
+              className="h-2 rounded-full transition-all duration-300"
+              style={{
+                width: `${progress}%`,
+                background: 'linear-gradient(90deg, var(--cq-red), var(--cq-yellow), var(--cq-green), var(--cq-blue), var(--cq-pink))'
+              }}
             ></div>
           </div>
         </div>

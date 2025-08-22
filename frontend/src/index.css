@@ -10,99 +10,111 @@
   }
 }
 
+:root {
+  --cq-red: #ff595e;
+  --cq-yellow: #ffd166;
+  --cq-green: #06d6a0;
+  --cq-blue: #1982ff;
+  --cq-pink: #ff6bcb;
+  /* slightly darker palette for richer rainbow headings */
+  --cq-red-dark: #e6454a;
+  --cq-yellow-dark: #f2b500;
+  --cq-green-dark: #04b079;
+  --cq-blue-dark: #1366d6;
+  --cq-pink-dark: #ff4fb3;
+}
+
 @layer components {
   .btn-primary {
-    @apply bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg;
+    background: linear-gradient(90deg, var(--cq-red), var(--cq-yellow), var(--cq-green), var(--cq-blue), var(--cq-pink));
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    box-shadow: 0 10px 24px rgba(16,24,40,0.08);
+    transition: transform 200ms ease, box-shadow 200ms ease;
   }
 
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-primary-600 font-bold py-3 px-6 rounded-full border-2 border-primary-500 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg;
+  background: white;
+  color: var(--cq-blue);
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  border: 2px solid rgba(25,130,255,0.12);
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .dashboard-btn {
+    background: linear-gradient(180deg, rgba(236, 213, 255, 0.9), rgba(243, 230, 255, 0.95));
+    color: #5b21b6; /* purple-700 */
+    border: 1px solid rgba(91,33,182,0.12);
+    box-shadow: 0 8px 20px rgba(91,33,182,0.06);
   }
 
   .card {
-    @apply bg-white rounded-2xl shadow-xl p-6 border border-gray-100;
+    @apply bg-white rounded-2xl shadow-xl p-6 border border-primary-50;
   }
 
   .card-hover {
-    @apply card transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+  @apply card transition duration-300 hover:shadow-2xl hover:-translate-y-1;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-600 to-coral-500 bg-clip-text text-transparent;
   }
 
   .bg-gradient-hero {
-    @apply bg-gradient-to-br from-primary-400 via-purple-500 to-pink-500;
+    @apply bg-gradient-to-br from-accent-100 via-mint-50 to-primary-50;
   }
 
-  /* Fun animations for kids */
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+  /* Rainbow text for headings (animated) */
+  .text-rainbow {
+  background: linear-gradient(90deg, var(--cq-red-dark), var(--cq-yellow-dark), var(--cq-green-dark), var(--cq-blue-dark), var(--cq-pink-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: hue-rotate 5s linear infinite;
   }
 
-  .animate-fade-in {
-    animation: fadeIn 1s ease-in;
+  /* Rainbow loading ring */
+  .loading-ring {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 9999px;
+  background: conic-gradient(var(--cq-red-dark), var(--cq-yellow-dark), var(--cq-green-dark), var(--cq-blue-dark), var(--cq-pink-dark), var(--cq-red-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin 2.2s linear infinite;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   }
 
-  .animate-wiggle {
-    animation: wiggle 1s ease-in-out infinite;
-  }
-
-  .animate-rainbow {
-    animation: rainbow 3s linear infinite;
+  .loading-ring-inner {
+    width: 5.25rem;
+    height: 5.25rem;
+    background: white;
+    border-radius: 9999px;
   }
 }
 
-/* Keyframe animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+/* Global button hover / lift effect */
+button, .btn, a.btn-primary, a.btn-secondary {
+  cursor: pointer;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+button:hover, .btn:hover, a.btn-primary:hover, a.btn-secondary:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(16,24,40,0.12);
 }
 
-@keyframes wiggle {
-  0%, 7% {
-    transform: rotateZ(0);
-  }
-  15% {
-    transform: rotateZ(-15deg);
-  }
-  20% {
-    transform: rotateZ(10deg);
-  }
-  25% {
-    transform: rotateZ(-10deg);
-  }
-  30% {
-    transform: rotateZ(6deg);
-  }
-  35% {
-    transform: rotateZ(-4deg);
-  }
-  40%, 100% {
-    transform: rotateZ(0);
-  }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-@keyframes rainbow {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
+@keyframes hue-rotate {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
 }

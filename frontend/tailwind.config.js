@@ -20,6 +20,42 @@ export default {
           800: '#075985',
           900: '#0c4a6e',
         },
+        accent: {
+          50: '#fff8ef',
+          100: '#fff1df',
+          200: '#ffe3bf',
+          300: '#ffd39f',
+          400: '#ffc07a',
+          500: '#ffad4f',
+          600: '#ff982f',
+          700: '#e67a23',
+          800: '#b85b1b',
+          900: '#873e12',
+        },
+        mint: {
+          50: '#f0fff7',
+          100: '#dfffee',
+          200: '#bfffe0',
+          300: '#8fffd0',
+          400: '#5ef7b3',
+          500: '#2fe398',
+          600: '#17c887',
+          700: '#11926a',
+          800: '#0e6f50',
+          900: '#0b4d38',
+        },
+        coral: {
+          50: '#fff5f2',
+          100: '#ffe9e2',
+          200: '#ffcdbf',
+          300: '#ffab94',
+          400: '#ff8a74',
+          500: '#ff6750',
+          600: '#ff4736',
+          700: '#e6362b',
+          800: '#b22621',
+          900: '#7f1816',
+        },
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -47,17 +83,6 @@ export default {
       },
       fontFamily: {
         'comic': ['Comic Neue', 'Comic Sans MS', 'cursive'],
-      },
-      animation: {
-        'bounce-slow': 'bounce 2s infinite',
-        'pulse-slow': 'pulse 3s infinite',
-        'wiggle': 'wiggle 1s ease-in-out infinite',
-      },
-      keyframes: {
-        wiggle: {
-          '0%, 100%': { transform: 'rotate(-3deg)' },
-          '50%': { transform: 'rotate(3deg)' },
-        }
       }
     },
   },
