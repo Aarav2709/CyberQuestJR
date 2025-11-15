@@ -9,7 +9,10 @@ import {
   ChevronRight,
   Play,
   Sparkles,
-  Clock
+  Clock,
+  Shield,
+  Search,
+  Lock
 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
@@ -53,10 +56,10 @@ const Dashboard: React.FC = () => {
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Welcome to Your Cyber Adventure! 🚀
+            Welcome to Your Cyber Adventure
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
-            Ready to continue your cybersecurity adventure? No account needed! 🎉
+            Ready to continue your cybersecurity adventure? No account needed!
           </p>
           {progress && (
             <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 inline-block">
@@ -72,7 +75,7 @@ const Dashboard: React.FC = () => {
               <div className="flex items-center mb-6">
                 <Sparkles className="h-8 w-8 text-green-600 mr-3" />
                 <h2 className="text-3xl font-bold text-green-800 dark:text-green-200">
-                  🎯 Your AI-Generated Learning Path
+                  Your AI-Generated Learning Path
                 </h2>
               </div>
 
@@ -102,7 +105,9 @@ const Dashboard: React.FC = () => {
                   {personalizedCourse.modules && personalizedCourse.modules.map((module: any, index: number) => (
                     <div key={index} className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900 dark:to-pink-900 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
                       <div className="flex items-start space-x-3">
-                        <div className="text-2xl">{module.icon}</div>
+                        <div className="text-2xl font-semibold text-purple-600">
+                          {module.name?.charAt(0) || 'M'}
+                        </div>
                         <div className="flex-1">
                           <h4 className="font-semibold text-gray-800 dark:text-white">{module.name}</h4>
                           <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{module.description}</p>
@@ -120,7 +125,7 @@ const Dashboard: React.FC = () => {
                   className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center space-x-2"
                 >
                   <Play className="h-5 w-5" />
-                  <span>🚀 Start My Learning Adventure</span>
+                  <span>Start My Learning Adventure</span>
                   <ChevronRight className="h-5 w-5" />
                 </Link>
               </div>
@@ -154,26 +159,32 @@ const Dashboard: React.FC = () => {
         {/* Gaming Modules Preview */}
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            🎮 Interactive Gaming Modules
+            Interactive Gaming Modules
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
-              <div className="text-4xl mb-4">🔐</div>
+              <div className="mb-4">
+                <Lock className="h-10 w-10 text-purple-600" />
+              </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Password Heroes</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">Become a password superhero and create unbreakable digital fortresses!</p>
               <Link to="/modules/password-basics" className="text-purple-600 hover:text-purple-800 font-medium">Start Adventure →</Link>
             </div>
 
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
-              <div className="text-4xl mb-4">🕵️</div>
+              <div className="mb-4">
+                <Search className="h-10 w-10 text-purple-600" />
+              </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Phishing Detective</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">Train your detective skills to spot and avoid phishing attempts!</p>
               <Link to="/modules/phishing-awareness" className="text-purple-600 hover:text-purple-800 font-medium">Start Adventure →</Link>
             </div>
 
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
-              <div className="text-4xl mb-4">🛡️</div>
+              <div className="mb-4">
+                <Shield className="h-10 w-10 text-purple-600" />
+              </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Privacy Guardian</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">Master the art of protecting your personal information online!</p>
               <Link to="/modules/privacy-guardian" className="text-purple-600 hover:text-purple-800 font-medium">Start Adventure →</Link>
@@ -206,10 +217,10 @@ const Dashboard: React.FC = () => {
 
         {/* Fun Fact */}
         <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl p-8 text-white text-center">
-          <h2 className="text-3xl font-bold mb-4">🎉 Fun Fact!</h2>
+          <h2 className="text-3xl font-bold mb-4">Fun Fact</h2>
           <p className="text-xl">
-            Cybersecurity heroes help protect over 4.6 billion internet users worldwide!
-            You're joining an amazing community of digital defenders! 🛡️
+            Cybersecurity heroes help protect over 4.6 billion internet users worldwide.
+            You're joining an amazing community of digital defenders.
           </p>
         </div>
       </div>

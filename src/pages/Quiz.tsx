@@ -165,12 +165,12 @@ const Quiz: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="card text-center">
-            <div className="text-6xl mb-6">
-              {type === 'assessment' ? '🎯' : quizResult.feedback.title.includes('Awesome') ? '🏆' : quizResult.feedback.title.includes('Great') ? '⭐' : '🌟'}
+            <div className="mb-6 flex justify-center">
+              <Sparkles className="h-12 w-12 text-primary-600" />
             </div>
 
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              {type === 'assessment' ? '🎉 Assessment Complete!' : quizResult.feedback.title}
+              {type === 'assessment' ? 'Assessment Complete' : quizResult.feedback.title}
             </h2>
 
             <div className="bg-primary-50 rounded-lg p-6 mb-6">
@@ -196,7 +196,7 @@ const Quiz: React.FC = () => {
             {type === 'assessment' && personalizedCourse && (
               <div className="text-left mb-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                  🌟 Your Personalized CyberQuest Adventure!
+                  Your Personalized CyberQuest Adventure
                 </h3>
                 <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-6 mb-6">
                   <h4 className="text-lg font-semibold text-purple-800 mb-2">{personalizedCourse.title}</h4>
@@ -206,7 +206,9 @@ const Quiz: React.FC = () => {
                     {personalizedCourse.modules && personalizedCourse.modules.map((module: any, index: number) => (
                       <div key={index} className="bg-white rounded-lg p-4 shadow-sm">
                         <div className="flex items-center space-x-3">
-                          <div className="text-2xl">{module.icon}</div>
+                          <div className="text-2xl font-semibold text-purple-600">
+                            {module.name?.charAt(0) || 'M'}
+                          </div>
                           <div>
                             <h5 className="font-medium text-gray-900">{module.name}</h5>
                             <p className="text-sm text-gray-600">{module.description}</p>
@@ -224,13 +226,15 @@ const Quiz: React.FC = () => {
             {type !== 'assessment' && quizResult.learning_path && quizResult.learning_path.length > 0 && (
               <div className="text-left mb-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  🎯 Your Personalized Learning Path
+                  Your Personalized Learning Path
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {quizResult.learning_path.map((module: any, index: number) => (
                     <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center space-x-3">
-                        <div className="text-2xl">{module.icon}</div>
+                        <div className="text-2xl font-semibold text-primary-600">
+                          {module.name?.charAt(0) || 'M'}
+                        </div>
                         <div>
                           <h4 className="font-medium text-gray-900">{module.name}</h4>
                           <p className="text-sm text-gray-600">{module.description}</p>
@@ -250,7 +254,7 @@ const Quiz: React.FC = () => {
                   className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center space-x-2"
                 >
                   <Sparkles className="h-5 w-5" />
-                  <span>🚀 Let's Go! Start My Course</span>
+                  <span>Start My Course</span>
                   <ArrowRight className="h-5 w-5" />
                 </button>
               ) : (

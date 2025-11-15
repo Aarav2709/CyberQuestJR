@@ -1,6 +1,23 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000';
+const normalizeUrl = (value?: string) => {
+  if (!value) return undefined;
+  return value.endsWith('/') ? value.slice(0, -1) : value;
+};
+
+const getDefaultBaseUrl = () => {
+  if (import.meta.env.MODE === 'development') {
+    return 'http://localhost:8000';
+  }
+
+  if (typeof window !== 'undefined') {
+    return window.location.origin;
+  }
+
+  return '';
+};
+
+const API_BASE_URL = normalizeUrl(import.meta.env.VITE_API_BASE_URL) ?? getDefaultBaseUrl();
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -19,8 +36,18 @@ export const quizAPI = {
 };
 
 export const moduleAPI = {
-  getContent: async (moduleName: string) => {
+  list: async () => {
+    const response = await api.get('/api/modules');
+    return response.data;
+  },
+  getDetails: async (moduleName: string) => {
     const response = await api.get(`/api/modules/${moduleName}`);
+    return response.data;
+  },
+  getChallenge: async (moduleName: string, level: string = 'beginner') => {
+    const response = await api.get(`/api/modules/${moduleName}/challenge`, {
+      params: { level },
+    });
     return response.data;
   },
 };

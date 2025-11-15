@@ -59,3 +59,10 @@ export interface Progress {
   available_quizzes: number;
   message: string;
 }
+
+export interface AIMetadata {
+  ai_enabled: boolean;
+  source: string;
+  reason?: string | null;
+  generated_at?: string;
+}

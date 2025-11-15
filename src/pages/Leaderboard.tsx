@@ -31,7 +31,7 @@ const Leaderboard: React.FC = () => {
           name: 'CyberChampion',
           score: 950,
           quizzes_completed: 12,
-          badge: '👑',
+          badge: 'Champion',
           username: 'CyberChampion',
           level: 'Expert'
         }
@@ -43,11 +43,11 @@ const Leaderboard: React.FC = () => {
 
   const getBadge = (index: number): string => {
     switch (index) {
-      case 0: return '👑';
-      case 1: return '🥇';
-      case 2: return '🥈';
-      case 3: return '🥉';
-      default: return '⭐';
+      case 0: return 'Champion';
+      case 1: return 'Gold';
+      case 2: return 'Silver';
+      case 3: return 'Bronze';
+      default: return 'Rising Star';
     }
   };
 
@@ -95,12 +95,12 @@ const Leaderboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center mb-12">
           <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Cyber Heroes Leaderboard 🏆
+            Cyber Heroes Leaderboard
           </h1>
           <p className="text-xl text-gray-600">
             See how you rank against other cyber heroes! Keep learning to climb higher.
@@ -117,7 +117,7 @@ const Leaderboard: React.FC = () => {
                 <div className="text-white font-bold">2nd</div>
               </div>
               <div className="card p-4">
-                <div className="text-2xl mb-2">{leaderboard[1]?.badge}</div>
+                <div className="text-2xl font-semibold mb-2">{leaderboard[1]?.badge}</div>
                 <div className="font-bold text-gray-900">{leaderboard[1].username}</div>
                 <div className="text-sm text-gray-600">{leaderboard[1].score}%</div>
               </div>
@@ -130,7 +130,7 @@ const Leaderboard: React.FC = () => {
                 <div className="text-white font-bold text-lg">1st</div>
               </div>
               <div className="card p-6 transform scale-110">
-                <div className="text-3xl mb-2">{leaderboard[0]?.badge}</div>
+                <div className="text-3xl font-semibold mb-2">{leaderboard[0]?.badge}</div>
                 <div className="font-bold text-gray-900 text-lg">{leaderboard[0].username}</div>
                 <div className="text-sm text-gray-600">{leaderboard[0].score}%</div>
               </div>
@@ -143,7 +143,7 @@ const Leaderboard: React.FC = () => {
                 <div className="text-white font-bold">3rd</div>
               </div>
               <div className="card p-4">
-                <div className="text-2xl mb-2">{leaderboard[2]?.badge}</div>
+                <div className="text-2xl font-semibold mb-2">{leaderboard[2]?.badge}</div>
                 <div className="font-bold text-gray-900">{leaderboard[2].username}</div>
                 <div className="text-sm text-gray-600">{leaderboard[2].score}%</div>
               </div>
@@ -156,7 +156,7 @@ const Leaderboard: React.FC = () => {
           <h3 className="text-xl font-bold text-gray-900 mb-6">
             All Cyber Heroes
           </h3>
-          
+
           <div className="space-y-3">
             {leaderboard.map((entry, index) => (
               <div
@@ -167,15 +167,15 @@ const Leaderboard: React.FC = () => {
                   <div className="flex items-center justify-center w-8 h-8">
                     {getRankIcon(entry.rank)}
                   </div>
-                  
+
                   <div className="text-2xl">{entry.badge}</div>
-                  
+
                   <div>
                     <div className="font-medium">{entry.username}</div>
                     <div className="text-sm opacity-75">{entry.level}</div>
                   </div>
                 </div>
-                
+
                 <div className="text-right">
                   <div className="font-bold text-lg">{entry.score}%</div>
                   <div className="text-sm opacity-75 capitalize">{entry.level}</div>
@@ -183,7 +183,7 @@ const Leaderboard: React.FC = () => {
               </div>
             ))}
           </div>
-          
+
           {leaderboard.length === 0 && (
             <div className="text-center py-12">
               <Trophy className="h-16 w-16 text-gray-300 mx-auto mb-4" />
@@ -202,7 +202,7 @@ const Leaderboard: React.FC = () => {
           <div className="text-center">
             <Star className="h-8 w-8 text-primary-600 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Want to climb higher? 🚀
+              Want to climb higher?
             </h3>
             <p className="text-gray-600 mb-4">
               Keep learning and taking quizzes to improve your rank!
