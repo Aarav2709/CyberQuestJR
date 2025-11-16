@@ -18,7 +18,7 @@ import TwoFactorSetup from '../components/games/TwoFactorSetup';
 const ChapterPage: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
   const chapter = chapters.find((c) => c.id === chapterId) || chapters[0];
-  const { markLessonComplete, getCompletedLessons } = useChapterProgress();
+  const { markLessonComplete, getCompletedLessons, markComplete, markStarted } = useChapterProgress();
   const lessonEntries = useMemo(() => {
     return chapter.lessons
       .map((lessonId) => findLessonById(lessonId))
@@ -37,6 +37,15 @@ const ChapterPage: React.FC = () => {
 
   const currentLesson = lessonEntries.find((lesson) => lesson.id === activeLessonId) || lessonEntries[0] || null;
   const completedLessons = getCompletedLessons(chapter.id);
+
+  // Check if all lessons are complete and mark chapter as complete
+  useEffect(() => {
+    if (lessonEntries.length > 0 && completedLessons.length === lessonEntries.length) {
+      markComplete(chapter.id);
+    } else if (completedLessons.length > 0) {
+      markStarted(chapter.id);
+    }
+  }, [completedLessons.length, lessonEntries.length, chapter.id, markComplete, markStarted]);
 
   // Check if current lesson is a game
   const isGameLesson = currentLesson?.id.endsWith('-game');

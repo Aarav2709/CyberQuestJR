@@ -1,9 +1,9 @@
-import { CheckCircle2, Sparkles, Shield, MessageCircle, BookOpen, Target, Lightbulb, Brain, Lock, Eye } from 'lucide-react';
+import { CheckCircle2, Sparkles, Shield, MessageCircle, Target, Lightbulb, Brain, Lock, Eye } from 'lucide-react';
 
 const pillars = [
   {
     title: 'Story-first safety',
-    detail: 'Every lesson is a mini comic script where you play the hero shutting down shady links. No lectures—just real conversations you might see in your own group chats.',
+    detail: 'Every lesson is a mini comic script where you play the hero shutting down shady links. No lectures, just real conversations you might see in your own group chats.',
   },
   {
     title: 'Hands-on practice',
@@ -24,7 +24,7 @@ const readingStacks = [
   {
     icon: Eye,
     title: 'Context layering',
-    detail: 'List who benefits, who is confused, and who is silent. That column of motives turns a chat log into a detective board. Understanding the "why" behind each message reveals the scam.',
+    detail: 'List who benefits, who is confused, and who is silent. That column of motives turns a chat log into a detective board. Understanding the why behind each message reveals the scam.',
   },
   {
     icon: Lock,
@@ -50,20 +50,20 @@ const deepDives = [
     text: 'Discover what strangers can learn about you from your online presence. We guide you through auditing your accounts, privacy settings, and metadata to minimize exposure.',
   },
   {
-    icon: BookOpen,
+    icon: MessageCircle,
     title: 'Incident response protocols',
-    text: 'Know exactly what to do when something goes wrong. We provide step-by-step recovery guides for compromised accounts, leaked data, and suspicious activity—no panic required.',
+    text: 'Know exactly what to do when something goes wrong. We provide step-by-step recovery guides for compromised accounts, leaked data, and suspicious activity. No panic required.',
   },
 ];
 
 const sampleQuestions = [
   {
-    q: 'A stranger sends a "homework key" that needs your school login. What do you slow down and check first?',
+    q: 'A stranger sends a homework key that needs your school login. What do you slow down and check first?',
     a: 'Pause and look for pressure signals: urgent deadlines, threats of missing out, or requests for personal info. Confirm the sender through another channel (call or in-person), and screenshot the thread for adults. Never give credentials to unverified sources.',
   },
   {
     q: 'Your friend reused a password across three apps. How do you coach them without sounding bossy?',
-    a: 'Walk them through your own passphrase recipe—show them how you build memorable but unique passwords for each service. Help them set a calendar reminder to rotate passwords every season. Lead by example rather than lecturing.',
+    a: 'Walk them through your own passphrase recipe. Show them how you build memorable but unique passwords for each service. Help them set a calendar reminder to rotate passwords every season. Lead by example rather than lecturing.',
   },
   {
     q: 'You discover an old public profile from middle school. What is the fastest shutdown plan?',
@@ -94,10 +94,10 @@ const LandingPage: React.FC = () => {
 
           <div className="space-y-5 text-lg leading-relaxed text-white/75">
             <p className="transition-colors duration-300 hover:text-white/90">
-              CyberQuest Jr is a cozy training base for ages 11–17. Every studio is written like a scene from a group chat, so you read how scammers actually talk and how a calm responder thinks through the chaos.
+              CyberQuest Jr is a cozy training base for ages 11 to 17. Every studio is written like a scene from a group chat, so you read how scammers actually talk and how a calm responder thinks through the chaos.
             </p>
             <p className="transition-colors duration-300 hover:text-white/90">
-              Instead of sprinting through tips, we slow down. You annotate evidence, label motives, sketch passphrase recipes, map your digital footprint, and rehearse incident reports. It's pure reading time with lots of "what if?" detours and no timers.
+              Instead of sprinting through tips, we slow down. You annotate evidence, label motives, sketch passphrase recipes, map your digital footprint, and rehearse incident reports. It is pure reading time with lots of what if detours and no timers.
             </p>
             <p className="transition-colors duration-300 hover:text-white/90">
               The flow is simple: read, rewrite, then summarize. Every paragraph ends with a reflection question so you spend more time thinking than tapping. Bring a notebook and copy the lines that hit you the hardest.

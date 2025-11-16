@@ -1,4 +1,17 @@
-# CyberQuest Jr
+# CyberQuestJR
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="screenshots/img1.png" alt="Landing Page" width="400"/></td>
+      <td><img src="screenshots/img2.png" alt="Journey Page" width="400"/></td>
+    </tr>
+    <tr>
+      <td><img src="screenshots/img3.png" alt="Chapter View" width="400"/></td>
+      <td><img src="screenshots/img4.png" alt="Interactive Games" width="400"/></td>
+    </tr>
+  </table>
+</div>
 
 CyberQuest Jr is a pure-frontend learning lab that teaches tweens and teens how to stay safe online. The interface leans into AMOLED blacks with glow-edge accents, story-driven lessons, and multiple inline quizzes per lesson. Everything runs locally in the browser—no backend services or API keys required.
 
@@ -34,8 +47,6 @@ npm run build
 npm run preview
 ```
 
-The site is entirely static, so you can deploy the `dist/` folder to Netlify, Vercel, GitHub Pages, Cloudflare Pages, or any S3 bucket.
-
 ## Project structure
 
 ```
@@ -68,12 +79,6 @@ CyberQuestJR/
 - `src/data/lessons.ts` holds story paragraphs, missions, `quizzes[]`, and `coachQuestions[]` for richer discussion prompts.
 - Each lesson includes 3–4 inline quizzes, so the reader practices repeatedly before moving on.
 - `src/hooks/useChapterProgress.ts` stores a lightweight `fresh → started → complete` state per chapter in `localStorage`, letting Journey and Chapter pages stay in sync without XP meters.
-
-## Customizing
-
-- **Add new chapters** by appending entries to `src/data/chapters.ts` and pointing to new lesson IDs.
-- **Author more text** in `src/data/lessons.ts`; each lesson supports an arbitrary number of narrative paragraphs, quizzes, and coach Q&A objects.
-- **Tweak theming** inside `tailwind.config.js` (colors, fonts, shadows) or extend the utility layer in `src/index.css`.
 
 ## Scripts
 
