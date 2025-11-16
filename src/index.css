@@ -1,37 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
   body {
-    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    font-family: 'Chakra Petch', 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background-color: #000;
+    min-height: 100vh;
+    color: #f2f6f0;
+    letter-spacing: 0.01em;
+  }
+
+  ::selection {
+    background: rgba(255, 200, 87, 0.4);
+    color: #01030d;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-glow-lime via-glow-amber to-glow-orange px-6 py-3 text-sm font-semibold text-night shadow-neon-sm transition-all duration-200 hover:shadow-neon-md hover:-translate-y-0.5;
   }
-  
+
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-primary-600 font-bold py-3 px-6 rounded-full border-2 border-primary-500 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg;
+    @apply rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5;
   }
-  
+
   .card {
-    @apply bg-white rounded-2xl shadow-xl p-6 border border-gray-100;
+    @apply rounded-3xl border border-white/5 bg-surface-200/80 p-6 shadow-[0_40px_120px_rgba(0,0,0,0.6)];
   }
-  
+
   .card-hover {
-    @apply card transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+    @apply card transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-neon-md;
   }
-  
+
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-glow-lime via-glow-amber to-glow-orange bg-clip-text text-transparent;
   }
-  
+
   .bg-gradient-hero {
-    @apply bg-gradient-to-br from-primary-400 via-purple-500 to-pink-500;
+    @apply bg-gradient-to-br from-glow-lime via-glow-amber to-glow-orange;
+  }
+
+  .quiz-card {
+    @apply rounded-2xl border border-white/10 bg-surface-100/85 p-5 backdrop-blur;
+  }
+
+  .glow-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-glow-amber/40 to-transparent;
+  }
+
+  .grid-spark {
+    background-image: linear-gradient(transparent 96%, rgba(255, 255, 255, 0.04) 97%), linear-gradient(90deg, transparent 96%, rgba(255, 255, 255, 0.04) 97%);
+    background-size: 28px 28px;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glow-amber focus-visible:ring-offset-2 focus-visible:ring-offset-night;
+  }
+
+  /* Smooth animations */
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  .animate-fade-in-delay {
+    animation: fadeIn 0.8s ease-out 0.2s both;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

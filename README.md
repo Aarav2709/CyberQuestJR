@@ -1,256 +1,91 @@
 # CyberQuest Jr
 
-**An AI-powered cybersecurity education platform for kids aged 8-18!**
+CyberQuest Jr is a pure-frontend learning lab that teaches tweens and teens how to stay safe online. The interface leans into AMOLED blacks with glow-edge accents, story-driven lessons, and multiple inline quizzes per lesson. Everything runs locally in the browser—no backend services or API keys required.
 
-## Features
+## Highlights
 
--  **AI-Powered Learning** - Personalized cybersecurity education with Google Gemini AI
--  **Adaptive Assessment** - Smart quizzes that adapt to your skill level
--  **Dynamic Course Generation** - AI creates custom learning paths based on your performance
--  **Interactive Gaming Modules** - 6 engaging cybersecurity challenges and scenarios
--  **Progress Tracking** - Monitor learning journey with XP, levels, and achievements
--  **Modern UI** - Beautiful, kid-friendly interface with dark/light mode
--  **No Authentication Required** - Jump right in and start learning!
+- **Story-first lessons** – Each chapter reads like a mini comic with narratives, detective prompts, and reflective coach Q&A blocks.
+- **Quiz-heavy practice** – Every lesson ships with 3–4 inline quizzes plus rationale blurbs to reinforce the concept immediately.
+- **Pure AMOLED palette** – High-contrast blacks with lime/amber/orange neon edges plus readable fonts (Chakra Petch + Space Grotesk).
+- **Keyboard-friendly UI** – Focus rings, descriptive status text, and large tap targets keep everything accessible.
+- **Zero backend** – Deploy the static Vite build to any CDN or static host and you’re done.
 
-##  Quick Start
+## Tech stack
 
-### Option 1: Automated Setup (Recommended)
+- [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) via [Vite](https://vitejs.dev/)
+- [React Router](https://reactrouter.com/) for lightweight navigation
+- [Tailwind CSS](https://tailwindcss.com/) for theming + custom utility layers
+- [Lucide](https://lucide.dev/) icons
 
-**Linux/macOS:**
+## Getting started
 
 ```bash
 git clone https://github.com/Aarav2709/CyberQuestJR.git
 cd CyberQuestJR
-chmod +x deployment/linux.sh
-./deployment/linux.sh
-./start.sh
+npm install
+
+# Run the dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview the production bundle
+npm run preview
 ```
 
-**Windows:**
+The site is entirely static, so you can deploy the `dist/` folder to Netlify, Vercel, GitHub Pages, Cloudflare Pages, or any S3 bucket.
 
-1. Clone or download the repository
-2. Double-click `deployment/windows.bat`
-3. Double-click `start.bat`
-
-### Option 2: Manual Setup
-
-### Prerequisites
-
-- Python 3.8+
-- Node.js 16+
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/Aarav2709/CyberQuestJR.git
-   cd CyberQuestJR
-   ```
-
-2. **Setup Backend**
-
-   **Linux/macOS:**
-
-   ```bash
-   cd backend
-   pip install -r requirements.txt
-   ```
-
-   **Windows:**
-
-   ```cmd
-   cd backend
-   pip install -r requirements.txt
-   ```
-
-3. **Setup Frontend**
-
-   **Linux/macOS:**
-
-   ```bash
-   cd ../frontend
-   npm install
-   npm run build
-   ```
-
-   **Windows:**
-
-   ```cmd
-   cd ..\frontend
-   npm install
-   npm run build
-   ```
-
-4. **Copy Build Files**
-
-   **Linux/macOS:**
-
-   ```bash
-   cd ..
-   mkdir -p backend/static
-   cp -r frontend/dist/* backend/static/
-   ```
-
-   **Windows:**
-
-   ```cmd
-   cd ..
-   mkdir backend\static
-   xcopy frontend\dist backend\static /E /I /Y
-   ```
-
-5. **Start the Server**
-
-   **Linux/macOS:**
-
-   ```bash
-   cd backend
-   python app.py
-   ```
-
-   **Windows:**
-
-   ```cmd
-   cd backend
-   python app.py
-   ```
-
-6. **Open Your Browser**
-   Navigate to `http://localhost:8000` and start learning!
-
-> **Tip:** Use the automated setup scripts in the `deployment/` folder for a one-click installation experience!
-
-## Troubleshooting
-
-### Common Issues
-
-**Python not found:**
-
-- **Windows:** Make sure Python is installed and added to PATH. Try `py app.py` instead of `python app.py`
-- **Linux:** Install Python with `sudo apt install python3 python3-pip` (Ubuntu/Debian)
-
-**Permission denied (Linux):**
-
-```bash
-sudo chmod +x backend/app.py
-```
-
-**npm not found:**
-
-- **Windows:** Download Node.js from [nodejs.org](https://nodejs.org)
-- **Linux:** Install with `sudo apt install nodejs npm` (Ubuntu/Debian)
-
-**Port already in use:**
-
-- Kill existing processes on port 8000 or change port in `app.py`
-
-## Project Structure
+## Project structure
 
 ```
 CyberQuestJR/
-├── backend/
-│   ├── app.py              # Unified FastAPI server
-│   ├── api/
-│   │   └── routes.py       # API endpoints
-│   ├── ai/
-│   │   └── challenge_generator.py  # AI content generation
-│   ├── database/
-│   │   ├── models.py       # Database models
-│   │   └── database.py     # Database setup
-│   ├── static/             # Built frontend files
-│   └── requirements.txt    # Python dependencies
-├── frontend/
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── pages/          # Page components
-│   │   ├── contexts/       # Application contexts
-│   │   └── services/       # API integration
-│   ├── package.json        # Node dependencies
-│   └── tailwind.config.js  # Styling config
-├── deployment/
-│   ├── setup-linux.sh      # Linux setup script
-│   └── setup-windows.bat   # Windows setup script
-└── README.md
+├── src/
+│   ├── components/
+│   │   ├── InlineQuiz.tsx      # Quiz widget with rationale + focus styles
+│   │   ├── Navbar.tsx          # High-contrast top navigation
+│   │   └── Sidebar.tsx         # Lesson navigator with outline + difficulty tags
+│   ├── data/
+│   │   ├── chapters.ts         # Chapter definitions + helper to locate lessons
+│   │   └── lessons.ts          # Narrative text, missions, quizzes, coach Q&A
+│   ├── hooks/
+│   │   └── useChapterProgress.ts # Tiny localStorage helper for chapter status
+│   ├── pages/
+│   │   ├── LandingPage.tsx     # Hero section + sample questions
+│   │   ├── JourneyPage.tsx     # Numbered chapter list with live progress
+│   │   └── ChapterPage.tsx     # Reader view with sidebar + multiple quizzes
+│   ├── App.tsx                 # Router wiring
+│   ├── main.tsx                # Entry point
+│   └── index.css               # Global neon theme + utility classes
+├── tailwind.config.js
+├── vite.config.ts
+├── tsconfig*.json
+└── package.json
 ```
 
-## Learning Modules
+## Lesson + progress data
 
-1. **Password Heroes**  - Learn to create super-strong passwords
-2. **Phishing Detective**  - Spot fake emails and websites
-3. **Digital Footprints**  - Understand your online traces
-4. **Social Media Safety**  - Safe sharing and privacy
-5. **Cyber Bullying Defense**  - Handle online bullying
-6. **Privacy Guardian** - Protect personal information
+- `src/data/lessons.ts` holds story paragraphs, missions, `quizzes[]`, and `coachQuestions[]` for richer discussion prompts.
+- Each lesson includes 3–4 inline quizzes, so the reader practices repeatedly before moving on.
+- `src/hooks/useChapterProgress.ts` stores a lightweight `fresh → started → complete` state per chapter in `localStorage`, letting Journey and Chapter pages stay in sync without XP meters.
 
-Each module uses AI to generate personalized challenges based on your skill level!
+## Customizing
 
-## Configuration
+- **Add new chapters** by appending entries to `src/data/chapters.ts` and pointing to new lesson IDs.
+- **Author more text** in `src/data/lessons.ts`; each lesson supports an arbitrary number of narrative paragraphs, quizzes, and coach Q&A objects.
+- **Tweak theming** inside `tailwind.config.js` (colors, fonts, shadows) or extend the utility layer in `src/index.css`.
 
-### Required: Google Gemini AI Integration
+## Scripts
 
-Create a `.env` file in the backend directory:
-
-**Linux/macOS:**
-
-```bash
-cd backend
-echo "GEMINI_API_KEY=your_gemini_api_key_here" > .env
-```
-
-**Windows:**
-
-```cmd
-cd backend
-echo GEMINI_API_KEY=your_gemini_api_key_here > .env
-```
-
-Or manually create the file with any text editor:
-
-```
-GEMINI_API_KEY=your_gemini_api_key_here
-DATABASE_URL=sqlite:///./cyberquest_game.db
-```
-
-**Get your Google Gemini API key:**
-
-1. Visit [Google AI Studio](https://ai.google.dev/)
-2. Sign up for a free account
-3. Navigate to API Keys section
-4. Create a new API key
-5. Copy your API key to the `.env` file
-
-The AI features require a valid Google Gemini API key for personalized content generation.
-
-## Contributing
-
-1. Fork the project
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
+- `npm run dev` – Vite dev server with HMR
+- `npm run build` – Type-check via `tsc`, then bundle with Vite
+- `npm run preview` – Serve the production build locally
+- `npm run lint` – ESLint with the configured React/TypeScript rules
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with React, TypeScript, and Tailwind CSS
-- Backend powered by FastAPI and SQLAlchemy
-- AI content generation by Google Gemini
-- Icons from Lucide React
-- Created for young cybersecurity enthusiasts!
-
-## AI-Powered Features
-
-- **Adaptive Learning:** AI analyzes performance and adjusts difficulty
-- **Personalized Courses:** Custom learning paths generated based on your strengths/weaknesses
-- **Dynamic Content:** Fresh challenges and scenarios created in real-time
-- **Smart Assessment:** Intelligent skill evaluation and gap identification
-- **Contextual Hints:** AI provides personalized guidance when you're stuck
+MIT - see [LICENSE](LICENSE).
 
 ---
 
-**Made with love for digital safety education**
+Built for curious kids (and the mentors who help them debug real-life cyber problems). Stay safe out there!

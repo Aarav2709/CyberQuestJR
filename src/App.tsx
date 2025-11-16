@@ -1,29 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import Quiz from './pages/Quiz';
-import Modules from './pages/Modules';
-import ModuleDetail from './pages/ModuleDetail';
-import Leaderboard from './pages/Leaderboard';
+import LandingPage from './pages/LandingPage';
+import JourneyPage from './pages/JourneyPage';
+import ChapterPage from './pages/ChapterPage';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100">
+    <BrowserRouter>
+      <div className="min-h-screen bg-night text-slate-50">
         <Navbar />
-        <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/quiz/:type?" element={<Quiz />} />
-              <Route path="/modules" element={<Modules />} />
-              <Route path="/modules/:moduleName" element={<ModuleDetail />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-            </Routes>
-          </main>
-        </div>
-      </Router>
+        <main className="pt-6">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/learn" element={<JourneyPage />} />
+            <Route path="/chapter/:chapterId" element={<ChapterPage />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
