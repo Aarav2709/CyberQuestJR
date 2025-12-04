@@ -32,7 +32,7 @@ const PasswordBuilder: React.FC = () => {
   return (
     <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-surface-100/90 to-surface-200/80 p-6">
       <div className="mb-4">
-        <h3 className="text-2xl font-semibold text-white">🔐 Password Strength Builder</h3>
+        <h3 className="text-2xl font-semibold text-white">Password Strength Builder</h3>
         <p className="mt-2 text-sm text-white/70">Create a password and watch its strength grow in real-time.</p>
       </div>
 
@@ -50,7 +50,7 @@ const PasswordBuilder: React.FC = () => {
             onClick={() => setShowFeedback(!showFeedback)}
             className="mt-2 text-xs text-glow-amber hover:text-glow-lime transition-colors"
           >
-            {showFeedback ? '🙈 Hide' : '👁️ Show'} Password
+            {showFeedback ? 'Hide' : 'Show'} Password
           </button>
         </div>
 
@@ -88,7 +88,7 @@ const PasswordBuilder: React.FC = () => {
             {strength >= 90 && (
               <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-4 animate-fadeIn">
                 <p className="text-sm text-green-300">
-                  🎉 Excellent! This password is strong and secure. Remember to never reuse it across different sites.
+                  Excellent! This password is strong and secure. Remember to never reuse it across different sites.
                 </p>
               </div>
             )}
@@ -96,7 +96,7 @@ const PasswordBuilder: React.FC = () => {
         )}
 
         <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-xs text-white/60">
-          <p className="font-semibold text-white/80 mb-2">💡 Pro Tips:</p>
+          <p className="font-semibold text-white/80 mb-2">Pro Tips:</p>
           <ul className="space-y-1 list-disc list-inside">
             <li>Use a unique password for every account</li>
             <li>Consider using a passphrase (4+ random words)</li>

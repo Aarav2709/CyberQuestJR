@@ -89,7 +89,7 @@ const RumorTracker: React.FC = () => {
     return (
       <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-surface-100/90 to-surface-200/80 p-6">
         <div className="mb-4">
-          <h3 className="text-2xl font-semibold text-white">❄️ Rumor Command Center</h3>
+          <h3 className="text-2xl font-semibold text-white">Rumor Command Center</h3>
           <p className="mt-2 text-sm text-white/70">Freeze rumors before they spread.</p>
         </div>
 
@@ -99,9 +99,6 @@ const RumorTracker: React.FC = () => {
             scorePercent >= 70 ? 'border-yellow-500/30 bg-yellow-500/10' :
             'border-red-500/30 bg-red-500/10'
           }`}>
-            <p className="text-4xl mb-2">
-              {scorePercent === 100 ? '🎉' : scorePercent >= 70 ? '👍' : '📚'}
-            </p>
             <p className="text-2xl font-semibold text-white mb-2">Mission Complete!</p>
             <p className="text-3xl font-bold text-glow-amber mb-2">{correctDecisions} / {decisions.length}</p>
             <p className="text-sm text-white/70">
@@ -126,7 +123,7 @@ const RumorTracker: React.FC = () => {
                         {wasCorrect ? '✓' : '✗'} Message {idx + 1}
                       </span>
                       <span className="text-white/60">
-                        You: {decision.choice === 'freeze' ? '❄️ Froze' : '📤 Shared'}
+                        You: {decision.choice === 'freeze' ? 'Froze' : 'Shared'}
                       </span>
                     </div>
                   </div>
@@ -149,7 +146,7 @@ const RumorTracker: React.FC = () => {
   return (
     <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-surface-100/90 to-surface-200/80 p-6">
       <div className="mb-4">
-        <h3 className="text-2xl font-semibold text-white">❄️ Rumor Command Center</h3>
+        <h3 className="text-2xl font-semibold text-white">Rumor Command Center</h3>
         <p className="mt-2 text-sm text-white/70">Freeze rumors before they spread. Think carefully before sharing!</p>
       </div>
 
@@ -178,14 +175,14 @@ const RumorTracker: React.FC = () => {
                   onClick={() => handleDecision('freeze')}
                   className="rounded-xl border-2 border-blue-500/50 bg-blue-500/10 px-4 py-3 text-blue-300 hover:bg-blue-500/20 hover:border-blue-500 transition-all font-semibold"
                 >
-                  ❄️ Freeze It
+                  Freeze It
                   <p className="text-xs font-normal text-white/60 mt-1">Don't share</p>
                 </button>
                 <button
                   onClick={() => handleDecision('share')}
                   className="rounded-xl border-2 border-green-500/50 bg-green-500/10 px-4 py-3 text-green-300 hover:bg-green-500/20 hover:border-green-500 transition-all font-semibold"
                 >
-                  📤 Share It
+                  Share It
                   <p className="text-xs font-normal text-white/60 mt-1">Pass it on</p>
                 </button>
               </div>
@@ -215,7 +212,7 @@ const RumorTracker: React.FC = () => {
               </p>
               {currentMessage.isRumor && (
                 <div className="mt-3 pt-3 border-t border-white/10">
-                  <p className="text-xs font-semibold text-white/80 mb-2">🚩 Red Flags Detected:</p>
+                  <p className="text-xs font-semibold text-white/80 mb-2">Red Flags Detected:</p>
                   <ul className="text-xs text-white/70 space-y-1">
                     {currentMessage.redFlags.map((flag, idx) => (
                       <li key={idx}>• {flag}</li>
@@ -235,7 +232,7 @@ const RumorTracker: React.FC = () => {
         )}
 
         <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-xs text-white/60">
-          <p className="font-semibold text-white/80 mb-2">❄️ Freeze Strategy:</p>
+          <p className="font-semibold text-white/80 mb-2">Freeze Strategy:</p>
           <ul className="space-y-1 list-disc list-inside">
             <li>Pause before sharing anything</li>
             <li>Check if the source is trustworthy</li>

@@ -7,6 +7,7 @@ import { calculateReadingTime, formatReadingTime } from '../utils/readingTime';
 import { useSound } from '../contexts/SoundContext';
 import Confetti from '../components/Confetti';
 import CertificateGenerator from '../components/CertificateGenerator';
+import { BookOpen, Clock, CheckCircle2, PlayCircle, RotateCcw, Award, ChevronRight, Lock } from 'lucide-react';
 
 const JourneyPage: React.FC = () => {
   const { progress, markStarted, getCompletedLessons } = useChapterProgress();
@@ -25,99 +26,133 @@ const JourneyPage: React.FC = () => {
   }, [allComplete, completedCount, playSound]);
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-12">
+    <div className="min-h-screen">
       <Confetti trigger={showConfetti} onComplete={() => setShowConfetti(false)} />
       {showCertificate && <CertificateGenerator onClose={() => setShowCertificate(false)} />}
 
-      <div className="mb-8 space-y-3">
-        <p className="text-xs uppercase tracking-[0.4em]" style={{ color: 'var(--text-secondary)' }}>Chapter Navigator</p>
-        <h2 className="text-3xl font-semibold" style={{ color: 'var(--text-primary)' }}>Your Cybersecurity Journey</h2>
-        <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-          Complete lessons to track your progress. Scroll through each lesson to auto-complete it!
-        </p>
+      {/* Chapters Grid */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {chapters.map((ch: Chapter, index: number) => {
+            const status = progress[ch.id] ?? 'fresh';
+            const completedLessons = getCompletedLessons(ch.id);
+            const lessonEntries = ch.lessons
+              .map((lessonId) => findLessonById(lessonId))
+              .filter((lesson): lesson is Lesson => Boolean(lesson));
+            const totalLessons = lessonEntries.length;
+            const percent = status === 'complete' ? 100 : calculateLessonProgress(completedLessons.length, totalLessons);
+            const readingTime = calculateReadingTime(lessonEntries);
 
-        <div className="rounded-2xl border p-4 mt-6" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-surface-100)' }}>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Overall Progress</span>
-            <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{completedCount} / {chapters.length} Chapters</span>
-          </div>
-          <div className="h-3 w-full overflow-hidden rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.1)' }}>
-            <div
-              className="h-full bg-gradient-to-r from-glow-lime via-glow-amber to-glow-orange transition-all duration-500"
-              style={{ width: `${(completedCount / chapters.length) * 100}%` }}
-            />
-          </div>
-        </div>
-
-        {allComplete && (
-          <button
-            onClick={() => {
-              playSound('achievement');
-              setShowCertificate(true);
-            }}
-            className="w-full rounded-xl bg-gradient-to-r from-glow-lime to-glow-amber px-6 py-4 font-semibold text-black hover:shadow-lg hover:shadow-glow-amber/50 transition-all mt-4 animate-fadeIn"
-          >
-            Download Your Certificate of Completion
-          </button>
-        )}
-      </div>
-
-      <ol className="space-y-4">
-        {chapters.map((ch: Chapter, index: number) => {
-          const status = progress[ch.id] ?? 'fresh';
-          const completedLessons = getCompletedLessons(ch.id);
-          const lessonEntries = ch.lessons
-            .map((lessonId) => findLessonById(lessonId))
-            .filter((lesson): lesson is Lesson => Boolean(lesson));
-          const totalLessons = lessonEntries.length;
-          const percent = status === 'complete' ? 100 : calculateLessonProgress(completedLessons.length, totalLessons);
-          const statusLabel =
-            status === 'complete' ? 'Complete' : status === 'started' ? 'In Progress' : 'Not Started';
-          const readingTime = calculateReadingTime(lessonEntries);
-
-          return (
-            <li key={ch.id} className="rounded-3xl border p-5 transition-all hover:scale-[1.01]" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-surface-100)' }}>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.4em]" style={{ color: 'var(--text-secondary)' }}>Chapter {String(index + 1).padStart(2, '0')}</p>
-                  <h3 className="text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>{ch.title}</h3>
-                  <p className="mt-2 text-sm" style={{ color: 'var(--text-secondary)' }}>{ch.summary}</p>
+            return (
+              <div
+                key={ch.id}
+                className={`group relative rounded-3xl border bg-surface-200/50 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 ${
+                  status === 'complete'
+                    ? 'border-glow-lime/30 hover:border-glow-lime/50'
+                    : status === 'started'
+                    ? 'border-glow-amber/30 hover:border-glow-amber/50'
+                    : 'border-white/10 hover:border-white/20'
+                }`}
+              >
+                {/* Chapter Number Badge */}
+                <div className="absolute -top-3 -right-3 flex h-8 w-8 items-center justify-center rounded-full bg-surface-200 border border-white/10 text-xs font-bold text-white/60">
+                  {String(index + 1).padStart(2, '0')}
                 </div>
-                <div className="text-right text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  <p>{totalLessons} Lesson{totalLessons === 1 ? '' : 's'}</p>
-                  <p className="text-glow-amber font-semibold">{formatReadingTime(readingTime)}</p>
-                </div>
-              </div>
 
-              <div className="mt-4">
-                <div className="flex items-center justify-between text-xs" style={{ color: 'var(--text-secondary)' }}>
-                  <span>{percent}% Complete</span>
-                  <span className={status === 'complete' ? 'text-green-400' : status === 'started' ? 'text-yellow-400' : ''}>{statusLabel}</span>
+                {/* Status Indicator */}
+                <div className="mb-4 flex items-center gap-2">
+                  {status === 'complete' ? (
+                    <div className="flex items-center gap-2 rounded-full bg-glow-lime/10 px-3 py-1 border border-glow-lime/20">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-glow-lime" />
+                      <span className="text-xs font-medium text-glow-lime">Complete</span>
+                    </div>
+                  ) : status === 'started' ? (
+                    <div className="flex items-center gap-2 rounded-full bg-glow-amber/10 px-3 py-1 border border-glow-amber/20">
+                      <PlayCircle className="h-3.5 w-3.5 text-glow-amber" />
+                      <span className="text-xs font-medium text-glow-amber">In Progress</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 border border-white/10">
+                      <Lock className="h-3.5 w-3.5 text-white/40" />
+                      <span className="text-xs font-medium text-white/40">Not Started</span>
+                    </div>
+                  )}
                 </div>
-                <div className="mt-2 h-2 w-full overflow-hidden rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.1)' }}>
-                  <div className="h-full bg-gradient-to-r from-glow-lime via-glow-amber to-glow-orange transition-all duration-300" style={{ width: `${percent}%` }} />
-                </div>
-              </div>
 
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div className={`text-xs uppercase tracking-[0.4em] ${status === 'complete' ? 'text-green-400' : status === 'started' ? 'text-yellow-400' : ''}`} style={status === 'fresh' ? { color: 'var(--text-secondary)' } : {}}>
-                  {status === 'complete' ? 'Completed' : status === 'started' ? 'In Progress' : 'Ready to Start'}
+                {/* Title & Summary */}
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gradient transition-colors">
+                  {ch.title}
+                </h3>
+                <p className="text-sm text-white/60 leading-relaxed mb-4 line-clamp-2">
+                  {ch.summary}
+                </p>
+
+                {/* Meta Info */}
+                <div className="flex items-center gap-4 text-xs text-white/40 mb-4">
+                  <span className="flex items-center gap-1.5">
+                    <BookOpen className="h-3.5 w-3.5" />
+                    {totalLessons} Lessons
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5" />
+                    {formatReadingTime(readingTime)}
+                  </span>
                 </div>
+
+                {/* Progress Bar */}
+                <div className="mb-4">
+                  <div className="flex items-center justify-between text-xs mb-1.5">
+                    <span className="text-white/40">{completedLessons.length}/{totalLessons} lessons</span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                    <div
+                      className={`h-full transition-all duration-500 ${
+                        status === 'complete'
+                          ? 'bg-glow-lime'
+                          : 'bg-gradient-to-r from-glow-amber to-glow-orange'
+                      }`}
+                      style={{ width: `${percent}%` }}
+                    />
+                  </div>
+                </div>
+
+                {/* Action Button */}
                 <Link
                   to={`/chapter/${ch.id}`}
-                  className="text-glow-amber focus-ring text-sm font-semibold hover:text-glow-lime transition-colors"
+                  className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
+                    status === 'complete'
+                      ? 'bg-white/5 text-white hover:bg-white/10'
+                      : status === 'started'
+                      ? 'bg-glow-amber/10 text-glow-amber hover:bg-glow-amber/20'
+                      : 'bg-gradient-to-r from-glow-lime to-glow-amber text-black hover:shadow-lg hover:shadow-glow-amber/20'
+                  }`}
                   onClick={() => {
                     playSound('click');
                     markStarted(ch.id);
                   }}
                 >
-                  {status === 'fresh' ? 'Start Chapter' : status === 'complete' ? 'Review Chapter' : 'Continue'}
+                  {status === 'complete' ? (
+                    <>
+                      <RotateCcw className="h-4 w-4" />
+                      Review Chapter
+                    </>
+                  ) : status === 'started' ? (
+                    <>
+                      Continue Learning
+                      <ChevronRight className="h-4 w-4" />
+                    </>
+                  ) : (
+                    <>
+                      Start Chapter
+                      <ChevronRight className="h-4 w-4" />
+                    </>
+                  )}
                 </Link>
               </div>
-            </li>
-          );
-        })}
-      </ol>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };

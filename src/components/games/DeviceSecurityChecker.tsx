@@ -56,7 +56,7 @@ const DeviceSecurityChecker: React.FC = () => {
   return (
     <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-surface-100/90 to-surface-200/80 p-6">
       <div className="mb-4">
-        <h3 className="text-2xl font-semibold text-white">🛡️ Device Security Checker</h3>
+        <h3 className="text-2xl font-semibold text-white">Device Security Checker</h3>
         <p className="mt-2 text-sm text-white/70">Scan your device for outdated software and security vulnerabilities.</p>
       </div>
 
@@ -66,14 +66,14 @@ const DeviceSecurityChecker: React.FC = () => {
             onClick={startScan}
             className="w-full rounded-xl bg-gradient-to-r from-glow-lime to-glow-amber px-4 py-3 font-semibold text-black hover:shadow-lg hover:shadow-glow-amber/50 transition-all"
           >
-            🔍 Start Security Scan
+            Start Security Scan
           </button>
         )}
 
         {scanning && (
           <div className="rounded-xl border border-white/10 bg-black/20 p-6 text-center animate-fadeIn">
             <div className="mb-4">
-              <div className="inline-block animate-spin text-4xl">🔄</div>
+              <div className="inline-block w-8 h-8 border-2 border-glow-amber border-t-transparent rounded-full animate-spin"></div>
             </div>
             <p className="text-lg font-semibold text-white mb-2">Scanning Your Device...</p>
             <p className="text-sm text-white/60">Checking for updates and vulnerabilities</p>
@@ -119,7 +119,7 @@ const DeviceSecurityChecker: React.FC = () => {
                         <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300">✓ Updated</span>
                       )}
                       {item.status === 'outdated' && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-red-500/20 text-red-300">⚠️ Outdated</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-red-500/20 text-red-300">Outdated</span>
                       )}
                     </div>
                     <div className="text-xs text-white/60 mt-1">
@@ -147,13 +147,13 @@ const DeviceSecurityChecker: React.FC = () => {
                 onClick={updateAll}
                 className="w-full rounded-xl bg-gradient-to-r from-glow-lime to-glow-amber px-4 py-3 font-semibold text-black hover:shadow-lg hover:shadow-glow-amber/50 transition-all"
               >
-                🚀 Update All ({outdatedCount} items)
+                Update All ({outdatedCount} items)
               </button>
             )}
 
             {scorePercent === 100 && (
               <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-4">
-                <p className="text-green-300 font-semibold">🎉 Perfect! Your device is fully protected.</p>
+                <p className="text-green-300 font-semibold">Perfect! Your device is fully protected.</p>
               </div>
             )}
 
@@ -167,7 +167,7 @@ const DeviceSecurityChecker: React.FC = () => {
         )}
 
         <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-xs text-white/60">
-          <p className="font-semibold text-white/80 mb-2">🔧 Device Security Tips:</p>
+          <p className="font-semibold text-white/80 mb-2">Device Security Tips:</p>
           <ul className="space-y-1 list-disc list-inside">
             <li>Enable automatic updates for your OS and apps</li>
             <li>Keep your antivirus software up to date</li>

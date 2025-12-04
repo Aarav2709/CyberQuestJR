@@ -1,205 +1,83 @@
-import { CheckCircle2, Sparkles, Shield, MessageCircle, Target, Lightbulb, Brain, Lock, Eye } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { useSound } from '../contexts/SoundContext';
 
-const pillars = [
-  {
-    title: 'Story-first safety',
-    detail: 'Every lesson is a mini comic script where you play the hero shutting down shady links. No lectures, just real conversations you might see in your own group chats.',
-  },
-  {
-    title: 'Hands-on practice',
-    detail: 'Try bite-sized challenges right inside the page before leveling up to the next chapter. Build muscle memory through interactive scenarios that mirror real-world threats.',
-  },
-  {
-    title: 'Youth-friendly glossary',
-    detail: 'No boring jargon. We explain every cyber buzzword with teen slang and simple visuals. Learn the language of digital safety in words that actually make sense.',
-  },
-];
-
-const readingStacks = [
-  {
-    icon: Brain,
-    title: 'Scene primer',
-    detail: 'Start every session by reading the scene aloud once, then again while underlining every pressure verb and suspicious timestamp. This double-pass method helps you spot manipulation tactics faster.',
-  },
-  {
-    icon: Eye,
-    title: 'Context layering',
-    detail: 'List who benefits, who is confused, and who is silent. That column of motives turns a chat log into a detective board. Understanding the why behind each message reveals the scam.',
-  },
-  {
-    icon: Lock,
-    title: 'Response rehearsal',
-    detail: 'Write the sentence you would send, plus the calmer version you would actually deliver. Editing your reply builds muscle memory for high-pressure moments when you need it most.',
-  },
-];
-
-const deepDives = [
-  {
-    icon: Target,
-    title: 'Phishing pattern recognition',
-    text: 'Learn to spot the telltale signs: urgency language, emotional manipulation, and fake authority. We break down real phishing attempts line by line so you can recognize them before you click.',
-  },
-  {
-    icon: Shield,
-    title: 'Password security architecture',
-    text: 'Master the art of creating unbreakable passphrases using memory palaces and personal symbols. We teach you to build passwords that are mathematically secure yet easy to remember.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Digital footprint mapping',
-    text: 'Discover what strangers can learn about you from your online presence. We guide you through auditing your accounts, privacy settings, and metadata to minimize exposure.',
-  },
-  {
-    icon: MessageCircle,
-    title: 'Incident response protocols',
-    text: 'Know exactly what to do when something goes wrong. We provide step-by-step recovery guides for compromised accounts, leaked data, and suspicious activity. No panic required.',
-  },
-];
-
-const sampleQuestions = [
-  {
-    q: 'A stranger sends a homework key that needs your school login. What do you slow down and check first?',
-    a: 'Pause and look for pressure signals: urgent deadlines, threats of missing out, or requests for personal info. Confirm the sender through another channel (call or in-person), and screenshot the thread for adults. Never give credentials to unverified sources.',
-  },
-  {
-    q: 'Your friend reused a password across three apps. How do you coach them without sounding bossy?',
-    a: 'Walk them through your own passphrase recipe. Show them how you build memorable but unique passwords for each service. Help them set a calendar reminder to rotate passwords every season. Lead by example rather than lecturing.',
-  },
-  {
-    q: 'You discover an old public profile from middle school. What is the fastest shutdown plan?',
-    a: 'Export the posts you want to keep (photos, messages). Deactivate or delete the account through its settings. Search your name and email on Google to confirm it has vanished. Set up Google Alerts for your name to monitor future mentions.',
-  },
-  {
-    q: 'Someone screenshots your private chat and threatens to share it. How do you respond?',
-    a: 'Do not engage or negotiate. Screenshot the threat and report it to the platform immediately. Tell a trusted adult (parent, teacher, counselor). Block the person. Document everything with timestamps in case you need evidence later.',
-  },
+const stats = [
+  { value: '6+', label: 'Interactive Chapters' },
+  { value: '24+', label: 'In-depth Lessons' },
+  { value: '50+', label: 'Practice Scenarios' },
+  { value: '100%', label: 'Free Forever' },
 ];
 
 const LandingPage: React.FC = () => {
+  const { isAuthenticated } = useAuth();
+  const { playSound } = useSound();
+
   return (
     <div className="relative isolate overflow-hidden">
-      <div className="absolute inset-0 grid-spark opacity-40" aria-hidden />
+      {/* Background Effects */}
+      <div className="absolute inset-0 grid-spark opacity-30" aria-hidden />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-radial from-glow-amber/10 via-transparent to-transparent blur-3xl" aria-hidden />
 
       {/* Hero Section */}
-      <div className="mx-auto flex min-h-[85vh] max-w-6xl flex-col gap-12 px-6 py-20 lg:flex-row lg:items-center">
-        <section className="flex-1 space-y-8 animate-fade-in">
-          <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.35em] text-white/80 transition-all duration-300 hover:border-white/30 hover:bg-white/10">
-            <Sparkles className="h-3.5 w-3.5 text-glow-amber animate-pulse" />
-            Teen-safe missions
-          </p>
+      <section className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-16 pb-24">
+        <div className="text-center max-w-4xl mx-auto space-y-8 animate-fade-in">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm">
+            <div className="h-2 w-2 rounded-full bg-glow-lime animate-pulse" />
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/80">
+              Designed for ages 11-17
+            </span>
+          </div>
 
-          <h1 className="text-5xl font-bold leading-tight text-gradient sm:text-6xl lg:text-7xl transition-all duration-500">
-            Build hacker-proof habits before high school.
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight">
+            <span className="text-white">Build </span>
+            <span className="text-gradient">hacker-proof</span>
+            <br />
+            <span className="text-white">habits before high school</span>
           </h1>
 
-          <div className="space-y-5 text-lg leading-relaxed text-white/75">
-            <p className="transition-colors duration-300 hover:text-white/90">
-              CyberQuest Jr is a cozy training base for ages 11 to 17. Every studio is written like a scene from a group chat, so you read how scammers actually talk and how a calm responder thinks through the chaos.
-            </p>
-            <p className="transition-colors duration-300 hover:text-white/90">
-              Instead of sprinting through tips, we slow down. You annotate evidence, label motives, sketch passphrase recipes, map your digital footprint, and rehearse incident reports. It is pure reading time with lots of what if detours and no timers.
-            </p>
-            <p className="transition-colors duration-300 hover:text-white/90">
-              The flow is simple: read, rewrite, then summarize. Every paragraph ends with a reflection question so you spend more time thinking than tapping. Bring a notebook and copy the lines that hit you the hardest.
-            </p>
-            <p className="transition-colors duration-300 hover:text-white/90">
-              We cover everything from spotting phishing emails to building fortress-grade passwords, from cleaning up your digital footprint to handling cyberbullying incidents. Each lesson includes real-world examples, expert insights, and interactive quizzes that test your understanding.
-            </p>
-          </div>
+          {/* Subheadline */}
+          <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+            CyberQuest Jr is your cozy training base for digital safety. Learn through real scenarios,
+            build lasting skills, and become the security expert in your friend group.
+          </p>
 
-          {/* Reading Framework */}
-          <div className="grid gap-4 rounded-3xl border border-white/12 bg-white/5 p-6 text-sm text-white/80 backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:bg-white/8">
-            <h3 className="text-base font-semibold uppercase tracking-[0.3em] text-white/90">Reading Framework</h3>
-            {readingStacks.map((stack, idx) => {
-              const Icon = stack.icon;
-              return (
-                <div
-                  key={stack.title}
-                  className="flex gap-3 transition-all duration-300 hover:translate-x-1"
-                  style={{ animationDelay: `${idx * 100}ms` }}
-                >
-                  <Icon className="mt-1 h-5 w-5 flex-shrink-0 text-glow-lime" />
-                  <div>
-                    <p className="text-base font-semibold text-white">{stack.title}</p>
-                    <p className="mt-1 leading-relaxed text-white/75">{stack.detail}</p>
-                  </div>
-                </div>
-              );
-            })}
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <Link
+              to={isAuthenticated ? '/learn' : '/register'}
+              onClick={() => playSound('click')}
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-glow-lime via-glow-amber to-glow-orange px-8 py-4 text-sm font-bold uppercase tracking-wider text-black shadow-lg shadow-glow-amber/20 transition-all hover:shadow-xl hover:shadow-glow-amber/30 hover:-translate-y-0.5"
+            >
+              {isAuthenticated ? 'Continue Learning' : 'Start Your Quest'}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              to="/learn"
+              onClick={() => playSound('click')}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-all hover:bg-white/5 hover:border-white/30"
+            >
+              Browse Chapters
+            </Link>
           </div>
+        </div>
 
-          {/* Deep Dive Topics */}
-          <div className="rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:bg-black/50">
-            <h3 className="mb-4 text-base font-semibold uppercase tracking-[0.3em] text-white/90">Core Topics</h3>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {deepDives.map((topic, idx) => {
-                const Icon = topic.icon;
-                return (
-                  <div
-                    key={topic.title}
-                    className="rounded-2xl border border-white/8 bg-white/5 p-4 transition-all duration-300 hover:border-white/15 hover:bg-white/10 hover:scale-105"
-                    style={{ animationDelay: `${idx * 75}ms` }}
-                  >
-                    <div className="mb-2 flex items-center gap-2">
-                      <Icon className="h-4 w-4 text-glow-amber" />
-                      <p className="text-sm font-semibold text-white">{topic.title}</p>
-                    </div>
-                    <p className="text-xs leading-relaxed text-white/70">{topic.text}</p>
-                  </div>
-                );
-              })}
+        {/* Stats Grid */}
+        <div className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+            >
+              <p className="text-3xl sm:text-4xl font-bold text-gradient">{stat.value}</p>
+              <p className="mt-2 text-xs sm:text-sm text-white/50 uppercase tracking-wider">{stat.label}</p>
             </div>
-          </div>
-        </section>
-
-        {/* Sidebar */}
-        <section className="flex-1 space-y-6 animate-fade-in-delay">
-          <div className="card-hover transition-all duration-500 hover:scale-[1.02]">
-            <header className="mb-5 flex items-center gap-3">
-              <Shield className="h-5 w-5 text-glow-lime" />
-              <div>
-                <h2 className="text-2xl font-semibold text-white">Mission Pillars</h2>
-              </div>
-            </header>
-            <ul className="space-y-4 text-sm text-white/80">
-              {pillars.map((block, idx) => (
-                <li
-                  key={block.title}
-                  className="flex gap-3 transition-all duration-300 hover:translate-x-1"
-                  style={{ animationDelay: `${idx * 100}ms` }}
-                >
-                  <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-glow-amber" />
-                  <div>
-                    <p className="font-semibold text-white">{block.title}</p>
-                    <p className="leading-relaxed">{block.detail}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="card-hover transition-all duration-500 hover:scale-[1.02]">
-            <header className="mb-4 flex items-center gap-3">
-              <MessageCircle className="h-5 w-5 text-glow-orange" />
-              <div>
-                <h2 className="text-xl font-semibold text-white">Sample Scenarios</h2>
-              </div>
-            </header>
-            <div className="space-y-4 text-sm text-white/80">
-              {sampleQuestions.map((item, idx) => (
-                <div
-                  key={item.q}
-                  className="rounded-2xl border border-white/8 bg-surface-100/80 p-4 transition-all duration-300 hover:border-white/15 hover:bg-surface-100 hover:scale-[1.02]"
-                  style={{ animationDelay: `${idx * 100}ms` }}
-                >
-                  <p className="font-semibold text-white leading-relaxed">Q: {item.q}</p>
-                  <p className="mt-3 leading-relaxed text-white/75">A: {item.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

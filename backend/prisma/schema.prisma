@@ -1,0 +1,270 @@
+// CyberQuestJR Backend - Prisma Schema
+// Database: SQLite (development) / PostgreSQL (production)
+// ID Strategy: CUID for most entities, ULID for certificates
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// =============================================================================
+// USER & AUTHENTICATION
+// =============================================================================
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  passwordHash   String
+  emailVerified  Boolean  @default(false)
+  isParentGuided Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  profile          Profile?
+  lessonProgress   LessonProgress[]
+  chapterProgress  ChapterProgress[]
+  progressHistory  ProgressHistory[]
+  quizAttempts     QuizAttempt[]
+  xpEvents         XpEvent[]
+  userBadges       UserBadge[]
+  certificates     Certificate[]
+  streaks          Streak[]
+  sessions         Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  token        String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  lastActiveAt DateTime @default(now())
+  userAgent    String?
+  ipAddress    String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  displayName String
+  avatarUrl   String?
+  bio         String?
+  timezone    String   @default("UTC")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+// =============================================================================
+// CONTENT STRUCTURE
+// =============================================================================
+
+model Chapter {
+  id        String   @id
+  title     String
+  summary   String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lessons         Lesson[]
+  chapterProgress ChapterProgress[]
+  certificates    Certificate[]
+
+  @@map("chapters")
+}
+
+model Lesson {
+  id         String   @id
+  chapterId  String
+  title      String
+  focus      String
+  difficulty String   @default("foundation")
+  summary    String
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  lessonProgress  LessonProgress[]
+  quizAttempts    QuizAttempt[]
+  certificates    Certificate[]
+  progressHistory ProgressHistory[]
+
+  @@map("lessons")
+}
+
+// =============================================================================
+// PROGRESS TRACKING
+// =============================================================================
+
+model LessonProgress {
+  id        String    @id @default(cuid())
+  userId    String
+  lessonId  String
+  status    String    @default("fresh")
+  startedAt DateTime?
+  doneAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@map("lesson_progress")
+}
+
+model ChapterProgress {
+  id        String    @id @default(cuid())
+  userId    String
+  chapterId String
+  status    String    @default("fresh")
+  startedAt DateTime?
+  doneAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, chapterId])
+  @@map("chapter_progress")
+}
+
+model ProgressHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  lessonId  String?
+  chapterId String?
+  event     String
+  metadata  String   @default("{}")
+  xpAwarded Int      @default(0)
+  createdAt DateTime @default(now())
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: SetNull)
+
+  @@map("progress_history")
+}
+
+// =============================================================================
+// QUIZ ANALYTICS
+// =============================================================================
+
+model QuizAttempt {
+  id            String   @id @default(cuid())
+  userId        String
+  lessonId      String
+  quizIndex     Int
+  correct       Boolean
+  chosenIndex   Int
+  attemptNumber Int      @default(1)
+  timeTakenMs   Int?
+  createdAt     DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@map("quiz_attempts")
+}
+
+// =============================================================================
+// GAMIFICATION
+// =============================================================================
+
+model XpEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  amount    Int
+  reason    String
+  sourceId  String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("xp_events")
+}
+
+model Badge {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String
+  iconKey     String
+  category    String   @default("general")
+  xpReward    Int      @default(0)
+  criteria    String   @default("{}")
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userBadges UserBadge[]
+
+  @@map("badges")
+}
+
+model UserBadge {
+  id        String   @id @default(cuid())
+  userId    String
+  badgeId   String
+  awardedAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeId])
+  @@map("user_badges")
+}
+
+model Streak {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  currentStreak   Int       @default(0)
+  longestStreak   Int       @default(0)
+  lastActivityAt  DateTime?
+  streakStartedAt DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("streaks")
+}
+
+// =============================================================================
+// CERTIFICATES
+// =============================================================================
+
+model Certificate {
+  id               String   @id
+  userId           String
+  lessonId         String?
+  chapterId        String?
+  type             String
+  verificationCode String   @unique
+  recipientName    String
+  issueDate        DateTime @default(now())
+  metadata         String   @default("{}")
+  createdAt        DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson  Lesson?  @relation(fields: [lessonId], references: [id], onDelete: SetNull)
+  chapter Chapter? @relation(fields: [chapterId], references: [id], onDelete: SetNull)
+
+  @@map("certificates")
+}

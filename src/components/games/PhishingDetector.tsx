@@ -88,7 +88,7 @@ const PhishingDetector: React.FC = () => {
   return (
     <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-surface-100/90 to-surface-200/80 p-6">
       <div className="mb-4">
-        <h3 className="text-2xl font-semibold text-white">🔍 Phishing Link Detective</h3>
+        <h3 className="text-2xl font-semibold text-white">Phishing Link Detective</h3>
         <p className="mt-2 text-sm text-white/70">Can you spot the fake links? Check each URL carefully.</p>
       </div>
 
@@ -120,7 +120,7 @@ const PhishingDetector: React.FC = () => {
                   onClick={() => handleAnswer(true)}
                   className="rounded-xl border-2 border-red-500/50 bg-red-500/10 px-4 py-3 text-red-300 hover:bg-red-500/20 hover:border-red-500 transition-all font-semibold"
                 >
-                  ⚠️ Phishing
+                  Phishing
                 </button>
               </div>
             </div>
@@ -148,7 +148,7 @@ const PhishingDetector: React.FC = () => {
           )}
 
           <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-xs text-white/60">
-            <p className="font-semibold text-white/80 mb-2">🔎 What to look for:</p>
+            <p className="font-semibold text-white/80 mb-2">What to look for:</p>
             <ul className="space-y-1 list-disc list-inside">
               <li>Check for HTTPS (the padlock icon)</li>
               <li>Look for misspellings in the domain</li>
@@ -161,7 +161,6 @@ const PhishingDetector: React.FC = () => {
       ) : (
         <div className="space-y-4 animate-fadeIn">
           <div className="rounded-xl border border-glow-amber/30 bg-glow-amber/10 p-6 text-center">
-            <p className="text-4xl mb-2">🎉</p>
             <p className="text-2xl font-semibold text-white mb-2">Quiz Complete!</p>
             <p className="text-3xl font-bold text-glow-amber mb-2">{score} / {totalQuestions}</p>
             <p className="text-sm text-white/70">

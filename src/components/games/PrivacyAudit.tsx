@@ -83,7 +83,7 @@ const PrivacyAudit: React.FC = () => {
   return (
     <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-surface-100/90 to-surface-200/80 p-6">
       <div className="mb-4">
-        <h3 className="text-2xl font-semibold text-white">🔒 Privacy Settings Audit</h3>
+        <h3 className="text-2xl font-semibold text-white">Privacy Settings Audit</h3>
         <p className="mt-2 text-sm text-white/70">Review your social media privacy settings and lock down your digital footprint.</p>
       </div>
 
@@ -100,7 +100,7 @@ const PrivacyAudit: React.FC = () => {
                     <h4 className="font-semibold text-white">{setting.label}</h4>
                     {showBadge && (
                       <span className={`text-xs px-2 py-0.5 rounded-full ${result.isSecure ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}>
-                        {result.isSecure ? '✓ Secure' : '⚠️ Exposed'}
+                        {result.isSecure ? 'Secure' : 'Exposed'}
                       </span>
                     )}
                   </div>
@@ -117,7 +117,7 @@ const PrivacyAudit: React.FC = () => {
                       : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
                   }`}
                 >
-                  🌍 Public
+                  Public
                 </button>
                 <button
                   onClick={() => updateSetting(setting.id, 'friends')}
@@ -127,7 +127,7 @@ const PrivacyAudit: React.FC = () => {
                       : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
                   }`}
                 >
-                  👥 Friends
+                  Friends
                 </button>
                 <button
                   onClick={() => updateSetting(setting.id, 'private')}
@@ -137,7 +137,7 @@ const PrivacyAudit: React.FC = () => {
                       : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
                   }`}
                 >
-                  🔒 Private
+                  Private
                 </button>
               </div>
             </div>
@@ -149,13 +149,13 @@ const PrivacyAudit: React.FC = () => {
             onClick={handleAudit}
             className="flex-1 rounded-xl bg-gradient-to-r from-glow-lime to-glow-amber px-4 py-3 font-semibold text-black hover:shadow-lg hover:shadow-glow-amber/50 transition-all"
           >
-            🔍 Run Privacy Audit
+            Run Privacy Audit
           </button>
           <button
             onClick={handleAutoFix}
             className="flex-1 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white hover:bg-white/20 transition-all font-semibold"
           >
-            🛡️ Auto-Fix All
+            Auto-Fix All
           </button>
         </div>
 
@@ -183,7 +183,7 @@ const PrivacyAudit: React.FC = () => {
             </div>
             <p className="text-sm text-white/80">
               {secureCount} of {totalCount} settings are secure.{' '}
-              {scorePercent === 100 ? '🎉 Perfect! Your privacy is locked down.' :
+              {scorePercent === 100 ? 'Perfect! Your privacy is locked down.' :
                scorePercent >= 70 ? 'Good progress! Fix the remaining settings.' :
                'Your information is too exposed. Tighten your privacy settings.'}
             </p>
@@ -191,7 +191,7 @@ const PrivacyAudit: React.FC = () => {
         )}
 
         <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-xs text-white/60">
-          <p className="font-semibold text-white/80 mb-2">🛡️ Privacy Best Practices:</p>
+          <p className="font-semibold text-white/80 mb-2">Privacy Best Practices:</p>
           <ul className="space-y-1 list-disc list-inside">
             <li>Review privacy settings on all social media accounts</li>
             <li>Limit who can see your personal information</li>
