@@ -7,7 +7,7 @@ import { calculateReadingTime, formatReadingTime } from '../utils/readingTime';
 import { useSound } from '../contexts/SoundContext';
 import Confetti from '../components/Confetti';
 import CertificateGenerator from '../components/CertificateGenerator';
-import { BookOpen, Clock, CheckCircle2, PlayCircle, RotateCcw, Award, ChevronRight, Lock } from 'lucide-react';
+import { BookOpen, Clock, CheckCircle2, PlayCircle, RotateCcw, ChevronRight, Lock } from 'lucide-react';
 
 const JourneyPage: React.FC = () => {
   const { progress, markStarted, getCompletedLessons } = useChapterProgress();

@@ -92,9 +92,9 @@ const Sidebar: FC<Props> = ({ chapterId, chapterTitle, lessons, activeLessonId, 
 
                   {/* Difficulty Badge */}
                   <span className={`text-[0.6rem] uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                    lesson.difficulty === 'beginner'
+                    lesson.difficulty === 'foundation'
                       ? 'bg-green-500/10 text-green-400'
-                      : lesson.difficulty === 'intermediate'
+                      : lesson.difficulty === 'applied'
                       ? 'bg-yellow-500/10 text-yellow-400'
                       : 'bg-red-500/10 text-red-400'
                   }`}>
