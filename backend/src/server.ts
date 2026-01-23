@@ -100,20 +100,23 @@ const shutdown = async () => {
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
-// Start server
-const start = async () => {
-  try {
-    await prisma.$connect();
-    app.log.info('Database connected');
+// Start server (only in non-production/non-Vercel environment)
+if (config.nodeEnv !== 'production' || process.env.VERCEL !== '1') {
+  const start = async () => {
+    try {
+      await prisma.$connect();
+      app.log.info('Database connected');
 
-    await app.listen({ port: config.port, host: config.host });
-    app.log.info(`Server running at http://${config.host}:${config.port}`);
-  } catch (err) {
-    app.log.error(err);
-    process.exit(1);
-  }
-};
+      await app.listen({ port: config.port, host: config.host });
+      app.log.info(`Server running at http://${config.host}:${config.port}`);
+    } catch (err) {
+      app.log.error(err);
+      process.exit(1);
+    }
+  };
 
-start();
+  start();
+}
 
-export { app };
+// Export for Vercel serverless
+export default app;
