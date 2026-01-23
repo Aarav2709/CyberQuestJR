@@ -1,7 +1,7 @@
 import argon2 from 'argon2';
-import { prisma } from '../lib/prisma';
-import { generateSessionToken } from '../lib/ids';
-import type { RegisterInput, LoginInput, ChangePasswordInput } from '../schemas/auth';
+import { prisma } from '../lib/prisma.js';
+import { generateSessionToken } from '../lib/ids.js';
+import type { RegisterInput, LoginInput, ChangePasswordInput } from '../schemas/auth.js';
 
 export class AuthService {
   /**

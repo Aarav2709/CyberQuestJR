@@ -1,5 +1,5 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { gamificationService } from '../services/gamification';
+import { gamificationService } from '../services/gamification.js';
 
 export async function gamificationRoutes(app: FastifyInstance) {
   // All routes require authentication except leaderboard

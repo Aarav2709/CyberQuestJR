@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { progressService } from '../services/progress';
-import { updateLessonProgressSchema, updateChapterProgressSchema, bulkSyncProgressSchema } from '../schemas/progress';
+import { progressService } from '../services/progress.js';
+import { updateLessonProgressSchema, updateChapterProgressSchema, bulkSyncProgressSchema } from '../schemas/progress.js';
 
 export async function progressRoutes(app: FastifyInstance) {
   // All routes require authentication

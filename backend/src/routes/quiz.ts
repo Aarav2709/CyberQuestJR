@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { quizService } from '../services/quiz';
-import { submitQuizAttemptSchema } from '../schemas/quiz';
+import { quizService } from '../services/quiz.js';
+import { submitQuizAttemptSchema } from '../schemas/quiz.js';
 
 export async function quizRoutes(app: FastifyInstance) {
   // All routes require authentication

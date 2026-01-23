@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { authService } from '../services/auth';
-import { registerSchema, loginSchema, changePasswordSchema } from '../schemas/auth';
+import { authService } from '../services/auth.js';
+import { registerSchema, loginSchema, changePasswordSchema } from '../schemas/auth.js';
 
 // Extend FastifyRequest to include user
 declare module 'fastify' {

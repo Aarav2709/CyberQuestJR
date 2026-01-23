@@ -1,5 +1,5 @@
-import { prisma } from '../lib/prisma';
-import type { AwardXpInput } from '../schemas/gamification';
+import { prisma } from '../lib/prisma.js';
+import type { AwardXpInput } from '../schemas/gamification.js';
 
 // XP amounts for different actions
 export const XP_VALUES = {

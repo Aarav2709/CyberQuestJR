@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { certificateService } from '../services/certificates';
-import { createCertificateSchema } from '../schemas/certificates';
+import { certificateService } from '../services/certificates.js';
+import { createCertificateSchema } from '../schemas/certificates.js';
 
 export async function certificateRoutes(app: FastifyInstance) {
   /**

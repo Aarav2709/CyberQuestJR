@@ -1,6 +1,6 @@
-import { prisma } from '../lib/prisma';
-import { gamificationService } from './gamification';
-import type { SubmitQuizAttemptInput } from '../schemas/quiz';
+import { prisma } from '../lib/prisma.js';
+import { gamificationService } from './gamification.js';
+import type { SubmitQuizAttemptInput } from '../schemas/quiz.js';
 
 export class QuizService {
   /**

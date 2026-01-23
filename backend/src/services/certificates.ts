@@ -1,6 +1,6 @@
-import { prisma } from '../lib/prisma';
-import { generateUlid, generateVerificationCode } from '../lib/ids';
-import type { CreateCertificateInput } from '../schemas/certificates';
+import { prisma } from '../lib/prisma.js';
+import { generateUlid, generateVerificationCode } from '../lib/ids.js';
+import type { CreateCertificateInput } from '../schemas/certificates.js';
 
 export class CertificateService {
   /**

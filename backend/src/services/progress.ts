@@ -1,6 +1,6 @@
-import { prisma } from '../lib/prisma';
-import { gamificationService } from './gamification';
-import type { UpdateLessonProgressInput, UpdateChapterProgressInput, BulkSyncProgressInput } from '../schemas/progress';
+import { prisma } from '../lib/prisma.js';
+import { gamificationService } from './gamification.js';
+import type { UpdateLessonProgressInput, UpdateChapterProgressInput, BulkSyncProgressInput } from '../schemas/progress.js';
 
 export class ProgressService {
   /**

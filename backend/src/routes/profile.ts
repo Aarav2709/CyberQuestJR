@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { profileService } from '../services/profile';
-import { updateProfileSchema } from '../schemas/profile';
+import { profileService } from '../services/profile.js';
+import { updateProfileSchema } from '../schemas/profile.js';
 
 export async function profileRoutes(app: FastifyInstance) {
   // All routes require authentication

@@ -1,5 +1,5 @@
-import { prisma } from '../lib/prisma';
-import type { UpdateProfileInput } from '../schemas/profile';
+import { prisma } from '../lib/prisma.js';
+import type { UpdateProfileInput } from '../schemas/profile.js';
 
 export class ProfileService {
   /**
