@@ -10,42 +10,62 @@ const links: LinkExample[] = [
   {
     url: 'https://www.paypal.com/signin',
     isPhishing: false,
-    reason: 'Legitimate PayPal domain with HTTPS',
+    reason: 'Legitimate PayPal domain with HTTPS and proper subdomain structure',
   },
   {
     url: 'http://paypa1.com/verify-account',
     isPhishing: true,
-    reason: 'Suspicious: uses "1" instead of "l", no HTTPS, asks to verify',
+    reason: 'Suspicious: uses "1" instead of "l", no HTTPS, asks to verify account (phishing tactic)',
   },
   {
     url: 'https://www.instagram.com/explore',
     isPhishing: false,
-    reason: 'Real Instagram domain with HTTPS',
+    reason: 'Real Instagram domain with HTTPS - official Meta property',
   },
   {
     url: 'https://instagram-security.com/account-suspended',
     isPhishing: true,
-    reason: 'Fake domain pretending to be Instagram, creating urgency',
+    reason: 'Fake domain using "instagram-security.com" not official Instagram.com. Creates urgency with "suspended"',
   },
   {
     url: 'https://www.amazon.com/orders',
     isPhishing: false,
-    reason: 'Official Amazon domain with HTTPS',
+    reason: 'Official Amazon domain with HTTPS - legitimate orders page',
   },
   {
     url: 'http://amaz0n-prize.net/claim-now',
     isPhishing: true,
-    reason: 'Uses "0" instead of "o", suspicious domain, no HTTPS, too good to be true',
+    reason: 'Uses "0" instead of "o", .net domain (not amazon.com), no HTTPS, urgency with "claim-now"',
   },
   {
     url: 'https://docs.google.com/forms/d/abc123',
     isPhishing: false,
-    reason: 'Legitimate Google Forms link',
+    reason: 'Legitimate Google Forms link - official docs.google.com subdomain',
   },
   {
     url: 'https://bit.ly/free-robux-2024',
     isPhishing: true,
-    reason: 'Shortened URL hiding destination, promises free items (common scam)',
+    reason: 'URL shortener hides true destination. Promises free items (common scam pattern)',
+  },
+  {
+    url: 'https://www.netflix.com/browse',
+    isPhishing: false,
+    reason: 'Official Netflix domain with proper HTTPS certificate',
+  },
+  {
+    url: 'http://netflix-payment-update.info/billing',
+    isPhishing: true,
+    reason: 'Suspicious .info domain pretending to be Netflix. No HTTPS. Targets billing info',
+  },
+  {
+    url: 'https://github.com/username/repository',
+    isPhishing: false,
+    reason: 'Legitimate GitHub repository URL with proper domain structure',
+  },
+  {
+    url: 'https://secure-bank-verification.com/chase-login',
+    isPhishing: true,
+    reason: 'Not the real Chase bank domain. Suspicious subdomain. Generic "secure" naming',
   },
 ];
 
@@ -114,7 +134,7 @@ const PhishingDetector: React.FC = () => {
                   onClick={() => handleAnswer(false)}
                   className="rounded-xl border-2 border-green-500/50 bg-green-500/10 px-4 py-3 text-green-300 hover:bg-green-500/20 hover:border-green-500 transition-all font-semibold"
                 >
-                  ✓ Safe Link
+                  [SAFE] Safe Link
                 </button>
                 <button
                   onClick={() => handleAnswer(true)}
@@ -128,7 +148,7 @@ const PhishingDetector: React.FC = () => {
             <div className="space-y-4 animate-fadeIn">
               <div className={`rounded-xl border p-4 ${isCorrect ? 'border-green-500/30 bg-green-500/10' : 'border-red-500/30 bg-red-500/10'}`}>
                 <p className={`font-semibold mb-2 ${isCorrect ? 'text-green-300' : 'text-red-300'}`}>
-                  {isCorrect ? '✓ Correct!' : '✗ Incorrect'}
+                  {isCorrect ? '[CORRECT]' : '[INCORRECT]'}
                 </p>
                 <p className="text-sm text-white/80">
                   This link is <strong>{currentLink.isPhishing ? 'PHISHING' : 'SAFE'}</strong>.

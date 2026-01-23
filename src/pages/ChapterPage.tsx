@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar';
 import TopScrollProgress from '../components/TopScrollProgress';
 import { useChapterProgress } from '../hooks/useChapterProgress';
 import { useSound } from '../contexts/SoundContext';
-import { ArrowLeft, BookOpen, CheckCircle2, MessageSquare, HelpCircle } from 'lucide-react';
+import { ArrowLeft, MessageSquare, HelpCircle } from 'lucide-react';
 
 // Import game components
 import PasswordBuilder from '../components/games/PasswordBuilder';
@@ -138,33 +138,10 @@ const ChapterPage: React.FC = () => {
 
         {/* Main Content */}
         <section className="col-span-12 lg:col-span-8 xl:col-span-9 space-y-6">
-          {/* Chapter Header */}
-          <div className="rounded-3xl border border-white/10 bg-surface-200/50 p-6 backdrop-blur-sm">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-glow-lime/10 border border-glow-lime/20">
-                <BookOpen className="h-4 w-4 text-glow-lime" />
-              </div>
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">Chapter Focus</p>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{chapter.title}</h2>
-            <p className="text-white/60">{chapter.summary}</p>
-          </div>
-
           {currentLesson ? (
             <article className="space-y-6">
               {/* Lesson Header */}
               <div className="rounded-3xl border border-white/10 bg-surface-100/80 p-6 backdrop-blur-sm">
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-glow-amber">
-                    {isGameLesson ? 'Interactive Activity' : `Lesson ${currentLessonIndex + 1} of ${lessonEntries.length}`}
-                  </p>
-                  {completedLessons.includes(currentLesson.id) && (
-                    <div className="flex items-center gap-1.5 rounded-full bg-glow-lime/10 px-3 py-1 border border-glow-lime/20">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-glow-lime" />
-                      <span className="text-xs font-medium text-glow-lime">Completed</span>
-                    </div>
-                  )}
-                </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{currentLesson.title}</h3>
                 <p className="text-white/60">{currentLesson.summary}</p>
               </div>
@@ -261,7 +238,6 @@ const ChapterPage: React.FC = () => {
                     onClick={() => playSound('click')}
                     className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-glow-lime to-glow-amber px-6 py-3 text-sm font-semibold text-black transition-all hover:shadow-lg hover:shadow-glow-amber/30"
                   >
-                    <CheckCircle2 className="h-4 w-4" />
                     Complete Chapter
                   </Link>
                 )}

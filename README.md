@@ -6,10 +6,6 @@
       <td><img src="screenshots/img1.png" alt="Landing Page" width="400"/></td>
       <td><img src="screenshots/img2.png" alt="Journey Page" width="400"/></td>
     </tr>
-    <tr>
-      <td><img src="screenshots/img3.png" alt="Chapter View" width="400"/></td>
-      <td><img src="screenshots/img4.png" alt="Interactive Games" width="400"/></td>
-    </tr>
   </table>
 </div>
 

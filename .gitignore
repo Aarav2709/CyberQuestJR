@@ -6,3 +6,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 dist/
+
+# Environment files
+.env
+.env.local
+.env.production
+backend/.env
+backend/dev.db
+backend/dev.db-journal

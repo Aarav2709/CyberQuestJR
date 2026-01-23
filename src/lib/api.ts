@@ -17,7 +17,11 @@ class ApiClient {
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
-    this.token = localStorage.getItem('auth_token');
+    // Initialize token from localStorage immediately
+    const savedToken = localStorage.getItem('auth_token');
+    if (savedToken) {
+      this.token = savedToken;
+    }
   }
 
   setToken(token: string | null) {
@@ -52,12 +56,14 @@ class ApiClient {
         body: body ? JSON.stringify(body) : undefined,
       });
 
-      const data = await response.json();
+      const json = await response.json();
 
       if (!response.ok) {
-        return { error: data.message || data.error || 'Request failed' };
+        return { error: json.error?.message || json.message || json.error || 'Request failed' };
       }
 
+      // Backend returns { success: true, data: {...} }, unwrap the data
+      const data = json.data || json;
       return { data };
     } catch (error) {
       return { error: error instanceof Error ? error.message : 'Network error' };
@@ -84,7 +90,7 @@ class ApiClient {
   }
 
   async getCurrentUser() {
-    return this.request<{ user: User }>('/auth/me');
+    return this.request<User>('/auth/me');
   }
 
   // Profile endpoints

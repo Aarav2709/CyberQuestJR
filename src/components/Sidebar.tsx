@@ -14,33 +14,18 @@ type Props = {
 const Sidebar: FC<Props> = ({ chapterId, chapterTitle, lessons, activeLessonId, onSelectLesson }) => {
   const { getCompletedLessons } = useChapterProgress();
   const completedLessons = getCompletedLessons(chapterId);
-  const completionPercent = Math.round((completedLessons.length / lessons.length) * 100);
 
   return (
     <div className="sticky top-24 space-y-4">
       {/* Chapter Header Card */}
       <div className="rounded-2xl border border-white/10 bg-surface-100/80 p-5 backdrop-blur-sm">
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-glow-amber/10 border border-glow-amber/20">
             <BookOpen className="h-5 w-5 text-glow-amber" />
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">Current Chapter</p>
             <h4 className="text-lg font-semibold text-white leading-tight">{chapterTitle}</h4>
-          </div>
-        </div>
-
-        {/* Progress Indicator */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs">
-            <span className="text-white/50">{completedLessons.length} of {lessons.length} lessons</span>
-            <span className="font-semibold text-glow-lime">{completionPercent}%</span>
-          </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-            <div
-              className="h-full bg-gradient-to-r from-glow-lime to-glow-amber transition-all duration-500"
-              style={{ width: `${completionPercent}%` }}
-            />
           </div>
         </div>
       </div>

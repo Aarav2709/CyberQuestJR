@@ -116,7 +116,7 @@ const DeviceSecurityChecker: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <h4 className="font-semibold text-white">{item.name}</h4>
                       {item.status === 'updated' && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300">✓ Updated</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300">[OK] Updated</span>
                       )}
                       {item.status === 'outdated' && (
                         <span className="text-xs px-2 py-0.5 rounded-full bg-red-500/20 text-red-300">Outdated</span>

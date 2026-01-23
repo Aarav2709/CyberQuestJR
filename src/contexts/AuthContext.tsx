@@ -40,7 +40,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    setUser(data.user);
+    // Backend returns user data directly, not wrapped in { user: ... }
+    setUser(data as User);
 
     // Fetch profile and gamification data in parallel
     const [profileRes, gamificationRes] = await Promise.all([

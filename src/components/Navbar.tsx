@@ -2,14 +2,11 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSound } from '../contexts/SoundContext';
 import { useAuth } from '../contexts/AuthContext';
-import { useLevelInfo, useStreak } from '../hooks/useGamification';
-import { User, LogOut, Flame, Trophy, ChevronDown, Zap, Menu, X } from 'lucide-react';
+import { User, LogOut, ChevronDown, Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { playSound } = useSound();
   const { user, isAuthenticated, logout } = useAuth();
-  const { level, totalXp, levelProgress } = useLevelInfo();
-  const { currentStreak } = useStreak();
   const location = useLocation();
 
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -60,44 +57,12 @@ const Navbar: React.FC = () => {
             <NavLink to="/learn" active={isActive('/learn')} onClick={() => playSound('click')}>
               Journey
             </NavLink>
-            {isAuthenticated && (
-              <NavLink to="/leaderboard" active={isActive('/leaderboard')} onClick={() => playSound('click')}>
-                Leaderboard
-              </NavLink>
-            )}
           </div>
 
           {/* Right Section */}
           <div className="flex items-center gap-3">
             {isAuthenticated ? (
               <>
-                {/* XP & Level Display */}
-                <div className="hidden sm:flex items-center gap-3">
-                  {currentStreak > 0 && (
-                    <div className="flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5">
-                      <Flame className="h-4 w-4 text-orange-400" />
-                      <span className="text-xs font-bold text-orange-400">{currentStreak}</span>
-                    </div>
-                  )}
-
-                  <div className="flex items-center gap-2 rounded-full border border-glow-amber/30 bg-glow-amber/10 px-3 py-1.5">
-                    <Zap className="h-4 w-4 text-glow-amber" />
-                    <span className="text-xs font-bold text-glow-amber">{totalXp.toLocaleString()} XP</span>
-                  </div>
-
-                  <div className="relative">
-                    <div className="flex items-center gap-2 rounded-full border border-glow-lime/30 bg-glow-lime/10 px-3 py-1.5">
-                      <Trophy className="h-4 w-4 text-glow-lime" />
-                      <span className="text-xs font-bold text-glow-lime">Lvl {level}</span>
-                    </div>
-                    <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-full h-0.5 bg-white/10 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-glow-lime to-glow-amber transition-all duration-500"
-                        style={{ width: `${levelProgress}%` }}
-                      />
-                    </div>
-                  </div>
-                </div>
 
                 {/* User Menu */}
                 <div className="relative" ref={menuRef}>
@@ -124,45 +89,6 @@ const Navbar: React.FC = () => {
                         <p className="text-xs text-white/50 truncate">{user?.email}</p>
                       </div>
 
-                      <div className="sm:hidden space-y-2 px-3 py-2 border-b border-white/10 mb-2">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-white/50">XP</span>
-                          <span className="font-bold text-glow-amber">{totalXp.toLocaleString()}</span>
-                        </div>
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-white/50">Level</span>
-                          <span className="font-bold text-glow-lime">{level}</span>
-                        </div>
-                        {currentStreak > 0 && (
-                          <div className="flex items-center justify-between text-xs">
-                            <span className="text-white/50">Streak</span>
-                            <span className="font-bold text-orange-400">{currentStreak} days</span>
-                          </div>
-                        )}
-                      </div>
-
-                      <Link
-                        to="/profile"
-                        onClick={() => {
-                          playSound('click');
-                          setShowUserMenu(false);
-                        }}
-                        className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                      >
-                        <User className="h-4 w-4" />
-                        Profile
-                      </Link>
-                      <Link
-                        to="/certificates"
-                        onClick={() => {
-                          playSound('click');
-                          setShowUserMenu(false);
-                        }}
-                        className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                      >
-                        <Trophy className="h-4 w-4" />
-                        Certificates
-                      </Link>
                       <button
                         onClick={handleLogout}
                         className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-red-400 transition-colors hover:bg-red-500/10"
@@ -214,11 +140,6 @@ const Navbar: React.FC = () => {
               <MobileNavLink to="/learn" active={isActive('/learn')} onClick={() => { playSound('click'); setShowMobileMenu(false); }}>
                 Journey
               </MobileNavLink>
-              {isAuthenticated && (
-                <MobileNavLink to="/leaderboard" active={isActive('/leaderboard')} onClick={() => { playSound('click'); setShowMobileMenu(false); }}>
-                  Leaderboard
-                </MobileNavLink>
-              )}
             </div>
           </div>
         )}

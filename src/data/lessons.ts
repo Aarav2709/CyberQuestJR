@@ -54,18 +54,18 @@ export const lessons: Lesson[] = [
         ],
         answer: 'Verify the request through the school portal or office before replying',
         rationale:
-          'Legitimate staff already have access channels. Independent verification stops the attack without feeding it more data.',
+          'Legitimate staff have official communication channels and would never pressure students for passwords via text. Independent verification through trusted channels stops social engineering attacks. The urgency is designed to bypass your critical thinking.',
       },
       {
         question: 'A stranger switches from casual slang to urgent commands mid-thread. What label should you add to your evidence board?',
         options: [
           'Humor shift',
           'Authority hijack',
-          'Emoji spam',
+          'Pressure escalation',
           'Grammar fail'
         ],
         answer: 'Authority hijack',
-        rationale: 'Attackers often pretend to outrank you to speed up compliance. Labeling the tactic keeps you from reacting emotionally.',
+        rationale: 'Sudden shifts from casual to authoritative tone signal manipulation. Attackers impersonate authority figures to create pressure and compliance. Labeling the tactic intellectually helps you resist emotional manipulation and builds pattern recognition for future attacks.',
       },
       {
         question: 'Which combination proves you actually verified a suspicious request?',
@@ -73,10 +73,10 @@ export const lessons: Lesson[] = [
           'Screenshot + DM reply',
           'Voice memo + group chat alert',
           'Second-channel confirmation + timestamped note',
-          'Emoji reaction + sticker reply'
+          'Quick reply + forwarded message'
         ],
         answer: 'Second-channel confirmation + timestamped note',
-        rationale: 'When you log how and when you verified, adults can trust your timeline and take action quickly.',
+        rationale: 'Verification requires using a completely separate communication channel—not just replying in the same app. Timestamped documentation creates an audit trail that adults can trust. This combination proves you took proper security steps and provides evidence if needed later.',
       },
       {
         question: 'Why should you avoid replying “stop scamming” inside the same thread?',
@@ -87,7 +87,7 @@ export const lessons: Lesson[] = [
           'The platform will ban you'
         ],
         answer: 'It tips off the attacker and may escalate drama',
-        rationale: 'Silently collecting proof protects your classmates and keeps the attacker from mutating tactics mid-investigation.',
+        rationale: 'Publicly confronting attackers alerts them that you are aware, causing them to delete evidence, change tactics, or target others. Silent documentation preserves evidence for investigation while protecting your classmates. Professional investigators always gather proof before confrontation.',
       }
     ],
     coachQuestions: [
@@ -138,7 +138,7 @@ export const lessons: Lesson[] = [
         ],
         answer: 'orbit campus lantern - nova + brass riff',
         rationale:
-          'Recipes describing the transformation are safer than exposed passwords and encourage site specific salt.',
+          'This recipe describes the structure without exposing the final password. The site-specific salt (nova) and personal symbol mapping (brass riff) create uniqueness. Even if someone sees your notes, they cannot reconstruct your actual password without knowing your personal symbol translations.',
       },
       {
         question: 'You forgot a symbol in your new passphrase. What is the safest fix?',
@@ -149,7 +149,7 @@ export const lessons: Lesson[] = [
           'Ignore it as long as the password is long'
         ],
         answer: 'Add the symbol only to the account you are editing now',
-        rationale: 'Each account deserves its own unique salt; copying the fix everywhere rebuilds the reuse problem.',
+        rationale: 'Password reuse is one of the biggest security mistakes. When one site gets breached, attackers test those credentials everywhere. Each account needs its own unique salt or modification. Adding the same symbol to all accounts recreates the reuse vulnerability you are trying to avoid.',
       },
       {
         question: 'Which storage method keeps your handwritten recipe notes safe if someone takes a photo?',
@@ -160,13 +160,13 @@ export const lessons: Lesson[] = [
           'Memorize everything and never write it down'
         ],
         answer: 'Use symbols like “+sunset riff” that only you can decode',
-        rationale: 'Layered hints are useless to intruders yet instantly meaningful to you.',
+        rationale: 'Recipe notation creates a separation between what is written and what is typed. Symbols like "+sunset riff" are meaningless to anyone who finds your notebook, but instantly trigger your memory system. This layered approach protects even if someone photographs your notes or finds them in a lost backpack.',
       },
       {
         question: 'How often should you run a reuse audit on high-value accounts?',
         options: ['Once a year', 'Whenever you get bored', 'Every season or after any breach alert', 'Never if you use symbols'],
         answer: 'Every season or after any breach alert',
-        rationale: 'Quarterly reviews keep leaks from spreading and teach you to react to breach emails calmly.',
+        rationale: 'Major sites experience data breaches regularly—sometimes millions of passwords leak at once. Quarterly audits ensure you catch reuse patterns, update compromised credentials, and respond to breach notifications before attackers exploit them. This proactive approach significantly reduces your risk of account compromise.',
       },
     ],
     coachQuestions: [
@@ -216,13 +216,13 @@ export const lessons: Lesson[] = [
         ],
         answer: 'Export the data, deactivate the account, and confirm removal in search results',
         rationale:
-          'Taking the account offline plus confirming the change removes both the content and its search trail.',
+          'Complete data removal requires three steps: export your content for your records, deactivate/delete the account to stop new exposure, and verify removal from search engines through Google Search Console or waiting for re-indexing. Partial removal leaves traces that can still harm your privacy.',
       },
       {
         question: 'You notice an app requesting microphone access for no reason. What belongs in your footprint log?',
         options: ['Date and time only', 'Permission type, reason, and whether you revoked it', 'A selfie proving you denied it', 'Nothing; it is normal'],
         answer: 'Permission type, reason, and whether you revoked it',
-        rationale: 'Detailed notes help you audit faster next month and catch patterns across apps.',
+        rationale: 'Comprehensive logs track what you allowed, why you allowed it, and whether you revoked it. This creates an audit trail for future reviews and helps you notice patterns—like apps requesting similar permissions after updates. Documentation transforms vague concerns into actionable security practices.',
       },
       {
         question: 'Which order closes leaks efficiently after a phone upgrade?',
@@ -233,7 +233,7 @@ export const lessons: Lesson[] = [
           'Throw it in a drawer without changes'
         ],
         answer: 'Wipe the old device, remove accounts, then sell or recycle it',
-        rationale: 'Cleaning data before transfer prevents strangers from restoring your credentials later.',
+        rationale: 'Old devices are treasure troves of logged-in accounts, saved passwords, cached photos, and browsing history. Factory reset alone may not fully erase data—professional recovery tools can restore it. Proper sequence: remove all accounts, perform factory reset, verify wipe completion, then transfer or recycle.',
       },
       {
         question: 'A friend shares a spreadsheet of everyone’s gamer tags and emails. What is the privacy-friendly response?',
@@ -244,7 +244,7 @@ export const lessons: Lesson[] = [
           'Copy the sheet to your own drive'
         ],
         answer: 'Ask them to lock the sheet and remove emails, then share safer contact methods',
-        rationale: 'Reducing unnecessary exposure keeps contact info from being scraped by strangers.',
+        rationale: 'Minimizing exposure protects everyone. Emails in public documents enable spammers, phishers, and social engineers to target people. Locking sharing permissions and using platform-specific usernames instead of emails demonstrates digital citizenship and reduces collective risk for your entire community.',
       },
     ],
     coachQuestions: [
@@ -294,13 +294,13 @@ export const lessons: Lesson[] = [
         ],
         answer: 'Isolate the device or account, then brief a trusted adult or admin with your log',
         rationale:
-          'Containment plus escalation protects everyone faster than public callouts.',
+          'Incident response follows a clear priority: contain the threat, preserve evidence, then escalate. Immediately isolating the affected device prevents malware spread or data exfiltration. Your documented evidence helps professionals conduct forensic analysis. Public callouts alert attackers and give them time to cover tracks.',
       },
       {
         question: 'Which detail matters most in your incident journal entry?',
         options: ['The background color of the chat', 'Exact timestamps and usernames involved', 'How angry you felt', 'Who first posted the rumor'],
         answer: 'Exact timestamps and usernames involved',
-        rationale: 'Time-stamped facts help pros rebuild the chain of events without guessing.',
+        rationale: 'Precise timestamps and usernames enable forensic reconstruction. Security professionals can correlate your log with server records, identify attack vectors, and trace compromise patterns. Background colors and emotions are irrelevant for technical investigation and dilute the signal in your report.',
       },
       {
         question: 'A friend wants to announce the breach on social media. What should you advise?',
@@ -311,7 +311,7 @@ export const lessons: Lesson[] = [
           'Change all passwords first, then post'
         ],
         answer: 'Wait until adults give a signal so attackers do not adapt',
-        rationale: 'Coordinated messaging prevents attackers from learning what evidence you have.',
+        rationale: 'Premature disclosure is a tactical error. Attackers monitor social media for mentions of their campaigns. When they see public warnings, they delete evidence, change infrastructure, and target new victims before defenders respond. Coordinated timing gives security teams maximum advantage for intervention.',
       },
       {
         question: 'Why is a debrief important even when nothing was stolen?',
@@ -322,7 +322,7 @@ export const lessons: Lesson[] = [
           'It helps you delete logs faster'
         ],
         answer: 'It teaches your team what worked and what to improve next time',
-        rationale: 'Reflection locks in skills so the next incident feels manageable.',
+        rationale: 'Debriefs transform incidents into institutional knowledge. Even "close calls" reveal gaps in procedures, communication, and preparation. Structured reflection builds team muscle memory, reduces future response time, and creates psychological safety—knowing you can handle problems makes new threats less intimidating.',
       },
     ],
     coachQuestions: [
@@ -371,7 +371,7 @@ export const lessons: Lesson[] = [
           'Ignore updates until a device crashes',
         ],
         answer: 'Back up files, update the OS, then patch apps and browser extensions',
-        rationale: 'Protect data before changing anything, then patch layers from system to apps so nothing is missed.',
+        rationale: 'Security hygiene requires layered protection. Backups prevent data loss from failed updates. OS patches close system-level vulnerabilities first. Then app and browser updates protect your daily tools. This sequence ensures updates do not leave you vulnerable if something breaks mid-process.',
       },
       {
         question: 'An unknown keyboard app suddenly asks for microphone access. What is the best move?',
@@ -382,7 +382,7 @@ export const lessons: Lesson[] = [
           'Restart the phone without touching settings',
         ],
         answer: 'Disable or uninstall the app, then note the change in your log',
-        rationale: 'Removing the risky component and documenting the decision prevents the permission from sneaking back later.',
+        rationale: 'Unknown apps requesting sensitive permissions are immediate threats. Microphone access enables eavesdropping, keylogging, and data exfiltration. Removal eliminates the threat surface. Documentation creates accountability—if the app returns or similar patterns emerge, your log reveals the attack campaign.',
       },
       {
         question: 'How can you tell if a browser extension deserves removal?',
@@ -393,7 +393,7 @@ export const lessons: Lesson[] = [
           'Your friend still uses it',
         ],
         answer: 'It duplicates a feature the browser already has and recently started showing ads',
-        rationale: 'Redundant extensions with new ad behavior often siphon data—remove them before they update again.',
+        rationale: 'Browser extensions access every website you visit, capturing passwords, reading emails, and tracking behavior. Redundant extensions are unnecessary attack surface. New ad behavior often signals acquisition by malicious actors who inject tracking and malware. Remove before they update with worse payloads.',
       },
       {
         question: 'Why keep a written hygiene log?',
@@ -404,7 +404,7 @@ export const lessons: Lesson[] = [
           'It replaces antivirus software',
         ],
         answer: 'Logs help you prove maintenance happened and spot patterns like recurring malware',
-        rationale: 'Paper trails build confidence, especially if you ever need help from tech support or parents.',
+        rationale: 'Maintenance logs serve multiple purposes: they prove due diligence to adults, reveal malware that survives basic cleanups through repetition patterns, and build your confidence through visible progress. Paper trails transform abstract security into concrete habits you can demonstrate and improve.',
       },
     ],
     coachQuestions: [
@@ -453,7 +453,7 @@ export const lessons: Lesson[] = [
           '“Just chill, it’s probably fine.”',
         ],
         answer: '“3:22 PM: suspicious login detected. Logged out of all sessions and collected screenshots.”',
-        rationale: 'Specific timestamps plus actions reassure adults you are already containing the issue.',
+        rationale: 'Professional briefings lead with facts and actions, demonstrating control and preparedness. Specific timestamps remove ambiguity. Listing completed containment steps shows initiative. This format signals to adults that you are managing the situation competently and tells them exactly what additional resources you need.',
       },
       {
         question: 'What belongs in the “ask” section of a briefing?',
@@ -464,7 +464,7 @@ export const lessons: Lesson[] = [
           'Song recommendations',
         ],
         answer: 'Clear next steps you need approval for, like “Need admin to reset shared drive permissions”',
-        rationale: 'Adults respond faster when they know the exact decision or access you require.',
+        rationale: 'Decision-makers need clarity, not blame or entertainment. The "ask" section should specify exactly what approval, access, or resources you need. Clear requests like "Need admin to reset shared drive permissions" enable immediate action. Vague briefings waste time and extend exposure windows.',
       },
       {
         question: 'Why schedule a debrief even if the breach was tiny?',
@@ -475,7 +475,7 @@ export const lessons: Lesson[] = [
           'To stall reporting',
         ],
         answer: 'Because reflection locks in what worked and what to tweak next time',
-        rationale: 'Quick debriefs build muscle memory and reduce panic in future incidents.',
+        rationale: 'Every incident—large or small—is a training opportunity. Quick debriefs identify what procedures worked, what communication broke down, and what skills need strengthening. This builds organizational resilience: your team becomes faster, calmer, and more coordinated with each event.',
       },
       {
         question: 'A teammate keeps adding unverified rumors to your briefing doc. What do you do?',
@@ -486,7 +486,7 @@ export const lessons: Lesson[] = [
           'Send the doc unfinished',
         ],
         answer: 'Label a “rumors” section clearly or move the notes elsewhere so the official brief stays factual',
-        rationale: 'Separating facts from speculation keeps the briefing trustworthy without silencing helpers.',
+        rationale: 'Report integrity is critical. Unverified rumors mixed with facts undermine credibility and can cause inappropriate responses. Create a clearly labeled "pending verification" section or separate document for speculative information. This maintains trust while acknowledging helpful contributions from teammates.',
       },
     ],
     coachQuestions: [
@@ -535,7 +535,7 @@ export const lessons: Lesson[] = [
           'Flag the message as spam without checking',
         ],
         answer: 'Paste the link into a sandbox or expander to reveal the full domain',
-        rationale: 'Seeing the full URL exposes impostor domains without loading them on your main device.',
+        rationale: 'URL shorteners like bit.ly hide the true destination, making them perfect for phishing. Free expander tools or sandbox environments reveal the actual domain without loading malicious content on your device. Always expand before clicking—legitimate senders have nothing to hide.',
       },
       {
         question: 'Which clue signals that “schoolupdates.education-login.com” is shady?',
@@ -546,7 +546,7 @@ export const lessons: Lesson[] = [
           'It has a hyphen',
         ],
         answer: 'The subdomain piles multiple words before the main domain',
-        rationale: 'Attackers often stuff official-sounding terms before a completely unrelated root domain.',
+        rationale: 'Domain names work right-to-left. In "schoolupdates.education-login.com", the real domain is "education-login.com"—a completely different entity from your school. Everything before it is a subdomain they control. Attackers exploit this by stacking official-sounding words before their fraudulent domain.',
       },
       {
         question: 'Why keep a “link ledger” even if you delete the messages later?',
@@ -557,7 +557,7 @@ export const lessons: Lesson[] = [
           'It replaces antivirus',
         ],
         answer: 'Logs prove patterns and help adults escalate faster',
-        rationale: 'Written evidence shows repetition, which convinces admins to block the source.',
+        rationale: 'Pattern documentation is more convincing than single reports. When you show administrators five examples of similar phishing attempts from your ledger, they can block the source network-wide instead of treating each as isolated. Your records accelerate protection for the entire community.',
       },
       {
         question: 'A QR code poster appears in the cafeteria overnight. What belongs in your notebook before scanning?',
@@ -568,7 +568,7 @@ export const lessons: Lesson[] = [
           'Nothing; just scan it',
         ],
         answer: 'Photo of the poster, location, and who benefits from the request',
-        rationale: 'Context clues plus a visual record help you trace where the code came from and whether to report it.',
+        rationale: 'QR codes bypass your visual verification—you cannot see the URL before scanning. Photographing the poster preserves location, timing, and appearance for verification. Asking "who benefits?" reveals motive—legitimate school activities are announced through official channels, not anonymous overnight posters.',
       },
     ],
     coachQuestions: [
@@ -617,7 +617,7 @@ export const lessons: Lesson[] = [
           '“LOL calm down.”',
         ],
         answer: '“Pause. Here is what we can confirm so far…”',
-        rationale: 'You invite people to slow down while offering verified info, which lowers defensiveness.',
+        rationale: 'Starting with "Pause" acknowledges the emotional energy without dismissing it. Offering verified facts provides direction and reduces anxiety. This approach invites collaboration rather than triggering defensiveness, making others more likely to help you gather accurate information.',
       },
       {
         question: 'Why keep feelings separated from facts in your notes?',
@@ -628,7 +628,7 @@ export const lessons: Lesson[] = [
           'It looks cooler',
         ],
         answer: 'It helps you empathize later but prevents emotional sentences from entering the official report',
-        rationale: 'Compartmentalizing lets you process emotions without contaminating the factual timeline.',
+        rationale: 'Emotions are valid and need processing, but mixing them with factual reports creates confusion and bias. Separate columns let you acknowledge how situations feel while maintaining objective timelines. This discipline makes your reports credible to adults and keeps you emotionally regulated during stressful investigations.',
       },
       {
         question: 'What belongs in the rumor log entry?',
@@ -639,7 +639,7 @@ export const lessons: Lesson[] = [
           'Memes about the situation',
         ],
         answer: 'Timestamps, source screenshots, and action steps',
-        rationale: 'Those details help adults review the situation quickly and fairly.',
+        rationale: 'Professional investigations require verifiable evidence. Timestamps establish sequence, screenshots preserve content before deletion, and action steps show proactive response. Together, these elements create a credible record that adults can act on immediately. Feelings and memes belong in your personal processing, not official reports.',
       },
       {
         question: 'A friend insists on posting the rumor publicly “to warn people.” What is your response?',
@@ -650,7 +650,7 @@ export const lessons: Lesson[] = [
           'Ignore them',
         ],
         answer: 'Ask them to wait until you confirm details with a trusted adult and offer to help craft a factual update',
-        rationale: 'Coordinated messaging prevents misinformation and shows you respect the need for accuracy.',
+        rationale: 'Unverified public posts often cause more harm than the original rumor. They spread panic, damage reputations, and force adults to manage multiple crisis responses. Coordinated messaging with trusted adults ensures accuracy, timing, and tone that protects everyone involved. Your patience demonstrates maturity and leadership.',
       },
     ],
     coachQuestions: [
@@ -693,13 +693,13 @@ export const lessons: Lesson[] = [
       {
         question: 'Which detail turns a “to-do” list into a real playbook?',
         options: [
-          'Adding emojis',
+          'Using colorful formatting',
           'Assigning roles and backups next to each action',
           'Making it all caps',
           'Hiding it on your desktop',
         ],
         answer: 'Assigning roles and backups next to each action',
-        rationale: 'People move faster when they know exactly who owns a task and who steps in if needed.',
+        rationale: 'Playbooks require accountability. Role assignment with backup designations ensures tasks get completed even when key people are absent. Clear ownership prevents duplication, confusion, and gaps. This structure transforms vague guidance into executable procedures that work under stress.',
       },
       {
         question: 'Why print a copy of the runbook?',
@@ -710,7 +710,7 @@ export const lessons: Lesson[] = [
           'It replaces digital backups',
         ],
         answer: 'Screens might be locked or offline during an incident',
-        rationale: 'Physical copies keep the plan available when devices are compromised.',
+        rationale: 'Digital devices fail during incidents—they get compromised, locked, or have dead batteries. Physical copies remain accessible when technology fails. Redundancy across formats (digital and physical) and locations (home, school, trusted adult) ensures your playbook is available exactly when you need it most.',
       },
       {
         question: 'What belongs in the “review” section of a playbook?',
@@ -721,7 +721,7 @@ export const lessons: Lesson[] = [
           'Memes from the drill',
         ],
         answer: 'Notes about what slowed you down and the next tweak to make',
-        rationale: 'Iteration keeps the document useful instead of dusty.',
+        rationale: 'Static playbooks become obsolete. The review section captures friction points, communication gaps, and procedure ambiguities discovered during execution. These lessons directly inform the next revision, making each iteration more practical. Living documents adapt to your team and evolving threats.',
       },
       {
         question: 'During a drill, someone misses their step. What should the playbook remind you to do?',
@@ -732,7 +732,7 @@ export const lessons: Lesson[] = [
           'Ignore it',
         ],
         answer: 'Run the backup assignment and log the gap for the review',
-        rationale: 'Backups keep the play moving, and the review log turns the miss into a lesson.',
+        rationale: 'Backup assignments prevent single points of failure. When the primary person is unavailable, sick, or overwhelmed, the backup immediately assumes the role without discussion or delay. Logging gaps during execution identifies training needs and role reassignments for the next drill. Resilient teams have redundancy.',
       },
     ],
     coachQuestions: [
@@ -783,7 +783,7 @@ export const lessons: Lesson[] = [
           'Deletion keeps your data; deactivation removes it'
         ],
         answer: 'Deactivation hides your profile but keeps data; deletion removes it after a waiting period',
-        rationale: 'Deactivation is like pressing pause—your account disappears from view but can be reactivated. Deletion requests permanent removal, though platforms often impose a grace period in case you change your mind.',
+        rationale: 'Deactivation is temporary invisibility—your data remains on servers and can be reactivated. Deletion initiates permanent removal, though platforms impose waiting periods (typically 30-90 days) allowing you to cancel if you change your mind. Always export your data before deletion; once the waiting period ends, recovery is impossible.',
       },
       {
         question: 'Why should you search your email addresses in addition to your name?',
@@ -794,7 +794,7 @@ export const lessons: Lesson[] = [
           'You can find your passwords this way'
         ],
         answer: 'Usernames and emails appear in places your name does not, like forum sign-ups',
-        rationale: 'Many old accounts used your email as the identifier, and forums or comment sections may display it publicly even if your real name is hidden.',
+        rationale: 'Email addresses serve as unique identifiers across platforms. Many sites display emails publicly in user profiles, forum posts, or comment sections even when you use a pseudonym. Forgotten forum accounts from years ago may still broadcast your current email, enabling targeted phishing and social engineering attacks.',
       },
       {
         question: 'How often should you audit your social media privacy settings?',
@@ -805,7 +805,7 @@ export const lessons: Lesson[] = [
           'Only when you suspect a breach'
         ],
         answer: 'Quarterly or after major platform updates',
-        rationale: 'Platforms change settings frequently. Regular audits ensure new features have not reset your privacy preferences to defaults.',
+        rationale: 'Platforms frequently introduce features with privacy-invasive defaults, bury controls deeper in menus, or silently reset preferences during redesigns. Quarterly audits counteract this gradual erosion. Major updates often include new data-sharing partnerships and AI training opt-outs that you must manually disable.',
       },
       {
         question: 'What metadata do smartphone photos usually contain?',
@@ -816,7 +816,7 @@ export const lessons: Lesson[] = [
           'Your browsing history'
         ],
         answer: 'GPS coordinates and camera model',
-        rationale: 'EXIF metadata embeds location, date, time, and device info in photo files unless you disable geotagging in camera settings.',
+        rationale: 'EXIF metadata is invisible but revealing. GPS coordinates pinpoint your home, school, and routine locations. Camera model and timestamps create patterns. Stalkers, burglars, and predators extract this data from photos shared online. Disable geotagging in camera settings, or use metadata-stripping tools before sharing photos.',
       }
     ],
     coachQuestions: [
@@ -868,7 +868,7 @@ export const lessons: Lesson[] = [
           'They never expire'
         ],
         answer: 'They cannot be intercepted via SIM-swapping attacks',
-        rationale: 'Authenticator apps generate codes locally on your device, so attackers cannot hijack your phone number to steal them.',
+        rationale: 'SMS codes travel over cellular networks that criminals can intercept. SIM-swapping attacks let attackers transfer your phone number to their device by social engineering your carrier. Once they control your number, SMS codes go to them. Authenticator apps generate codes locally on your physical device, eliminating network interception.',
       },
       {
         question: 'What should you do with backup codes after generating them?',
@@ -879,7 +879,7 @@ export const lessons: Lesson[] = [
           'Save them in a cloud note'
         ],
         answer: 'Print them and store them in a safe offline location',
-        rationale: 'Backup codes are your last line of defense. Storing them offline prevents attackers from accessing them if they compromise your digital accounts.',
+        rationale: 'Backup codes are your emergency access. If your phone breaks, gets stolen, or factory resets, these codes are the only way to regain account access without lengthy identity verification. Digital storage creates a circular dependency—if you are locked out, you cannot access your cloud storage. Offline storage breaks this dependency.',
       },
       {
         question: 'Which type of 2FA offers the strongest protection?',
@@ -890,7 +890,7 @@ export const lessons: Lesson[] = [
           'Security questions'
         ],
         answer: 'Hardware security keys',
-        rationale: 'Hardware keys require physical possession and are immune to phishing, SIM-swapping, and remote attacks.',
+        rationale: 'Hardware keys verify the website domain cryptographically before releasing codes, preventing phishing on lookalike domains. They are immune to SIM-swapping, malware, and remote attacks because they require physical possession and proximity. For administrator accounts, cryptocurrency wallets, and high-value targets, hardware keys provide maximum protection.',
       },
       {
         question: 'Why should you enable 2FA on your backup email account?',
@@ -901,7 +901,7 @@ export const lessons: Lesson[] = [
           'It reduces spam'
         ],
         answer: 'Attackers often target backup emails to bypass 2FA on main accounts',
-        rationale: 'If your backup email is unprotected, an attacker can use it to reset your main account password and disable 2FA.',
+        rationale: 'Account security is only as strong as the weakest link. Attackers target backup emails specifically because they provide password reset access. Once they control your backup email, they can disable 2FA on your main account by requesting a password reset. Securing the entire recovery chain prevents this bypass.',
       }
     ],
     coachQuestions: [
@@ -926,21 +926,34 @@ export const lessons: Lesson[] = [
     difficulty: 'foundation',
     summary: 'Build and test password strength in real-time with interactive feedback',
     outcomes: [
-      'Create strong passwords with multiple character types',
-      'Understand what makes a password secure',
-      'Learn password best practices',
+      'Create passwords with 12+ characters mixing uppercase, lowercase, numbers, and symbols',
+      'Understand the difference between password complexity and true strength',
+      'Learn to evaluate password strength and identify weak patterns',
+      'Recognize common password mistakes that make accounts vulnerable',
     ],
     narrative: [
-      'A strong password is your first line of defense against unauthorized access to your accounts.',
-      'The best passwords combine uppercase and lowercase letters, numbers, and special characters in unpredictable ways.',
-      'Password managers can help you create and store unique passwords for every account.',
+      'A strong password is your first line of defense against unauthorized access to your accounts. Think of it as the lock on your digital front door—if it is weak, intruders can easily break in.',
+      'The best passwords combine uppercase and lowercase letters, numbers, and special characters in unpredictable ways. Avoid common patterns like "Password123!" or "Qwerty@2024" that attackers test first.',
+      'Length matters more than complexity. A 16-character passphrase like "purple-mountain-lake-sunrise" is stronger than "P@ssw0rd" because it takes exponentially longer to crack.',
+      'Password managers are your secret weapon. They generate cryptographically random passwords, store them securely, and auto-fill them so you never have to remember more than one master password.',
+      'Never reuse passwords across accounts. If one site gets breached, attackers immediately test those credentials on banking, email, and social media platforms. Unique passwords contain the damage.',
+      'Beware of personal information. Birthdays, pet names, and favorite sports teams appear in data breaches and social media profiles. Attackers use this information to guess passwords through targeted attacks.',
+      'Regular password updates for high-value accounts—like email and banking—add another layer of protection. Set quarterly reminders to rotate credentials and review account activity.',
     ],
-    mission: 'Use the interactive tool to create a password that scores 90% or higher.',
+    mission: 'Use the interactive tool to create three different passwords that each score 90% or higher. Then, identify what makes them strong and write down your password creation strategy for future use.',
     quizzes: [],
     coachQuestions: [
       {
         question: 'Why should each account have a unique password?',
         answer: 'If one account is compromised, unique passwords prevent attackers from accessing your other accounts.',
+      },
+      {
+        question: 'What makes a passphrase stronger than a short complex password?',
+        answer: 'Length creates exponentially more combinations than complexity. A 16-character passphrase takes millions of times longer to crack than an 8-character password with symbols.',
+      },
+      {
+        question: 'How does a password manager protect you beyond just storing passwords?',
+        answer: 'It generates truly random passwords, detects phishing sites by only auto-filling on legitimate domains, and alerts you to breached credentials.',
       },
     ],
   },
@@ -951,21 +964,34 @@ export const lessons: Lesson[] = [
     difficulty: 'foundation',
     summary: 'Test your skills at spotting fake and malicious links',
     outcomes: [
-      'Identify common phishing patterns',
-      'Recognize suspicious URLs',
-      'Understand link verification techniques',
+      'Identify domain spoofing and URL manipulation techniques',
+      'Recognize urgency tactics and emotional manipulation in phishing messages',
+      'Practice safe link verification using hover, preview, and manual navigation',
+      'Understand the anatomy of phishing attacks and common pretexts',
     ],
     narrative: [
-      'Phishing attacks trick you into clicking malicious links that look legitimate.',
-      'Always examine URLs carefully before clicking, looking for misspellings and suspicious domains.',
-      'When in doubt, go directly to the official website instead of clicking links.',
+      'Phishing attacks trick you into clicking malicious links that look legitimate. Attackers impersonate banks, schools, popular services, and even friends to steal your credentials or install malware.',
+      'Always examine URLs carefully before clicking. Look for misspellings like "paypa1.com" instead of "paypal.com", extra subdomains like "secure-login.verified-amazon-shop.net", or suspicious top-level domains like ".tk" or ".xyz".',
+      'Urgency is a weapon. Messages claiming "Your account will be locked in 24 hours!" or "Click now to claim your prize!" trigger panic and bypass your critical thinking. Legitimate organizations give you time to respond.',
+      'Hover before you click. On desktop, hovering over a link reveals the actual URL without opening it. On mobile, long-press the link to preview the destination. If it does not match the claimed source, do not click.',
+      'When in doubt, go directly to the official website instead of clicking links in emails or messages. Type the URL manually or use a bookmarked link you trust.',
+      'Check the sender carefully. Phishing emails often come from addresses like "support@paypa1-secure.com" instead of the real "support@paypal.com". One character difference can hide a fake domain.',
+      'Look for poor grammar and formatting. While not all phishing attempts have errors, many contain awkward phrasing, inconsistent fonts, or low-quality logos that reveal their fraudulent nature.',
     ],
-    mission: 'Complete the phishing detection quiz and score at least 70%.',
+    mission: 'Complete the phishing detection challenge by correctly identifying at least 7 out of 10 links, then document the three most deceptive techniques you encountered.',
     quizzes: [],
     coachQuestions: [
       {
         question: 'What are red flags in a suspicious link?',
         answer: 'Misspellings, character substitutions, shortened URLs, urgency tactics, and domains that don\'t match the claimed source.',
+      },
+      {
+        question: 'Why do phishing messages use urgent language like "Act now or lose access"?',
+        answer: 'Urgency triggers panic and bypasses critical thinking. When you feel rushed, you are more likely to click without verifying the sender or link.',
+      },
+      {
+        question: 'What should you do if you accidentally clicked a phishing link?',
+        answer: 'Disconnect from internet immediately, change passwords on a different device, scan for malware, and report it to your IT admin or trusted adult.',
       },
     ],
   },
@@ -976,21 +1002,34 @@ export const lessons: Lesson[] = [
     difficulty: 'applied',
     summary: 'Configure privacy settings and audit your digital footprint',
     outcomes: [
-      'Understand privacy setting levels',
-      'Make informed privacy decisions',
-      'Audit and secure personal information',
+      'Audit visibility settings for posts, photos, contact information, and friend lists',
+      'Review and restrict app permissions for camera, microphone, location, and contacts',
+      'Understand privacy trade-offs and make informed decisions about data sharing',
+      'Create a repeatable privacy audit checklist for quarterly reviews',
     ],
     narrative: [
-      'Social media platforms default to public settings to encourage sharing, but this exposes your information.',
-      'Reviewing and tightening privacy settings is one of the most effective ways to protect your digital footprint.',
-      'Regular privacy audits help ensure your settings haven\'t been reset by app updates.',
+      'Social media platforms default to public settings to encourage sharing and growth, but this exposes your information to strangers, advertisers, and potential threats. You have the power to control what you share.',
+      'Reviewing and tightening privacy settings is one of the most effective ways to protect your digital footprint. Most platforms bury these controls deep in menus, hoping you will not find them.',
+      'Regular privacy audits help ensure your settings have not been reset by app updates. Platforms frequently change interfaces and re-enable sharing features during updates—checking quarterly keeps you protected.',
+      'Control who can see your posts, contact you, tag you in photos, and view your friends list. Each of these settings leaks information that attackers and advertisers collect to build profiles about you.',
+      'Review app permissions on your phone and computer. Many apps request access to your camera, microphone, location, and contacts even when they do not need them. Deny unnecessary permissions and revoke them regularly.',
+      'Search your name on Google, Bing, and other engines to see what others can find about you. Look for old profiles, leaked information, and data broker listings that you can request to remove.',
+      'Two-factor authentication and strong passwords protect your privacy settings from being changed by attackers. If someone gains access to your account, they can undo all your privacy work and leak your data.',
     ],
-    mission: 'Audit all privacy settings and achieve 100% security score.',
+    mission: 'Complete a full privacy audit achieving 100% security score by reviewing all settings, then create a written checklist to use for quarterly audits on your real accounts.',
     quizzes: [],
     coachQuestions: [
       {
         question: 'How often should you review your privacy settings?',
         answer: 'At least quarterly, and immediately after major app updates that may reset your preferences.',
+      },
+      {
+        question: 'What information can attackers gather from a public social media profile?',
+        answer: 'Your location patterns, friend network, schedule, interests, family details, and answers to common security questions like pet names or schools.',
+      },
+      {
+        question: 'Why should you review app permissions regularly?',
+        answer: 'Apps often request more access than needed and can update to add new permissions. Regular reviews ensure apps only access what they genuinely require.',
       },
     ],
   },
@@ -1001,21 +1040,34 @@ export const lessons: Lesson[] = [
     difficulty: 'applied',
     summary: 'Scan your device for outdated software and security vulnerabilities',
     outcomes: [
-      'Understand the importance of updates',
-      'Identify security vulnerabilities',
-      'Maintain updated systems',
+      'Identify outdated operating systems, browsers, and applications that need updates',
+      'Understand critical vs. optional updates and prioritize security patches',
+      'Learn to enable automatic updates for OS, browsers, and security software',
+      'Recognize malicious browser extensions and unnecessary app permissions',
     ],
     narrative: [
-      'Outdated software is one of the biggest security risks because attackers exploit known vulnerabilities.',
-      'Security updates patch holes that criminals use to break into devices.',
-      'Enabling automatic updates ensures you\'re always protected with the latest security fixes.',
+      'Outdated software is one of the biggest security risks because attackers exploit known vulnerabilities. When companies discover security flaws, they release patches—but only users who update receive protection.',
+      'Security updates patch holes that criminals use to break into devices. These vulnerabilities allow malware installation, data theft, and remote control of your device by attackers.',
+      'Enabling automatic updates ensures you are always protected with the latest security fixes. Most operating systems and apps offer this feature—turn it on for critical software like your OS, browser, and messaging apps.',
+      'Browser extensions and plugins can be trojan horses. Many start legitimate but get sold to malicious actors who inject ad trackers, keyloggers, or data scrapers in updates. Review your extensions monthly and remove any you do not actively use.',
+      'Antivirus and anti-malware software provides real-time protection against threats. While built-in protection on Windows, Mac, and mobile devices has improved, additional layers help, especially for devices used by younger siblings.',
+      'Physical security matters too. Screen locks, encryption, and Find My Device features protect your data if your phone or laptop is lost or stolen. Set these up before you need them.',
+      'Back up important files regularly to an external drive or secure cloud service. If ransomware encrypts your device or hardware fails, backups let you restore everything without paying criminals or losing memories.',
     ],
-    mission: 'Run a security scan and update all outdated components.',
+    mission: 'Run a complete security scan, update all outdated components, remove at least one unnecessary browser extension, and document your maintenance routine for future weekly checks.',
     quizzes: [],
     coachQuestions: [
       {
         question: 'Why are updates important for security?',
         answer: 'Updates fix security vulnerabilities that attackers could exploit to access your device or data.',
+      },
+      {
+        question: 'What should you do before installing a new browser extension?',
+        answer: 'Check reviews, verify the publisher, review requested permissions, and research whether the extension has been compromised or sold to malicious actors.',
+      },
+      {
+        question: 'How does enabling Find My Device help if your phone is stolen?',
+        answer: 'It lets you locate, lock, or remotely wipe your device to prevent thieves from accessing your data, accounts, and personal information.',
       },
     ],
   },
@@ -1026,21 +1078,34 @@ export const lessons: Lesson[] = [
     difficulty: 'applied',
     summary: 'Identify rumors and misinformation before they spread',
     outcomes: [
-      'Recognize rumor red flags',
-      'Practice verification techniques',
-      'Stop misinformation spread',
+      'Identify emotional manipulation tactics like urgency, fear, and outrage bait',
+      'Practice source verification using reverse image search and fact-checking sites',
+      'Apply the freeze-verify-decide framework before sharing information',
+      'Distinguish between facts, opinions, and unverified claims in messages',
     ],
     narrative: [
-      'Rumors spread faster than facts because they trigger emotions like fear, excitement, or outrage.',
-      'The "freeze" technique means pausing before sharing to verify the information first.',
-      'Responsible digital citizens fact-check before forwarding messages that could harm others.',
+      'Rumors spread faster than facts because they trigger emotions like fear, excitement, or outrage. Your brain is wired to pay attention to threats and surprises, which makes sensational claims feel true even when they are not.',
+      'The "freeze" technique means pausing before sharing to verify the information first. This simple habit breaks the chain of misinformation and protects others from making decisions based on false claims.',
+      'Responsible digital citizens fact-check before forwarding messages that could harm others. Ask: Who benefits from this rumor? Can I verify it through official sources? What happens if I am wrong?',
+      'Check the source. Does the claim come from a verified news outlet, official organization, or a random social media post? Screenshots can be doctored, and fake accounts impersonate real people.',
+      'Look for corroboration. If a story is real, multiple credible sources will report it independently. If only one suspicious account is sharing it, treat it as unverified until proven otherwise.',
+      'Beware of emotional language. Phrases like "BREAKING: You won\'t believe..." or "URGENT: Share before they delete this!" manipulate your emotions to bypass critical thinking. Calm down before you click share.',
+      'Use reverse image search and fact-checking sites. Tools like Google Images, Snopes, and FactCheck.org help you verify whether photos, videos, and claims are authentic before you spread them further.',
     ],
-    mission: 'Complete the rumor detection challenge with 100% accuracy.',
+    mission: 'Complete the rumor detection challenge with 100% accuracy by correctly identifying all false claims, then practice verifying one real-world viral post using fact-checking tools.',
     quizzes: [],
     coachQuestions: [
       {
         question: 'What should you do if you\'re unsure if a message is true?',
         answer: 'Don\'t share it. Ask a trusted adult, check official sources, or verify through a second channel.',
+      },
+      {
+        question: 'How can you verify whether a viral image or video is real?',
+        answer: 'Use reverse image search on Google Images or TinEye, check fact-checking sites like Snopes, and look for the original source and context.',
+      },
+      {
+        question: 'Why is it important to pause before sharing sensational claims?',
+        answer: 'False information can harm reputations, cause panic, or lead others to make bad decisions. Pausing breaks the chain and protects your community.',
       },
     ],
   },
@@ -1051,21 +1116,34 @@ export const lessons: Lesson[] = [
     difficulty: 'advanced',
     summary: 'Set up and test two-factor authentication step by step',
     outcomes: [
-      'Understand how 2FA works',
-      'Set up authenticator apps',
-      'Manage backup codes',
+      'Understand the differences between SMS, authenticator apps, and hardware keys',
+      'Successfully set up an authenticator app with QR code scanning',
+      'Generate, store, and test backup codes for account recovery',
+      'Identify which accounts need 2FA most urgently based on risk level',
     ],
     narrative: [
-      'Two-factor authentication adds a second verification step beyond just your password.',
-      'Even if someone steals your password, they can\'t access your account without the second factor.',
-      'Authenticator apps are more secure than SMS because they can\'t be intercepted through SIM swapping.',
+      'Two-factor authentication adds a second verification step beyond just your password. This additional layer dramatically reduces the risk of unauthorized access, even if your password is compromised.',
+      'Even if someone steals your password through phishing, data breaches, or keyloggers, they cannot access your account without the second factor—something you physically possess like your phone or security key.',
+      'Authenticator apps are more secure than SMS because they cannot be intercepted through SIM swapping attacks. When an attacker convinces your phone carrier to transfer your number, SMS codes go to them—but authenticator apps stay on your device.',
+      'Popular authenticator apps include Google Authenticator, Microsoft Authenticator, Authy, and Duo Mobile. They generate time-based one-time passwords that refresh every 30 seconds and work even without internet connection.',
+      'Set up 2FA on your most critical accounts first: email, password manager, banking apps, and social media. Your email is especially important because attackers use it to reset passwords for all your other accounts.',
+      'Save backup codes in a secure offline location when you enable 2FA. If you lose your phone or security key, backup codes are the only way to regain access without lengthy account recovery processes.',
+      'Hardware security keys like YubiKey provide the strongest protection for high-value accounts. They are immune to phishing because they verify the website\'s authenticity before sending codes, preventing credential theft on fake sites.',
     ],
-    mission: 'Complete the 2FA setup simulation and verify with a code.',
+    mission: 'Complete the full 2FA setup simulation including scanning a QR code, verifying with a generated code, saving backup codes, and testing account recovery with a backup code.',
     quizzes: [],
     coachQuestions: [
       {
         question: 'Why is an authenticator app better than SMS for 2FA?',
         answer: 'Authenticator apps can\'t be intercepted through SIM swapping attacks, and they work without cell service.',
+      },
+      {
+        question: 'What should you do with backup codes after enabling 2FA?',
+        answer: 'Print them and store them in a secure offline location like a safe or locked drawer. Never email them or save them in cloud notes.',
+      },
+      {
+        question: 'Which accounts should you prioritize for 2FA first?',
+        answer: 'Start with email, password manager, and banking. Your email is critical because attackers use it to reset passwords for all other accounts.',
       },
     ],
   },

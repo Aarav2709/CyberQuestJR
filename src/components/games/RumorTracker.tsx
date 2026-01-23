@@ -120,7 +120,7 @@ const RumorTracker: React.FC = () => {
                   }`}>
                     <div className="flex items-center justify-between">
                       <span className={wasCorrect ? 'text-green-300' : 'text-red-300'}>
-                        {wasCorrect ? '✓' : '✗'} Message {idx + 1}
+                        {wasCorrect ? '[CORRECT]' : '[WRONG]'} Message {idx + 1}
                       </span>
                       <span className="text-white/60">
                         You: {decision.choice === 'freeze' ? 'Froze' : 'Shared'}
@@ -204,8 +204,8 @@ const RumorTracker: React.FC = () => {
               }`}>
                 {(currentMessage.isRumor && decisions[decisions.length - 1].choice === 'freeze') ||
                 (!currentMessage.isRumor && decisions[decisions.length - 1].choice === 'share')
-                  ? '✓ Correct Decision!'
-                  : '✗ Think Again!'}
+                  ? '[CORRECT] Good Decision!'
+                  : '[WRONG] Think Again!'}
               </p>
               <p className="text-sm text-white/80 mb-2">
                 This message is <strong>{currentMessage.isRumor ? 'A RUMOR' : 'LEGITIMATE'}</strong>.
