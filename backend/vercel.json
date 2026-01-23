@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "installCommand": "npm install && npx prisma generate",
-  "buildCommand": "npm run build",
   "builds": [
     {
       "src": "src/server.ts",
