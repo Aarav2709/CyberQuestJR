@@ -4,16 +4,16 @@ import helmet from '@fastify/helmet';
 import rateLimit from '@fastify/rate-limit';
 import sensible from '@fastify/sensible';
 import jwt from '@fastify/jwt';
-import './types/fastify.d.ts';
+import './types/fastify.d.js';
 
-import { config } from './config/index';
-import { prisma } from './lib/prisma';
-import { authRoutes } from './routes/auth';
-import { profileRoutes } from './routes/profile';
-import { progressRoutes } from './routes/progress';
-import { quizRoutes } from './routes/quiz';
-import { gamificationRoutes } from './routes/gamification';
-import { certificateRoutes } from './routes/certificates';
+import { config } from './config/index.js';
+import { prisma } from './lib/prisma.js';
+import { authRoutes } from './routes/auth.js';
+import { profileRoutes } from './routes/profile.js';
+import { progressRoutes } from './routes/progress.js';
+import { quizRoutes } from './routes/quiz.js';
+import { gamificationRoutes } from './routes/gamification.js';
+import { certificateRoutes } from './routes/certificates.js';
 
 const app = Fastify({
   logger: {
