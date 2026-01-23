@@ -4,7 +4,6 @@ import helmet from '@fastify/helmet';
 import rateLimit from '@fastify/rate-limit';
 import sensible from '@fastify/sensible';
 import jwt from '@fastify/jwt';
-import './types/fastify.d.js';
 
 import { config } from './config/index.js';
 import { prisma } from './lib/prisma.js';
