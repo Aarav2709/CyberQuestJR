@@ -9,7 +9,7 @@
   </table>
 </div>
 
-CyberQuest Jr is a pure-frontend learning lab that teaches tweens and teens how to stay safe online. The interface leans into AMOLED blacks with glow-edge accents, story-driven lessons, and multiple inline quizzes per lesson. Everything runs locally in the browser—no backend services or API keys required.
+CyberQuest Jr is a pure-frontend learning lab that teaches tweens and teens how to stay safe online. The interface leans into AMOLED blacks with glow-edge accents, story-driven lessons, and multiple inline quizzes per lesson. Everything runs locally in the browser—no backend services or API keys required. **This project of mine has placed 4th globally in a hackathon recieved a 100$ prize :D** 
 
 ## Highlights
 
